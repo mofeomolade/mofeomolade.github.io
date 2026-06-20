@@ -554,7 +554,7 @@ function HomeContent() {
               <div className="space-y-3 text-neutral-400 mt-2">
                 <p className="text-white font-medium">Custom Motor Controller</p>
                 <p className="text-xs leading-relaxed">
-                  Designing a custom motor controller PCB supporting 24 V, 5 A loads with robust RS-485 serial communications.
+                  Designing a custom motor controller PCB supporting 24 V, 5 A loads and RS-485 serial communications.
                 </p>
                 <p className="text-xs uppercase tracking-wider text-cyan-500 font-bold mt-2">
                   In Progress
@@ -630,7 +630,7 @@ function ProjectsContent() {
       id: "motor-controller",
       title: "Custom Motor Controller", 
       desc: "Custom motor controller PCB supporting 24V, 5A loads and RS-485 serial communications.", 
-      tech: "PCB Layout, SPICE, C++",
+      tech: "Altium Designer, SPICE, C++",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Custom Motor Controller</h4>
@@ -639,15 +639,15 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Executing precise component selection, schematic capture, and PCB layout to ensure signal integrity and thermal efficiency.</span>
+                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Component selection, schematic capture, and PCB layout to ensure signal integrity and thermal efficiency.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Validation & Simulation:</strong> Planning thorough SPICE simulations prior to physical assembly, followed by rigorous hardware testing.</span>
+                <span><strong className="text-neutral-200 block mb-1">Validation & Simulation:</strong> Planning thorough SPICE simulations prior to physical assembly, followed by hardware debugging.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to manage motor control logic and handle RS-485 communications.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and RS-485 communications.</span>
               </li>
             </ul>
           </div>
@@ -658,7 +658,7 @@ function ProjectsContent() {
       id: "drivetrain",
       title: "Autonomous Drivetrain", 
       desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an Nvidia Jetson.", 
-      tech: "Nucleo-F446RE, C, Serial",
+      tech: "STM32, C, UART",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Autonomous Drivetrain System</h4>
@@ -667,7 +667,7 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Hardware Integration:</strong> Utilized three L298N motor driver modules to successfully drive six brushed DC motors.</span>
+                <span><strong className="text-neutral-200 block mb-1">Hardware Integration:</strong> Utilized three L298N motor driver modules to drive six brushed DC motors.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
@@ -675,7 +675,7 @@ function ProjectsContent() {
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Telemetry:</strong> Calculated real-time rover speed using quadrature encoder data, feeding critical velocity metrics back to the system.</span>
+                <span><strong className="text-neutral-200 block mb-1">Telemetry:</strong> Calculated rover speed using hall effect encoder data, transmitting velocity back to the Jetson.</span>
               </li>
             </ul>
           </div>
@@ -684,9 +684,9 @@ function ProjectsContent() {
     },
     { 
       id: "uav",
-      title: "UAV Hardware R&D", 
-      desc: "Built custom power distribution and motor control breakout boards for specialized UAV prototypes.", 
-      tech: "PCB Design, Prototyping",
+      title: "Hardware R&D", 
+      desc: "Built custom power distribution and motor control breakout boards for production robots.", 
+      tech: "Altium, KiCAD",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">UAV Hardware Prototyping</h4>
@@ -695,11 +695,11 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Power Distribution:</strong> Built a breakout board featuring XT30 and XT60 connectors to take 24V from two batteries and reliably distribute it across 3 lines supporting up to 3 A.</span>
+                <span><strong className="text-neutral-200 block mb-1">Power Distribution:</strong> Built a breakout board featuring XT30 and XT60 connectors to take 24V input and distribute it across 3 rails supporting up to 3 A.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Motor Control Hub:</strong> Designed a secondary breakout board to route phase signals, drive linear actuators, and safely interface with Electronic Speed Controllers (ESCs).</span>
+                <span><strong className="text-neutral-200 block mb-1">Motor Control Hub:</strong> Designed a PCB to route phase signals, drive linear actuators, interface with Electronic Speed Controllers, and break out serial communication lines.</span>
               </li>
             </ul>
           </div>
@@ -710,7 +710,7 @@ function ProjectsContent() {
       id: "hud",
       title: "Car HUD Speedometer", 
       desc: "Developing a custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness LCD.", 
-      tech: "MCU, GPS, Displays",
+      tech: "ESP-32, GNSS, C, UART",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
@@ -719,11 +719,12 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">System Architecture:</strong> Performing detailed component selection for a high-brightness LCD module capable of daylight visibility, a reliable GPS module for speed data, and a low-power MCU to run the logic.</span>
+                <span><strong className="text-neutral-200 block mb-1">System Architecture:</strong> Performing component selection for a high-brightness LCD module capable of daylight visibility, a reliable GNSS module for speed data, and a low-power MCU to run the logic.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Project Roadmap:</strong> Upcoming phases include schematic capture, optical testing for windshield projection clarity, and firmware development for GPS NMEA sentence parsing.</span>
+                <span><strong className="text-neutral-200 block mb-1">Project Roadmap:</strong> Upcoming phases include schematic capture, optical testing for windshield projection clarity, and firmware development for GPS integration.</span>
+                
               </li>
             </ul>
           </div>
