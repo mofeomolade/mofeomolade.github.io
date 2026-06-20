@@ -710,7 +710,7 @@ function ProjectsContent() {
       id: "hud",
       title: "Car HUD Speedometer", 
       desc: "Developing a custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness LCD.", 
-      tech: "ESP-32, GNSS, C, UART",
+      tech: "ESP32, GNSS, C, UART",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
