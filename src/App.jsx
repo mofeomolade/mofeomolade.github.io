@@ -442,7 +442,7 @@ function HomeContent() {
             <h4 className="text-xl font-bold text-white mb-1">Electronics R&D Intern <span className="text-cyan-500 font-normal">@ FulcrumAir</span></h4>
             <p className="text-sm font-mono text-neutral-500 mb-3">Current</p>
             <p className="text-neutral-300 leading-relaxed text-sm md:text-base">
-              Developing and testing custom PCBs and embedded systems for industrial robotic applications. Focusing on maximizing power reliability, signal integrity, and firmware stability for field-ready hardware.
+              Developing and testing custom PCBs and embedded systems for industrial robotic applications. Focusing on maximizing power reliability, signal integrity, and firmware stability for high-voltage environments.
             </p>
           </div>
           <div className="w-full h-px bg-neutral-800/50"></div>
@@ -450,7 +450,7 @@ function HomeContent() {
             <h4 className="text-xl font-bold text-white mb-1">ELEC Team Member <span className="text-cyan-500 font-normal">@ UBC Rover</span></h4>
             <p className="text-sm font-mono text-neutral-500 mb-3">2025 - Present</p>
             <p className="text-neutral-300 leading-relaxed text-sm md:text-base">
-              Collaborating with a multi-disciplinary team to design and build a Mars rover for international competitions. Contributing to the electrical sub-team on sensor integration, power distribution, and telemetry communication.
+              Collaborating with a multi-disciplinary team to design and build a Mars rover for international competitions. Contributing to the electrical sub-team on sensor integration, power distribution, and serial communication.
             </p>
           </div>
           <div className="w-full h-px bg-neutral-800/50"></div>
@@ -478,7 +478,7 @@ function HomeContent() {
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and RS-485 serial communications.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and CAN communication.</span>
               </li>
             </ul>
           </div>
@@ -554,7 +554,7 @@ function HomeContent() {
               <div className="space-y-3 text-neutral-400 mt-2">
                 <p className="text-white font-medium">Custom Motor Controller</p>
                 <p className="text-xs leading-relaxed">
-                  Designing a custom motor controller PCB supporting 24 V, 5 A loads and RS-485 serial communications.
+                  Designing a custom motor controller PCB supporting 24 V, 5 A loads and CAN communication.
                 </p>
                 <p className="text-xs uppercase tracking-wider text-cyan-500 font-bold mt-2">
                   In Progress
@@ -629,7 +629,7 @@ function ProjectsContent() {
     { 
       id: "motor-controller",
       title: "Custom Motor Controller", 
-      desc: "Custom motor controller PCB supporting 24V, 5A loads and RS-485 serial communications.", 
+      desc: "Custom motor controller PCB supporting 24V, 5A loads and CAN communication.", 
       tech: "Altium Designer, SPICE, C++",
       content: (
         <div className="space-y-4">
@@ -647,7 +647,7 @@ function ProjectsContent() {
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and RS-485 communications.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and CAN communication.</span>
               </li>
             </ul>
           </div>
