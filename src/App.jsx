@@ -501,7 +501,7 @@ function HomeContent() {
             </div>
             <div className="space-y-6 text-neutral-300 text-lg md:text-xl leading-relaxed max-w-2xl text-left drop-shadow-md">
               <p>
-                I'm a UBC engineering student with a passion for electronics. I love exploring anything related to robotics, embedded programming, semiconductors, EVs, and more!
+                I'm a UBC Computer Engineering student with a passion for electronics. I love exploring anything related to robotics, embedded programming, semiconductors, and more!
               </p>
             </div>
           </div>
@@ -657,7 +657,7 @@ function ProjectsContent() {
     { 
       id: "drivetrain",
       title: "Autonomous Drivetrain", 
-      desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an Nvidia Jetson.", 
+      desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
       tech: "STM32, C, UART",
       content: (
         <div className="space-y-4">
@@ -710,7 +710,7 @@ function ProjectsContent() {
       id: "hud",
       title: "Car HUD Speedometer", 
       desc: "Developing a custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness LCD.", 
-      tech: "ESP32, GNSS, C, UART",
+      tech: "ESP32, GNSS, C++, SPI",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
@@ -719,11 +719,11 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">System Architecture:</strong> Performing component selection for a high-brightness LCD module capable of daylight visibility, a reliable GNSS module for speed data, and a low-power MCU to run the logic.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Programming:</strong> Initial firmware development working to achieve reliable NMEA message parsing and serial communication.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Project Roadmap:</strong> Upcoming phases include schematic capture, optical testing for windshield projection clarity, and firmware development for GPS integration.</span>
+                <span><strong className="text-neutral-200 block mb-1">Project Roadmap:</strong> Upcoming phases include schematic capture, optical testing for windshield projection clarity, and  firmware development for data transmission.</span>
                 
               </li>
             </ul>
