@@ -538,7 +538,7 @@ function HomeContent() {
             <div className="p-6 bg-neutral-900/60 rounded-xl backdrop-blur-md border border-neutral-800/60 hover:border-cyan-500/30 transition-all text-left flex flex-col h-full">
               <h3 className="text-white font-semibold mb-2 pb-2 border-b border-neutral-800 tracking-wider">LANGUAGES</h3>
               <div className="grid grid-cols-2 gap-4 mt-2 content-start flex-1">
-                <TechItemPNG src="/C.png" name="C" />
+                <TechItemPNG src="/C.png" name="C++" />
                 <TechItem Icon={PythonIcon} name="Python" />
               </div>
             </div>
