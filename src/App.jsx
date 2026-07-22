@@ -474,7 +474,7 @@ function HomeContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Performing component selection, schematic capture, and PCB layout to ensure signal integrity and thermal efficiency.</span>
+                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Designing a compact motor driver module around the IFX007T half-bridge to support multichannel actuator control. </span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
@@ -630,7 +630,7 @@ function ProjectsContent() {
       id: "motor-controller",
       title: "Custom Motor Controller", 
       desc: "Custom motor controller PCB supporting 24V, 5A loads and CAN communication.", 
-      tech: "Altium Designer, SPICE, C++",
+      tech: "Altium Designer, LTspice, C++",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Custom Motor Controller</h4>
@@ -639,15 +639,15 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Component selection, schematic capture, and PCB layout to ensure signal integrity and thermal efficiency.</span>
+                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Designing a compact motor driver module around the IFX007T half-bridge to support multi-channel actuator control and CAN communication. </span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Validation & Simulation:</strong> Planning thorough SPICE simulations prior to physical assembly, followed by hardware debugging.</span>
+                <span><strong className="text-neutral-200 block mb-1">PCB Layout:</strong> Planning thorough SPICE simulations prior to physical assembly, followed by hardware debugging.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and CAN communication.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and serial communication for reliable in-field robot operation.</span>
               </li>
             </ul>
           </div>
@@ -684,22 +684,22 @@ function ProjectsContent() {
     },
     { 
       id: "uav",
-      title: "Hardware R&D", 
-      desc: "Built custom power distribution and motor control breakout boards for production robots.", 
-      tech: "Altium, KiCAD",
+      title: "Buck Converter Module", 
+      desc: "Designing a custom 24V-5V 2A synchronous buck converter.", 
+      tech: "Altium, LTspice",
       content: (
         <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">UAV Hardware Prototyping</h4>
+          <h4 className="text-2xl font-bold text-white">24V-5V Synchronous Buck</h4>
           <div className="bg-neutral-900/80 border border-neutral-800 rounded-xl p-5">
             <h5 className="font-mono text-cyan-500 text-sm mb-4 uppercase tracking-wider">Technical Highlights</h5>
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Power Distribution:</strong> Built a breakout board featuring XT30 and XT60 connectors to take 24V input and distribute it across 3 rails supporting up to 3 A.</span>
+                <span><strong className="text-neutral-200 block mb-1">Power Architecture:</strong> Designing a discrete step-down topology utilizing a high-side N-channel MOSFET, low-side synchronous switch, floating bootstrap gate drive, and an analog Type II control loop.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Motor Control Hub:</strong> Designed a PCB to route phase signals, drive linear actuators, interface with Electronic Speed Controllers, and break out serial communication lines.</span>
+                <span><strong className="text-neutral-200 block mb-1">PCB Layout:</strong> Validating closed-loop stability in LTspice before executing PCB layout in Altium.</span>
               </li>
             </ul>
           </div>
@@ -709,8 +709,8 @@ function ProjectsContent() {
     { 
       id: "hud",
       title: "Car HUD Speedometer", 
-      desc: "Developing a custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness LCD.", 
-      tech: "ESP32, GNSS, C++, SPI",
+      desc: "Custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness LCD.", 
+      tech: "Arduino, GNSS, C++, SPI",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
@@ -719,11 +719,11 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Embedded Programming:</strong> Initial firmware development working to achieve reliable NMEA message parsing and serial communication.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Programming:</strong> C++ firmware to parse NMEA data streams to compute velocity from positioning telemetry.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Project Roadmap:</strong> Upcoming phases include schematic capture, optical testing for windshield projection clarity, and  firmware development for data transmission.</span>
+                <span><strong className="text-neutral-200 block mb-1">Electronics Design:</strong> Integrating Arduino Nano, GY-NEO6MV2 module, and SPI OLED display for safe operation on vehicle supply voltage. </span>
                 
               </li>
             </ul>
