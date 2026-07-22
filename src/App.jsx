@@ -531,7 +531,7 @@ function HomeContent() {
                 <TechItem Icon={GitIcon} name="Git" />
                 <TechItemPNG src="/LT.png" name="LTspice" />
                 <TechItem Icon={Stm32Icon} name="STM32" />
-                <TechItemPNG src="/matlablogo.png" name="MATLAB" />
+                <TechItemPNG src="/MATLAB.png" name="MATLAB" />
               </div>
             </div>
 
@@ -695,11 +695,11 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Power Architecture:</strong> Designing a discrete step-down topology utilizing a high-side N-channel MOSFET, low-side synchronous switch, floating bootstrap gate drive, and an analog Type II control loop.</span>
+                <span><strong className="text-neutral-200 block mb-1">Power Architecture:</strong> Discrete topology utilizing a high-side N-channel MOSFET, low-side synchronous switch, floating bootstrap gate drive, and an analog Type II control loop.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">PCB Layout:</strong> Validating closed-loop stability in LTspice before executing PCB layout in Altium.</span>
+                <span><strong className="text-neutral-200 block mb-1">PCB Layout:</strong> Validating closed-loop stability in LTspice simulations before performing PCB layout in Altium.</span>
               </li>
             </ul>
           </div>
