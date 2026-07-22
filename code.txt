@@ -468,25 +468,17 @@ function HomeContent() {
       title: "PROJECT INSIGHTS",
       content: (
         <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">24V-5V Synchronous Buck Converter</h4>
+          <h4 className="text-2xl font-bold text-white">Custom Motor Controller</h4>
           <div className="bg-neutral-900/80 border border-neutral-800 rounded-xl p-5">
             <h5 className="font-mono text-cyan-500 text-sm mb-4 uppercase tracking-wider">Technical Highlights</h5>
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Power Architecture:</strong> Target 24V-5V step-down regulator operating at 100kHz aimed at supporting up to 2A output current.</span>
+                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Performing component selection, schematic capture, and PCB layout to ensure signal integrity and thermal efficiency.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Discrete Control Loop:</strong> Engineering a closed-loop PWM controller using an op-amp triangle wave generator, error amplifier, and analog compensation network.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Gate Drive & Dead-Time:</strong> Designing floating bootstrap gate drive circuitry with hardware dead-time logic to prevent MOSFET shoot-through.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Simulation & PCB Execution:</strong> Modeling power stage dynamics in LTspice before laying out a 4-layer low-EMI PCB in KiCad.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and CAN communication.</span>
               </li>
             </ul>
           </div>
@@ -560,9 +552,9 @@ function HomeContent() {
               </div>
               <h3 className="text-white font-semibold mb-3 pb-2 border-b border-neutral-800 tracking-wider pr-8">CURRENT PROJECT</h3>
               <div className="space-y-3 text-neutral-400 mt-2">
-                <p className="text-white font-medium">Synchronous Buck Converter</p>
+                <p className="text-white font-medium">Custom Motor Controller</p>
                 <p className="text-xs leading-relaxed">
-                  Designing a discrete 24V-5V synchronous buck converter with custom analog PWM and floating bootstrap logic.
+                  Designing a custom motor controller PCB supporting 24 V, 5 A loads and CAN communication.
                 </p>
                 <p className="text-xs uppercase tracking-wider text-cyan-500 font-bold mt-2">
                   In Progress
@@ -594,14 +586,8 @@ function HomeContent() {
                   />
                 </a>
                 
-                <a href="mailto:mofe.omolade@example.com" aria-label="Contact" className="pointer-events-auto cursor-pointer text-neutral-400 hover:text-white transition-transform hover:-translate-y-1 duration-300 flex items-center gap-2 font-mono text-sm tracking-wider relative z-20">
+                <a href="mailto:mofe.omolade@example.com" aria-label="Contact" className="pointer-events-auto cursor-pointer text-neutral-400 hover:text-white transition-transform hover:-translate-y-1 duration-300 flex items-center justify-center relative z-20">
                   <MailIcon size={24} />
-                  <span className="hidden sm:inline">CONTACT</span>
-                </a>
-                
-                <a href="/resume.pdf" target="_blank" aria-label="Resume" rel="noreferrer" className="pointer-events-auto cursor-pointer text-neutral-400 hover:text-white transition-transform hover:-translate-y-1 duration-300 flex items-center gap-2 font-mono text-sm tracking-wider relative z-20">
-                  <ResumeIcon size={24} />
-                  <span className="hidden sm:inline">RESUME</span>
                 </a>
               </div>
             </div>
@@ -643,8 +629,8 @@ function ProjectsContent() {
     { 
       id: "motor-controller",
       title: "Custom Motor Controller", 
-      desc: "Designed and integrated an 8-layer motor driver PCB with robust telemetry.", 
-      tech: "Altium, IFX007T, MAX33040E",
+      desc: "Custom motor controller PCB supporting 24V, 5A loads and CAN communication.", 
+      tech: "Altium Designer, SPICE, C++",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Custom Motor Controller</h4>
@@ -653,15 +639,15 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Designed and integrated a custom 8-layer motor driver PCB built around the IFX007T half-bridge ICs, MAX33040E CAN transceiver, and LMR50410-Q1 buck converter.</span>
+                <span><strong className="text-neutral-200 block mb-1">Hardware Design:</strong> Component selection, schematic capture, and PCB layout to ensure signal integrity and thermal efficiency.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Wrote C++ firmware for multichannel motor control, CAN telemetry transmission, and actuator feedback calculation.</span>
+                <span><strong className="text-neutral-200 block mb-1">Validation & Simulation:</strong> Planning thorough SPICE simulations prior to physical assembly, followed by hardware debugging.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Iterative Reliability:</strong> Revised past schematics and PCB layouts to implement electrical best practices and improve overall electronic reliability.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and CAN communication.</span>
               </li>
             </ul>
           </div>
@@ -697,31 +683,23 @@ function ProjectsContent() {
       )
     },
     { 
-      id: "buck",
-      title: "24V-5V Synchronous Buck Converter", 
+      id: "uav",
+      title: "24V-5V Synchornous Buck Converter", 
       desc: "Designing a $24\text{V} \rightarrow 5\text{V}$ synchronous buck converter, implementing custom analog PWM control, bootstrap gate drivers, and low-EMI PCB layout.", 
-      tech: "LTspice, KiCad, OP-Amps",
+      tech: "LTspice, MATLAB, Altium",
       content: (
         <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">Synchronous Buck Converter Design</h4>
+          <h4 className="text-2xl font-bold text-white">UAV Hardware Prototyping</h4>
           <div className="bg-neutral-900/80 border border-neutral-800 rounded-xl p-5">
             <h5 className="font-mono text-cyan-500 text-sm mb-4 uppercase tracking-wider">Technical Highlights</h5>
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Power Architecture & Design Spec:</strong> Target 24V &rarr; 5V step-down regulator operating at 100kHz aimed at supporting up to 2A output current.</span>
+                <span><strong className="text-neutral-200 block mb-1">Power Architecture:</strong> Target 24V-5V step-down regulator operating at 100kHz with up to 2A output current.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
                 <span><strong className="text-neutral-200 block mb-1">Discrete Control Loop:</strong> Engineering a closed-loop PWM controller using an op-amp triangle wave generator, error amplifier, and analog compensation network.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Gate Drive & Dead-Time:</strong> Designing floating bootstrap gate drive circuitry with hardware dead-time logic to prevent MOSFET shoot-through.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Simulation & PCB Execution (In Progress):</strong> Modeling power stage dynamics in LTspice before laying out a 4-layer low-EMI PCB in KiCad.</span>
               </li>
             </ul>
           </div>
@@ -731,26 +709,21 @@ function ProjectsContent() {
     { 
       id: "hud",
       title: "Car HUD Speedometer", 
-      desc: "Developed a low-latency heads-up display projecting GPS velocity onto a windshield.", 
-      tech: "Arduino, GPS, C++",
+      desc: "Developing a custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness LCD.", 
+      tech: "Arduino, GNSS, C++, SPI",
       content: (
         <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">Arduino GPS Heads-Up Display (HUD) Speedometer</h4>
-          <p className="text-neutral-300 leading-relaxed text-base">A real-time digital speedometer that safely integrates with a car's electrical system and has a low-latency HUD.</p>
+          <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
           <div className="bg-neutral-900/80 border border-neutral-800 rounded-xl p-5">
             <h5 className="font-mono text-cyan-500 text-sm mb-4 uppercase tracking-wider">Technical Highlights</h5>
             <ul className="space-y-4 text-neutral-400 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Hardware Architecture:</strong> Developed using an Arduino Nano, GY-NEO6MV2 GPS module with ceramic antenna, and a 128x64 SPI OLED display. Integrated a power regulation circuit (USB-C to DIN module) to step down 14V vehicle outputs to a stable 5V rail.</span>
+                <span><strong className="text-neutral-200 block mb-1">Embedded Programming:</strong> Initial firmware development working to achieve reliable NMEA message parsing and serial communication.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Signal Processing:</strong> Wrote C++ firmware to extract raw speed from <code>$GPRMC</code> or <code>$GPVTG</code> sentences using the TinyGPS++ library, computing velocity within 5% of the factory speedometer.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-neutral-200 block mb-1">Windshield Reflection Mirroring:</strong> Sent hardware commands directly to the OLED controller during setup to invert the image horizontally, allowing it to read correctly when reflected off the glass.</span>
+                <span><strong className="text-neutral-200 block mb-1">Project Roadmap:</strong> Upcoming phases include schematic capture, optical testing for windshield projection clarity, and  firmware development for data transmission.</span>
                 
               </li>
             </ul>
@@ -819,14 +792,8 @@ function ProjectsContent() {
                   />
                 </a>
                 
-                <a href="mailto:mofe.omolade@example.com" aria-label="Contact" className="pointer-events-auto cursor-pointer text-neutral-400 hover:text-white transition-transform hover:-translate-y-1 duration-300 flex items-center gap-2 font-mono text-sm tracking-wider relative z-20">
+                <a href="mailto:mofe.omolade@example.com" aria-label="Contact" className="pointer-events-auto cursor-pointer text-neutral-400 hover:text-white transition-transform hover:-translate-y-1 duration-300 flex items-center justify-center relative z-20">
                   <MailIcon size={24} />
-                  <span className="hidden sm:inline">CONTACT</span>
-                </a>
-                
-                <a href="/resume.pdf" target="_blank" aria-label="Resume" rel="noreferrer" className="pointer-events-auto cursor-pointer text-neutral-400 hover:text-white transition-transform hover:-translate-y-1 duration-300 flex items-center gap-2 font-mono text-sm tracking-wider relative z-20">
-                  <ResumeIcon size={24} />
-                  <span className="hidden sm:inline">RESUME</span>
                 </a>
               </div>
             </div>
@@ -954,4 +921,4 @@ export default function App() {
       </div>
     </div>
   );
-}
+}   
