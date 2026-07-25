@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-// --- INLINE SVG COMPONENTS ---
-
 const GithubIcon = ({ size = 24, ...props }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
     <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
@@ -97,22 +95,12 @@ const TechItem = ({ Icon, name }) => (
   </div>
 );
 
-// Crosshair corner decorations for cards to keep the engineering motif
-const Corners = () => (
-  <>
-    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-neutral-600 rounded-tl-sm transition-colors group-hover:border-cyan-500/50"></div>
-    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-neutral-600 rounded-tr-sm transition-colors group-hover:border-cyan-500/50"></div>
-    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-neutral-600 rounded-bl-sm transition-colors group-hover:border-cyan-500/50"></div>
-    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-neutral-600 rounded-br-sm transition-colors group-hover:border-cyan-500/50"></div>
-  </>
-);
-
 function HomeContent({ setActiveModal }) {
   return (
     <div className="w-full flex-1 flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       
-      <div className="border-b border-neutral-800/80 pb-8 mb-8 mt-4">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white text-left drop-shadow-lg m-0 leading-none">
+      <div className="border-b border-neutral-800/80 pb-8 mb-8 mt-4 text-left">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
           Mofe Omolade <span className="text-cyan-500 animate-terminal-blink">_</span>
         </h1>
         <div className="mt-6 space-y-4 text-neutral-400 text-base md:text-xl leading-relaxed max-w-2xl text-left">
@@ -122,15 +110,12 @@ function HomeContent({ setActiveModal }) {
         </div>
       </div>
 
-      {/* Grid adapts beautifully from 1 column on mobile to up to 4 on desktop */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full mb-12 font-mono text-sm">
         
-        {/* Experience Card */}
         <div 
           onClick={() => setActiveModal('experience')}
           className="relative p-6 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col h-full cursor-pointer group shadow-lg"
         >
-          <Corners />
           <div className="absolute top-4 right-4 text-neutral-600 group-hover:text-cyan-400 transition-colors">
             <MaximizeIcon size={16} />
           </div>
@@ -145,9 +130,7 @@ function HomeContent({ setActiveModal }) {
           </ul>
         </div>
 
-        {/* Tools Card */}
         <div className="relative p-6 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col h-full group">
-          <Corners />
           <h3 className="text-white font-semibold mb-4 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
             TOOLS
@@ -162,9 +145,7 @@ function HomeContent({ setActiveModal }) {
           </div>
         </div>
 
-        {/* Languages Card */}
         <div className="relative p-6 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col h-full group">
-          <Corners />
           <h3 className="text-white font-semibold mb-4 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
             LANGUAGES
@@ -175,12 +156,10 @@ function HomeContent({ setActiveModal }) {
           </div>
         </div>
 
-        {/* Current Project Card */}
         <div 
           onClick={() => setActiveModal('currentProject')}
           className="relative p-6 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col h-full cursor-pointer group shadow-lg"
         >
-          <Corners />
           <div className="absolute top-4 right-4 text-neutral-600 group-hover:text-cyan-400 transition-colors">
             <MaximizeIcon size={16} />
           </div>
@@ -237,7 +216,7 @@ function ProjectsContent({ setActiveModal }) {
     <div className="w-full flex-1 flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       
       <div className="border-b border-neutral-800/80 pb-8 mb-8 mt-4 text-left">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white text-left drop-shadow-lg m-0 leading-none">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
           Projects <span className="text-cyan-500 animate-terminal-blink">_</span>
         </h1>
         <p className="text-cyan-500/80 font-mono text-xs sm:text-sm uppercase tracking-widest mt-6">
@@ -250,7 +229,7 @@ function ProjectsContent({ setActiveModal }) {
           <div 
             key={proj.id} 
             onClick={() => setActiveModal(proj.id)}
-            className="relative p-6 sm:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/40 hover:bg-neutral-800/60 hover:-translate-y-1 transition-all duration-300 group cursor-pointer flex flex-col h-full shadow-lg"
+            className="relative p-6 sm:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/40 hover:bg-neutral-800/60 transition-all duration-300 group cursor-pointer flex flex-col h-full shadow-lg"
           >
             <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
               <MaximizeIcon size={18} />
@@ -414,14 +393,14 @@ const ModalData = {
         <div className="space-y-4 mt-8">
           <h5 className="font-mono text-cyan-500 text-xs uppercase tracking-widest border-b border-neutral-800 pb-2">Gallery</h5>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="group relative rounded-lg overflow-hidden border border-neutral-800/80 hover:border-cyan-500/50 transition-colors">
+            <div className="group relative rounded-lg overflow-hidden border border-neutral-800/80 hover:border-cyan-500/50 transition-colors bg-neutral-900">
               <img src="/hud breadboard.jpg" alt="HUD Breadboard Prototype" className="w-full h-48 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
             </div>
-            <div className="group relative rounded-lg overflow-hidden border border-neutral-800/80 hover:border-cyan-500/50 transition-colors">
+            <div className="group relative rounded-lg overflow-hidden border border-neutral-800/80 hover:border-cyan-500/50 transition-colors bg-neutral-900">
               <img src="/HUD driver view.jpg" alt="HUD Driver View" className="w-full h-48 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
             </div>
-            <div className="group relative rounded-lg overflow-hidden border border-neutral-800/80 hover:border-cyan-500/50 transition-colors md:col-span-2">
-              <img src="/HUD Schematic.png" alt="HUD Schematic" className="w-full h-auto object-contain bg-neutral-200 opacity-90 group-hover:opacity-100 transition-opacity" />
+            <div className="group relative rounded-lg overflow-hidden border border-neutral-800/80 hover:border-cyan-500/50 transition-colors bg-neutral-200 md:col-span-2 p-2">
+              <img src="/HUD Schematic.png" alt="HUD Schematic" className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
             </div>
           </div>
         </div>
@@ -435,16 +414,12 @@ function Modal({ activeModal, setActiveModal }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 pointer-events-auto">
-      {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer animate-in fade-in duration-300"
         onClick={() => setActiveModal(null)}
       />
       
-      {/* Modal Container */}
       <div className="relative z-10 w-full max-w-2xl bg-[#0a0a0a] border border-neutral-800/80 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 fade-in duration-300">
-        
-        {/* Header */}
         <div className="flex justify-between items-center p-5 md:p-6 border-b border-neutral-800/80 bg-neutral-900/40">
           <h2 className="text-sm md:text-base font-bold font-mono tracking-widest text-cyan-500 flex items-center gap-2">
             <span className="w-2 h-2 bg-cyan-500 block"></span>
@@ -458,7 +433,6 @@ function Modal({ activeModal, setActiveModal }) {
           </button>
         </div>
         
-        {/* Body */}
         <div className="p-6 md:p-8 overflow-y-auto text-left scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent bg-gradient-to-b from-transparent to-neutral-900/20">
           {ModalData[activeModal].content}
         </div>
@@ -468,33 +442,9 @@ function Modal({ activeModal, setActiveModal }) {
 }
 
 export default function App() {
-  const [page, setPage] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.location.pathname.includes('/projects') ? 'projects' : 'home';
-    }
-    return 'home';
-  });
+  const [page, setPage] = useState('home');
   const [activeModal, setActiveModal] = useState(null);
 
-  // Handle custom routing to update the URL natively
-  const navigate = (newPage) => {
-    setPage(newPage);
-    if (typeof window !== 'undefined') {
-      const newUrl = newPage === 'home' ? '/' : '/projects';
-      window.history.pushState({}, '', newUrl);
-    }
-  };
-
-  // Listen for browser back/forward buttons
-  useEffect(() => {
-    const handlePopState = () => {
-      setPage(window.location.pathname.includes('/projects') ? 'projects' : 'home');
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  // Lock body scroll when modal is open for a better mobile experience
   useEffect(() => {
     if (activeModal) {
       document.body.style.overflow = 'hidden';
@@ -505,7 +455,7 @@ export default function App() {
   }, [activeModal]);
 
   return (
-    <div className="relative w-full min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-cyan-500 selection:text-black flex flex-col overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-cyan-500 selection:text-black flex flex-col">
       
       <style>{`
         @keyframes terminal-blink {
@@ -517,7 +467,7 @@ export default function App() {
         }
       `}</style>
 
-      {/* Dynamic Grid Background replaces the Heavy WebGL canvas */}
+      {/* Persistent Animated Background */}
       <div className="fixed inset-0 z-0 pointer-events-none" style={{
         backgroundImage: `
           radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.04), transparent 30%),
@@ -528,24 +478,23 @@ export default function App() {
         backgroundSize: '100% 100%, 100% 100%, 40px 40px, 40px 40px',
         backgroundPosition: 'center center'
       }}>
-        {/* Subtle grid animation overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505] opacity-80" />
       </div>
 
-      {/* Main Content Area */}
-      <div className="relative z-10 flex-1 flex flex-col w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 pt-8 sm:pt-12 pb-16">
+      {/* Scrolling Content Wrapper */}
+      <div className="relative z-10 flex-1 flex flex-col w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 pt-8 md:pt-16 pb-12">
         
-        {/* Header / Navigation */}
-        <header className="w-full flex flex-col sm:flex-row justify-end items-start sm:items-center gap-6 mb-12 sm:mb-16">
+        {/* Navigation Header */}
+        <header className="w-full flex justify-end items-center mb-8 md:mb-12">
           <nav className="flex gap-6 sm:gap-8 font-mono text-sm sm:text-base tracking-widest items-center">
             <button 
-              onClick={() => navigate('home')} 
+              onClick={() => setPage('home')} 
               className={`flex items-center gap-2 transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'home' ? 'text-cyan-500' : 'text-neutral-500'}`}
             >
               [ Home ]
             </button>
             <button 
-              onClick={() => navigate('projects')} 
+              onClick={() => setPage('projects')} 
               className={`flex items-center gap-2 transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'projects' ? 'text-cyan-500' : 'text-neutral-500'}`}
             >
               [ Projects ]
@@ -562,12 +511,12 @@ export default function App() {
           </nav>
         </header>
 
-        {/* Page Routing */}
+        {/* Page Content */}
         <main className="flex-1 flex flex-col w-full">
           {page === 'home' ? <HomeContent setActiveModal={setActiveModal} /> : <ProjectsContent setActiveModal={setActiveModal} />}
         </main>
 
-        {/* Footer / Socials */}
+        {/* Global Footer (Visible on both pages) */}
         <footer className="w-full border-t border-neutral-800/80 pt-8 mt-12">
           <div className="flex flex-wrap justify-between items-center gap-6">
             <div className="flex justify-start items-center gap-6 sm:gap-8">
@@ -589,9 +538,7 @@ export default function App() {
         
       </div>
 
-      {/* Global Modals */}
       <Modal activeModal={activeModal} setActiveModal={setActiveModal} />
-
     </div>
   );
 }
