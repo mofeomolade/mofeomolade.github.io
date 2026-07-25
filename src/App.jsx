@@ -95,26 +95,56 @@ const TechItem = ({ Icon, name }) => (
   </div>
 );
 
-function HomeContent({ setActiveModal }) {
+const TopNav = ({ page, setPage }) => (
+  <nav className="flex gap-6 sm:gap-8 font-mono text-sm sm:text-base tracking-widest items-center shrink-0 w-full md:w-auto justify-end">
+    <button 
+      onClick={() => setPage('home')} 
+      className={`transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'home' ? 'text-cyan-500' : 'text-neutral-500'}`}
+    >
+      [ Home ]
+    </button>
+    <button 
+      onClick={() => setPage('projects')} 
+      className={`transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'projects' ? 'text-cyan-500' : 'text-neutral-500'}`}
+    >
+      [ Projects ]
+    </button>
+    <a 
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-1.5 transition-colors cursor-pointer text-neutral-500 hover:text-cyan-400"
+    >
+      Resume
+      <ExternalLinkIcon size={14} className="mb-0.5 opacity-80" />
+    </a>
+  </nav>
+);
+
+function HomeContent({ setActiveModal, page, setPage }) {
   return (
     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       
       <div className="border-b border-neutral-800/80 pb-8 mb-10 text-left">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
-          Mofe Omolade <span className="text-cyan-500 animate-terminal-blink">_</span>
-        </h1>
-        <div className="mt-6 space-y-4 text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl text-left">
+        <div className="flex flex-col-reverse md:flex-row justify-between items-start md:items-center gap-6 md:gap-4 mb-6 md:mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
+            Mofe Omolade <span className="text-cyan-500 animate-terminal-blink">_</span>
+          </h1>
+          <TopNav page={page} setPage={setPage} />
+        </div>
+        <div className="mt-4 md:mt-2 space-y-4 text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl text-left">
           <p>
             I'm a UBC Computer Engineering student with a passion for electronics. I love exploring anything related to robotics, embedded programming, semiconductors, and more!
           </p>
         </div>
       </div>
 
-      <div className="flex flex-col gap-6 w-full mb-12 font-mono text-sm">
+      <div className="flex flex-col gap-8 w-full mb-12 font-mono text-sm">
         
+        {/* EXPERIENCE BLOCK */}
         <div 
           onClick={() => setActiveModal('experience')}
-          className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg"
+          className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg w-full"
         >
           <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
             <MaximizeIcon size={18} />
@@ -123,49 +153,61 @@ function HomeContent({ setActiveModal }) {
             <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full"></span>
             EXPERIENCE
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-neutral-400">
-            <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">Electronics R&D Intern</strong>@ FulcrumAir</div>
-            <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">ELEC Team Member</strong>@ UBC Rover</div>
-            <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">EE Intern</strong>@ UCalgary</div>
+          <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-12 text-neutral-400">
+            <div className="leading-relaxed flex-1 border-l-2 border-cyan-500/30 pl-4 py-1 hover:border-cyan-500 transition-colors">
+                <strong className="text-neutral-200 block text-base mb-1">Electronics R&D Intern</strong>@ FulcrumAir
+            </div>
+            <div className="leading-relaxed flex-1 border-l-2 border-cyan-500/30 pl-4 py-1 hover:border-cyan-500 transition-colors">
+                <strong className="text-neutral-200 block text-base mb-1">ELEC Team Member</strong>@ UBC Rover
+            </div>
+            <div className="leading-relaxed flex-1 border-l-2 border-cyan-500/30 pl-4 py-1 hover:border-cyan-500 transition-colors">
+                <strong className="text-neutral-200 block text-base mb-1">EE Intern</strong>@ UCalgary
+            </div>
           </div>
         </div>
 
-        <div className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col group">
-          <h3 className="text-white font-semibold mb-6 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
-            TOOLS
-          </h3>
-          <div className="flex flex-wrap gap-8 items-center justify-start flex-1">
-            <TechItemPNG src="/altium-logo.png" name="Altium" />
-            <TechItemPNG src="/kicad.png" name="KiCad" />
-            <TechItem Icon={GitIcon} name="Git" />
-            <TechItemPNG src="/LT.png" name="LTspice" />
-            <TechItem Icon={Stm32Icon} name="STM32" />
-            <TechItemPNG src="/MATLAB.png" name="MATLAB" />
+        {/* TOOLS & LANGUAGES ROW */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+          {/* TOOLS BLOCK */}
+          <div className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col w-full h-full">
+            <h3 className="text-white font-semibold mb-6 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
+              TOOLS
+            </h3>
+            <div className="flex flex-wrap gap-8 items-center justify-start flex-1">
+              <TechItemPNG src="/altium-logo.png" name="Altium" />
+              <TechItemPNG src="/kicad.png" name="KiCad" />
+              <TechItem Icon={GitIcon} name="Git" />
+              <TechItemPNG src="/LT.png" name="LTspice" />
+              <TechItem Icon={Stm32Icon} name="STM32" />
+              <TechItemPNG src="/MATLAB.png" name="MATLAB" />
+            </div>
+          </div>
+
+          {/* LANGUAGES BLOCK */}
+          <div className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col w-full h-full">
+            <h3 className="text-white font-semibold mb-6 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
+              LANGUAGES
+            </h3>
+            <div className="flex flex-wrap gap-8 items-center justify-start flex-1">
+              <TechItemPNG src="/C.png" name="C/C++" />
+              <TechItem Icon={PythonIcon} name="Python" />
+            </div>
           </div>
         </div>
 
-        <div className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col group">
-          <h3 className="text-white font-semibold mb-6 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
-            LANGUAGES
-          </h3>
-          <div className="flex flex-wrap gap-8 items-center justify-start flex-1">
-            <TechItemPNG src="/C.png" name="C/C++" />
-            <TechItem Icon={PythonIcon} name="Python" />
-          </div>
-        </div>
-
+        {/* CURRENT PROJECT BLOCK */}
         <div 
           onClick={() => setActiveModal('currentProject')}
-          className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg"
+          className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg w-full"
         >
           <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
             <MaximizeIcon size={18} />
           </div>
           <h3 className="text-white font-semibold mb-4 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
-            CURRENT
+            CURRENT PROJECT
           </h3>
           <div className="space-y-3 text-neutral-400 mt-2 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
@@ -186,7 +228,7 @@ function HomeContent({ setActiveModal }) {
   );
 }
 
-function ProjectsContent({ setActiveModal }) {
+function ProjectsContent({ setActiveModal, page, setPage }) {
   const projects = [
     { 
       id: "motor-controller",
@@ -218,10 +260,13 @@ function ProjectsContent({ setActiveModal }) {
     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       
       <div className="border-b border-neutral-800/80 pb-8 mb-10 text-left">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
-          Projects <span className="text-cyan-500 animate-terminal-blink">_</span>
-        </h1>
-        <p className="text-cyan-500/80 font-mono text-xs sm:text-sm uppercase tracking-widest mt-6">
+        <div className="flex flex-col-reverse md:flex-row justify-between items-start md:items-center gap-6 md:gap-4 mb-6 md:mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
+            Projects <span className="text-cyan-500 animate-terminal-blink">_</span>
+          </h1>
+          <TopNav page={page} setPage={setPage} />
+        </div>
+        <p className="text-cyan-500/80 font-mono text-xs sm:text-sm uppercase tracking-widest mt-2 md:mt-4">
           Cool things I've built :)
         </p>
       </div>
@@ -483,7 +528,7 @@ export default function App() {
 
   return (
     // Replaced h-screen/overflow-hidden with a natural document layout handled inside the app element
-    <div className="relative w-full h-screen overflow-y-auto overflow-x-hidden bg-[#050505] text-[#e5e5e5] font-sans selection:bg-cyan-500 selection:text-black flex flex-col">
+    <div className="relative w-full h-screen overflow-y-auto overflow-x-hidden bg-[#050505] text-[#e5e5e5] font-sans selection:bg-cyan-500 selection:text-black flex flex-col scrollbar-hide">
       
       <style>{`
         @keyframes terminal-blink {
@@ -492,6 +537,15 @@ export default function App() {
         }
         .animate-terminal-blink {
           animation: terminal-blink 1.2s step-end infinite;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
       `}</style>
 
@@ -510,38 +564,11 @@ export default function App() {
       </div>
 
       {/* Main Content Wrapper - Expands to 6xl for a wider layout */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 pt-6 pb-8 md:pt-10 md:pb-16 flex flex-col flex-1">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 pt-8 pb-8 md:pt-16 md:pb-16 flex flex-col flex-1">
         
-        {/* Navigation Header */}
-        <header className="w-full flex justify-end items-center mb-8 md:mb-10 shrink-0">
-          <nav className="flex gap-6 sm:gap-8 font-mono text-sm sm:text-base tracking-widest items-center">
-            <button 
-              onClick={() => setPage('home')} 
-              className={`transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'home' ? 'text-cyan-500' : 'text-neutral-500'}`}
-            >
-              [ Home ]
-            </button>
-            <button 
-              onClick={() => setPage('projects')} 
-              className={`transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'projects' ? 'text-cyan-500' : 'text-neutral-500'}`}
-            >
-              [ Projects ]
-            </button>
-            <a 
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 transition-colors cursor-pointer text-neutral-500 hover:text-cyan-400"
-            >
-              Resume
-              <ExternalLinkIcon size={14} className="mb-0.5 opacity-80" />
-            </a>
-          </nav>
-        </header>
-
         {/* Page Content */}
         <main className="w-full flex-1">
-          {page === 'home' ? <HomeContent setActiveModal={setActiveModal} /> : <ProjectsContent setActiveModal={setActiveModal} />}
+          {page === 'home' ? <HomeContent setActiveModal={setActiveModal} page={page} setPage={setPage} /> : <ProjectsContent setActiveModal={setActiveModal} page={page} setPage={setPage} />}
         </main>
 
         {/* Global Footer */}
