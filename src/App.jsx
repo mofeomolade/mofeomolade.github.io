@@ -99,7 +99,7 @@ function HomeContent({ setActiveModal }) {
   return (
     <div className="w-full flex-1 flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       
-      <div className="border-b border-neutral-800/80 pb-8 mb-8 mt-4 text-left">
+      <div className="border-b border-neutral-800/80 pb-6 mb-8 text-left">
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
           Mofe Omolade <span className="text-cyan-500 animate-terminal-blink">_</span>
         </h1>
@@ -215,7 +215,7 @@ function ProjectsContent({ setActiveModal }) {
   return (
     <div className="w-full flex-1 flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       
-      <div className="border-b border-neutral-800/80 pb-8 mb-8 mt-4 text-left">
+      <div className="border-b border-neutral-800/80 pb-6 mb-8 text-left">
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
           Projects <span className="text-cyan-500 animate-terminal-blink">_</span>
         </h1>
@@ -454,6 +454,15 @@ export default function App() {
     return () => { document.body.style.overflow = 'unset'; }
   }, [activeModal]);
 
+  useEffect(() => {
+    // Restore the tab icon
+    const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/svg+xml';
+    link.rel = 'icon';
+    link.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18.36 6.64a9 9 0 1 1-12.73 0'/%3E%3Cline x1='12' y1='2' x2='12' y2='12'/%3E%3C/svg%3E";
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }, []);
+
   return (
     <div className="relative w-full min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-cyan-500 selection:text-black flex flex-col">
       
@@ -482,10 +491,10 @@ export default function App() {
       </div>
 
       {/* Scrolling Content Wrapper */}
-      <div className="relative z-10 flex-1 flex flex-col w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 pt-8 md:pt-16 pb-12">
+      <div className="relative z-10 flex-1 flex flex-col w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 pt-6 md:pt-10 pb-8">
         
         {/* Navigation Header */}
-        <header className="w-full flex justify-end items-center mb-8 md:mb-12">
+        <header className="w-full flex justify-end items-center mb-6 md:mb-8">
           <nav className="flex gap-6 sm:gap-8 font-mono text-sm sm:text-base tracking-widest items-center">
             <button 
               onClick={() => setPage('home')} 
