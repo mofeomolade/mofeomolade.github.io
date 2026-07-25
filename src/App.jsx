@@ -86,7 +86,7 @@ const TechItemPNG = ({ src, name }) => (
 const TechItem = ({ Icon, name }) => (
   <div className="group relative flex flex-col items-center justify-center p-2 text-neutral-300 cursor-default h-full min-h-[70px]">
     <Icon 
-      size={28} 
+      size={32} 
       className="transition-all duration-300 group-hover:text-cyan-400 group-hover:-translate-y-2 relative z-10" 
     />
     <span className="absolute bottom-1 text-[10px] sm:text-xs font-mono tracking-wider text-neutral-500 opacity-0 transform translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 z-0">
@@ -97,45 +97,45 @@ const TechItem = ({ Icon, name }) => (
 
 function HomeContent({ setActiveModal }) {
   return (
-    <div className="w-full flex-1 flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       
-      <div className="border-b border-neutral-800/80 pb-6 mb-8 text-left">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
+      <div className="border-b border-neutral-800/80 pb-8 mb-10 text-left">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
           Mofe Omolade <span className="text-cyan-500 animate-terminal-blink">_</span>
         </h1>
-        <div className="mt-6 space-y-4 text-neutral-400 text-base md:text-xl leading-relaxed max-w-2xl text-left">
+        <div className="mt-6 space-y-4 text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl text-left">
           <p>
             I'm a UBC Computer Engineering student with a passion for electronics. I love exploring anything related to robotics, embedded programming, semiconductors, and more!
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full mb-12 font-mono text-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-12 font-mono text-sm">
         
         <div 
           onClick={() => setActiveModal('experience')}
-          className="relative p-6 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col h-full cursor-pointer group shadow-lg"
+          className="md:col-span-2 relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg"
         >
-          <div className="absolute top-4 right-4 text-neutral-600 group-hover:text-cyan-400 transition-colors">
-            <MaximizeIcon size={16} />
+          <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
+            <MaximizeIcon size={18} />
           </div>
-          <h3 className="text-white font-semibold mb-4 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
+          <h3 className="text-white font-semibold mb-6 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full"></span>
             EXPERIENCE
           </h3>
-          <ul className="space-y-4 text-neutral-400 mt-2">
-            <li className="leading-snug"><strong className="text-neutral-200 block">Electronics R&D Intern</strong>@ FulcrumAir</li>
-            <li className="leading-snug"><strong className="text-neutral-200 block">ELEC Team Member</strong>@ UBC Rover</li>
-            <li className="leading-snug"><strong className="text-neutral-200 block">EE Intern</strong>@ UCalgary</li>
-          </ul>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-neutral-400">
+            <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">Electronics R&D Intern</strong>@ FulcrumAir</div>
+            <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">ELEC Team Member</strong>@ UBC Rover</div>
+            <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">EE Intern</strong>@ UCalgary</div>
+          </div>
         </div>
 
-        <div className="relative p-6 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col h-full group">
-          <h3 className="text-white font-semibold mb-4 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
+        <div className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col group">
+          <h3 className="text-white font-semibold mb-6 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
             TOOLS
           </h3>
-          <div className="grid grid-cols-3 gap-2 mt-2 content-start flex-1">
+          <div className="grid grid-cols-3 gap-4 content-start flex-1">
             <TechItemPNG src="/altium-logo.png" name="Altium" />
             <TechItemPNG src="/kicad.png" name="KiCad" />
             <TechItem Icon={GitIcon} name="Git" />
@@ -145,12 +145,12 @@ function HomeContent({ setActiveModal }) {
           </div>
         </div>
 
-        <div className="relative p-6 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col h-full group">
-          <h3 className="text-white font-semibold mb-4 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
+        <div className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/30 transition-all text-left flex flex-col group">
+          <h3 className="text-white font-semibold mb-6 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
             LANGUAGES
           </h3>
-          <div className="grid grid-cols-2 gap-4 mt-2 content-start flex-1">
+          <div className="grid grid-cols-2 gap-6 content-start flex-1">
             <TechItemPNG src="/C.png" name="C/C++" />
             <TechItem Icon={PythonIcon} name="Python" />
           </div>
@@ -158,22 +158,24 @@ function HomeContent({ setActiveModal }) {
 
         <div 
           onClick={() => setActiveModal('currentProject')}
-          className="relative p-6 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col h-full cursor-pointer group shadow-lg"
+          className="md:col-span-2 relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg"
         >
-          <div className="absolute top-4 right-4 text-neutral-600 group-hover:text-cyan-400 transition-colors">
-            <MaximizeIcon size={16} />
+          <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
+            <MaximizeIcon size={18} />
           </div>
           <h3 className="text-white font-semibold mb-4 pb-2 border-b border-neutral-800/80 tracking-wider flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
             CURRENT
           </h3>
-          <div className="space-y-3 text-neutral-400 mt-2 flex flex-col flex-1">
-            <p className="text-neutral-200 font-bold">Custom Motor Controller</p>
-            <p className="text-xs leading-relaxed opacity-80">
-              Designing a custom motor controller PCB supporting 24 V, 5 A loads and CAN communication.
-            </p>
-            <div className="mt-auto pt-4">
-              <span className="inline-block px-2 py-1 text-[10px] uppercase tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-900/50 rounded-sm">
+          <div className="space-y-3 text-neutral-400 mt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <p className="text-neutral-200 font-bold text-base mb-2">Custom Motor Controller</p>
+              <p className="text-sm leading-relaxed opacity-80 max-w-xl">
+                Designing a custom motor controller PCB supporting 24 V, 5 A loads and CAN communication.
+              </p>
+            </div>
+            <div className="pt-2 sm:pt-0 shrink-0">
+              <span className="inline-block px-3 py-1.5 text-[10px] sm:text-xs uppercase tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-900/50 rounded-sm">
                 In Progress
               </span>
             </div>
@@ -213,10 +215,10 @@ function ProjectsContent({ setActiveModal }) {
   ];
 
   return (
-    <div className="w-full flex-1 flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       
-      <div className="border-b border-neutral-800/80 pb-6 mb-8 text-left">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
+      <div className="border-b border-neutral-800/80 pb-8 mb-10 text-left">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white drop-shadow-lg m-0 leading-none">
           Projects <span className="text-cyan-500 animate-terminal-blink">_</span>
         </h1>
         <p className="text-cyan-500/80 font-mono text-xs sm:text-sm uppercase tracking-widest mt-6">
@@ -224,7 +226,7 @@ function ProjectsContent({ setActiveModal }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 pb-8 text-left flex-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8 text-left">
         {projects.map((proj) => (
           <div 
             key={proj.id} 
@@ -234,7 +236,7 @@ function ProjectsContent({ setActiveModal }) {
             <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
               <MaximizeIcon size={18} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors pr-8">{proj.title}</h3>
+            <h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors pr-8">{proj.title}</h3>
             <p className="text-neutral-400 mb-8 flex-grow leading-relaxed">{proj.desc}</p>
             <div className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase tracking-widest border-t border-neutral-800/80 pt-4 mt-auto">
               [ {proj.tech} ]
@@ -419,8 +421,8 @@ function Modal({ activeModal, setActiveModal }) {
         onClick={() => setActiveModal(null)}
       />
       
-      <div className="relative z-10 w-full max-w-2xl bg-[#0a0a0a] border border-neutral-800/80 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 fade-in duration-300">
-        <div className="flex justify-between items-center p-5 md:p-6 border-b border-neutral-800/80 bg-neutral-900/40">
+      <div className="relative z-10 w-full max-w-3xl bg-[#0a0a0a] border border-neutral-800/80 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 fade-in duration-300">
+        <div className="flex justify-between items-center p-5 md:p-6 border-b border-neutral-800/80 bg-neutral-900/40 shrink-0">
           <h2 className="text-sm md:text-base font-bold font-mono tracking-widest text-cyan-500 flex items-center gap-2">
             <span className="w-2 h-2 bg-cyan-500 block"></span>
             {ModalData[activeModal].title}
@@ -446,6 +448,7 @@ export default function App() {
   const [activeModal, setActiveModal] = useState(null);
 
   useEffect(() => {
+    // Lock background scroll when modal is open
     if (activeModal) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -455,15 +458,21 @@ export default function App() {
   }, [activeModal]);
 
   useEffect(() => {
-    // Restore the tab icon
-    const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    // Aggressively set the tab icon
+    const svgIcon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18.36 6.64a9 9 0 1 1-12.73 0'/%3E%3Cline x1='12' y1='2' x2='12' y2='12'/%3E%3C/svg%3E";
+    
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.href = svgIcon;
     link.type = 'image/svg+xml';
-    link.rel = 'icon';
-    link.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18.36 6.64a9 9 0 1 1-12.73 0'/%3E%3Cline x1='12' y1='2' x2='12' y2='12'/%3E%3C/svg%3E";
-    document.getElementsByTagName('head')[0].appendChild(link);
   }, []);
 
   return (
+    // Replaced h-screen/overflow-hidden with a natural document layout
     <div className="relative w-full min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-cyan-500 selection:text-black flex flex-col">
       
       <style>{`
@@ -476,7 +485,7 @@ export default function App() {
         }
       `}</style>
 
-      {/* Persistent Animated Background */}
+      {/* Fixed Background (Doesn't affect scroll) */}
       <div className="fixed inset-0 z-0 pointer-events-none" style={{
         backgroundImage: `
           radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.04), transparent 30%),
@@ -490,21 +499,21 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505] opacity-80" />
       </div>
 
-      {/* Scrolling Content Wrapper */}
-      <div className="relative z-10 flex-1 flex flex-col w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 pt-6 md:pt-10 pb-8">
+      {/* Main Content Wrapper - Centers content and handles max-width */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 md:px-12 pt-6 pb-8 md:pt-10 md:pb-16 flex flex-col min-h-screen">
         
         {/* Navigation Header */}
-        <header className="w-full flex justify-end items-center mb-6 md:mb-8">
+        <header className="w-full flex justify-end items-center mb-8 md:mb-10 shrink-0">
           <nav className="flex gap-6 sm:gap-8 font-mono text-sm sm:text-base tracking-widest items-center">
             <button 
               onClick={() => setPage('home')} 
-              className={`flex items-center gap-2 transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'home' ? 'text-cyan-500' : 'text-neutral-500'}`}
+              className={`transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'home' ? 'text-cyan-500' : 'text-neutral-500'}`}
             >
               [ Home ]
             </button>
             <button 
               onClick={() => setPage('projects')} 
-              className={`flex items-center gap-2 transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'projects' ? 'text-cyan-500' : 'text-neutral-500'}`}
+              className={`transition-colors cursor-pointer bg-transparent border-0 p-0 hover:text-cyan-400 ${page === 'projects' ? 'text-cyan-500' : 'text-neutral-500'}`}
             >
               [ Projects ]
             </button>
@@ -521,12 +530,12 @@ export default function App() {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 flex flex-col w-full">
+        <main className="w-full flex-1">
           {page === 'home' ? <HomeContent setActiveModal={setActiveModal} /> : <ProjectsContent setActiveModal={setActiveModal} />}
         </main>
 
-        {/* Global Footer (Visible on both pages) */}
-        <footer className="w-full border-t border-neutral-800/80 pt-8 mt-12">
+        {/* Global Footer */}
+        <footer className="w-full border-t border-neutral-800/80 pt-8 mt-16 shrink-0">
           <div className="flex flex-wrap justify-between items-center gap-6">
             <div className="flex justify-start items-center gap-6 sm:gap-8">
               <a href="https://github.com/mofeomolade" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-neutral-500 hover:text-cyan-400 transition-all hover:-translate-y-1 duration-300">
