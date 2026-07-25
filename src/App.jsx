@@ -110,11 +110,11 @@ function HomeContent({ setActiveModal }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-12 font-mono text-sm">
+      <div className="flex flex-col gap-6 w-full mb-12 font-mono text-sm">
         
         <div 
           onClick={() => setActiveModal('experience')}
-          className="md:col-span-2 relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg"
+          className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg"
         >
           <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
             <MaximizeIcon size={18} />
@@ -123,7 +123,7 @@ function HomeContent({ setActiveModal }) {
             <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full"></span>
             EXPERIENCE
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-neutral-400">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-neutral-400">
             <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">Electronics R&D Intern</strong>@ FulcrumAir</div>
             <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">ELEC Team Member</strong>@ UBC Rover</div>
             <div className="leading-relaxed"><strong className="text-neutral-200 block text-base mb-1">EE Intern</strong>@ UCalgary</div>
@@ -135,7 +135,7 @@ function HomeContent({ setActiveModal }) {
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
             TOOLS
           </h3>
-          <div className="grid grid-cols-3 gap-4 content-start flex-1">
+          <div className="flex flex-wrap gap-8 items-center justify-start flex-1">
             <TechItemPNG src="/altium-logo.png" name="Altium" />
             <TechItemPNG src="/kicad.png" name="KiCad" />
             <TechItem Icon={GitIcon} name="Git" />
@@ -150,7 +150,7 @@ function HomeContent({ setActiveModal }) {
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
             LANGUAGES
           </h3>
-          <div className="grid grid-cols-2 gap-6 content-start flex-1">
+          <div className="flex flex-wrap gap-8 items-center justify-start flex-1">
             <TechItemPNG src="/C.png" name="C/C++" />
             <TechItem Icon={PythonIcon} name="Python" />
           </div>
@@ -158,7 +158,7 @@ function HomeContent({ setActiveModal }) {
 
         <div 
           onClick={() => setActiveModal('currentProject')}
-          className="md:col-span-2 relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg"
+          className="relative p-6 md:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/50 hover:bg-neutral-800/40 transition-all text-left flex flex-col cursor-pointer group shadow-lg"
         >
           <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
             <MaximizeIcon size={18} />
@@ -167,14 +167,14 @@ function HomeContent({ setActiveModal }) {
             <span className="w-1.5 h-1.5 bg-cyan-500/50 rounded-full"></span>
             CURRENT
           </h3>
-          <div className="space-y-3 text-neutral-400 mt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="space-y-3 text-neutral-400 mt-2 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <p className="text-neutral-200 font-bold text-base mb-2">Custom Motor Controller</p>
               <p className="text-sm leading-relaxed opacity-80 max-w-xl">
                 Designing a custom motor controller PCB supporting 24 V, 5 A loads and CAN communication.
               </p>
             </div>
-            <div className="pt-2 sm:pt-0 shrink-0">
+            <div className="pt-2 md:pt-0 shrink-0">
               <span className="inline-block px-3 py-1.5 text-[10px] sm:text-xs uppercase tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-900/50 rounded-sm">
                 In Progress
               </span>
@@ -226,19 +226,29 @@ function ProjectsContent({ setActiveModal }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8 text-left">
+      <div className="flex flex-col gap-6 pb-8 text-left">
         {projects.map((proj) => (
           <div 
             key={proj.id} 
             onClick={() => setActiveModal(proj.id)}
-            className="relative p-6 sm:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/40 hover:bg-neutral-800/60 transition-all duration-300 group cursor-pointer flex flex-col h-full shadow-lg"
+            className="relative p-6 sm:p-8 bg-neutral-900/40 rounded-xl backdrop-blur-sm border border-neutral-800/80 hover:border-cyan-500/40 hover:bg-neutral-800/60 transition-all duration-300 group cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-lg"
           >
-            <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors">
+            <div className="absolute top-6 right-6 text-neutral-600 group-hover:text-cyan-400 transition-colors hidden sm:block">
               <MaximizeIcon size={18} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors pr-8">{proj.title}</h3>
-            <p className="text-neutral-400 mb-8 flex-grow leading-relaxed">{proj.desc}</p>
-            <div className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase tracking-widest border-t border-neutral-800/80 pt-4 mt-auto">
+            
+            <div className="flex-1">
+              <div className="flex justify-between items-center mb-4 sm:hidden">
+                 <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors pr-8">{proj.title}</h3>
+                 <div className="text-neutral-600 group-hover:text-cyan-400 transition-colors">
+                    <MaximizeIcon size={18} />
+                 </div>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors hidden sm:block">{proj.title}</h3>
+              <p className="text-neutral-400 leading-relaxed max-w-3xl">{proj.desc}</p>
+            </div>
+            
+            <div className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase tracking-widest sm:border-l sm:border-neutral-800/80 sm:pl-6 pt-4 sm:pt-0 border-t border-neutral-800/80 sm:border-t-0 shrink-0 sm:w-48">
               [ {proj.tech} ]
             </div>
           </div>
@@ -472,8 +482,8 @@ export default function App() {
   }, []);
 
   return (
-    // Replaced h-screen/overflow-hidden with a natural document layout
-    <div className="relative w-full min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-cyan-500 selection:text-black flex flex-col">
+    // Replaced h-screen/overflow-hidden with a natural document layout handled inside the app element
+    <div className="relative w-full h-screen overflow-y-auto overflow-x-hidden bg-[#050505] text-[#e5e5e5] font-sans selection:bg-cyan-500 selection:text-black flex flex-col">
       
       <style>{`
         @keyframes terminal-blink {
@@ -499,8 +509,8 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505] opacity-80" />
       </div>
 
-      {/* Main Content Wrapper - Centers content and handles max-width */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 md:px-12 pt-6 pb-8 md:pt-10 md:pb-16 flex flex-col min-h-screen">
+      {/* Main Content Wrapper - Expands to 6xl for a wider layout */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 pt-6 pb-8 md:pt-10 md:pb-16 flex flex-col flex-1">
         
         {/* Navigation Header */}
         <header className="w-full flex justify-end items-center mb-8 md:mb-10 shrink-0">
