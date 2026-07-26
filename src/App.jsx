@@ -172,7 +172,7 @@ function HomeContent() {
       <div className="w-full text-left animate-in fade-in duration-500">
         
         <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-2xl mb-12">
-          I'm a UBC Computer Engineering student with a passion for electronics. I love exploring anything related to robotics, embedded programming, semiconductors, and more!
+          I'm a UBC Computer Engineering student with a passion for electronics. I love exploring anything related to robotics, EVs, embedded programming, semiconductors, and more!
         </p>
 
         {/* Experience Block */}
@@ -308,7 +308,7 @@ function ProjectsContent() {
       id: "motor-controller",
       title: "Custom Motor Controller", 
       desc: "Custom motor controller PCB supporting 24V, 5A loads and CAN communication.", 
-      tech: "Altium Designer, LTspice, C++",
+      tech: "Altium, LTspice, C++",
       content: (
         <div className="space-y-4">
           <h4 className="text-2xl font-bold text-white">Custom Motor Controller</h4>
@@ -336,12 +336,12 @@ function ProjectsContent() {
     },
     { 
       id: "drivetrain",
-      title: "Autonomous Drivetrain", 
+      title: "Rover Powertrain", 
       desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
       tech: "STM32, C, UART",
       content: (
         <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">Autonomous Drivetrain System</h4>
+          <h4 className="text-2xl font-bold text-white">Rover Powertrain System</h4>
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
             <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
@@ -393,7 +393,7 @@ function ProjectsContent() {
     { 
       id: "hud",
       title: "Car HUD Speedometer", 
-      desc: "Custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness LCD.", 
+      desc: "Custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness OLED.", 
       tech: "Arduino, GNSS, C++, SPI",
       content: (
         <div className="space-y-6">
