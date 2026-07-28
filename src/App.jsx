@@ -389,7 +389,7 @@ function ProjectsContent() {
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
             </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <img src="/mini-rover-prototype.jpg" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <img src="/mini-rover-prototype.png" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
                  <img src="/mini-rover-block-diagram.png" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
               </div>
