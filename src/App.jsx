@@ -334,21 +334,25 @@ function ProjectsContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               
               {/* 3D Views - Side by Side on Medium+ Screens */}
-              <img src="motor driver module top view.jpg" alt="Motor Driver Module Top View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <img src="motor driver module bottom view.jpg" alt="Motor Driver Module Bottom View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              {/* FIXED: Added leading slash and encoded spaces */}
+              <img src="/motor%20driver%20module%20top%20view.jpg" alt="Motor Driver Module Top View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <img src="/motor%20driver%20module%20bottom%20view.jpg" alt="Motor Driver Module Bottom View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               
               {/* Layout - Full Width */}
               <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="updated motor driver module layout.jpg" alt="Updated PCB Layout" className="w-full max-h-64 object-contain" />
+                 {/* FIXED: Added leading slash and encoded spaces */}
+                 <img src="/updated%20motor%20driver%20module%20layout.jpg" alt="Updated PCB Layout" className="w-full max-h-64 object-contain" />
               </div>
 
               {/* Schematics - Full Width */}
               <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="motor driver module schematic.jpg" alt="Motor Driver Module Schematic" className="w-full max-h-64 object-contain" />
+                 {/* FIXED: Added leading slash and encoded spaces */}
+                 <img src="/motor%20driver%20module%20schematic.jpg" alt="Motor Driver Module Schematic" className="w-full max-h-64 object-contain" />
               </div>
               
               <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="motor driver h bridge schematic.png" alt="H-Bridge Schematic" className="w-full max-h-64 object-contain" />
+                 {/* FIXED: Added leading slash and encoded spaces */}
+                 <img src="/motor%20driver%20h%20bridge%20schematic.png" alt="H-Bridge Schematic" className="w-full max-h-64 object-contain" />
               </div>
 
             </div>
@@ -389,9 +393,11 @@ function ProjectsContent() {
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
             </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <img src="mini rover prototype.jpg" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              {/* FIXED: Added leading slash and encoded spaces */}
+              <img src="/mini%20rover%20prototype.jpg" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="mini rover block diagram.png" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
+                 {/* FIXED: Added leading slash and encoded spaces */}
+                 <img src="/mini%20rover%20block%20diagram.png" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
               </div>
             </div>
           </div>
