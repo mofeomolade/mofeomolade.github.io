@@ -55,8 +55,8 @@ const PythonIcon = ({ size = 24, ...props }) => (
   </svg>
 );
 
-const TechItem = ({ Icon }) => (
-  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300">
+const TechItem = ({ Icon, title }) => (
+  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300" title={title}>
     <Icon 
       size={26} 
       className="text-neutral-400 group-hover:text-white transition-colors duration-300" 
@@ -64,8 +64,8 @@ const TechItem = ({ Icon }) => (
   </div>
 );
 
-const TechItemPNG = ({ src }) => (
-  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300">
+const TechItemPNG = ({ src, title }) => (
+  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300" title={title}>
     <div 
       className="w-[26px] h-[26px] bg-neutral-400 group-hover:bg-white transition-colors duration-300"
       style={{
@@ -141,7 +141,7 @@ function HomeContent() {
       title: "PROJECT INSIGHTS",
       content: (
         <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">Custom Motor Controller</h4>
+          <h4 className="text-2xl font-bold text-white">PID Self-Balancing Robot</h4>
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
             <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
@@ -149,14 +149,21 @@ function HomeContent() {
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Hardware Design:</strong> Designing a compact motor driver module around the IFX007T half-bridge to support multichannel actuator control. </span>
+                <span><strong className="text-white block mb-1 font-medium">Hardware Design:</strong> Designing a custom two-wheeled self-balancing robot utilizing an ESP32-C3, MPU-6050 IMU, and an L298N motor driver. The frame is being custom-designed in SolidWorks.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and CAN communication.</span>
+                <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Implemented a closed-loop PID control system to actively drive dual DC motors, maintaining dynamic equilibrium.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Integrated a custom C++ IMU library that fetches real-time pitch data utilizing an optimized complementary filter.</span>
               </li>
             </ul>
           </div>
+          <a href="https://github.com/mofeomolade/PID-Self-Balancing-Robot" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-mono text-cyan-500 hover:text-cyan-400 transition-colors mt-2">
+            <GithubIcon size={16} /> View on GitHub <ExternalLinkIcon size={14} />
+          </a>
         </div>
       )
     }
@@ -213,12 +220,13 @@ function HomeContent() {
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
             <div className="flex flex-wrap gap-4 items-center">
-              <TechItemPNG src="/altium-logo.png" />
-              <TechItemPNG src="/kicad.png" />
-              <TechItem Icon={GitIcon} />
-              <TechItemPNG src="/LT.png" />
-              <TechItem Icon={Stm32Icon} />
-              <TechItemPNG src="/MATLAB.png" />
+              <TechItemPNG src="/altium-logo.png" title="Altium Designer" />
+              <TechItemPNG src="/kicad.png" title="KiCad" />
+              <TechItem Icon={GitIcon} title="Git" />
+              <TechItemPNG src="/LT.png" title="LTspice" />
+              <TechItem Icon={Stm32Icon} title="STM32" />
+              <TechItemPNG src="/MATLAB.png" title="MATLAB" />
+              <TechItemPNG src="solidworkslogo.png" title="SolidWorks" />
             </div>
           </div>
 
@@ -231,8 +239,8 @@ function HomeContent() {
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
             <div className="flex flex-wrap gap-4 items-center">
-              <TechItemPNG src="/C.png" />
-              <TechItem Icon={PythonIcon} />
+              <TechItemPNG src="/C.png" title="C/C++" />
+              <TechItem Icon={PythonIcon} title="Python" />
             </div>
           </div>
           
@@ -254,9 +262,9 @@ function HomeContent() {
           <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
           
           <div className="space-y-4">
-            <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Custom Motor Controller</h4>
+            <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">PID Self-Balancing Robot</h4>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl">
-              Designing a custom motor controller PCB supporting 24 V, 5 A loads and CAN communication.
+              Designing a two-wheeled self-balancing robot with a custom SolidWorks frame, an ESP32-C3, and closed-loop PID control.
             </p>
             <div className="inline-block mt-2">
               <span className="text-xs font-mono font-semibold tracking-wider text-cyan-500 bg-cyan-500/10 border border-cyan-500/20 rounded px-3 py-1.5">
@@ -298,6 +306,87 @@ function ProjectsContent() {
   const [activeModal, setActiveModal] = useState(null);
 
   const projects = [
+    {
+      id: "pid-robot",
+      title: "PID Self-Balancing Robot",
+      desc: "Designing a two-wheeled self-balancing robot using an ESP32-C3, custom IMU library, and PID control.",
+      tech: "ESP32, C++, SolidWorks, PID",
+      content: (
+        <div className="space-y-6">
+          <div className="flex justify-between items-start">
+            <h4 className="text-2xl font-bold text-white">PID Self-Balancing Robot</h4>
+            <a href="https://github.com/mofeomolade/PID-Self-Balancing-Robot" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
+               <GithubIcon size={24} />
+            </a>
+          </div>
+          
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+            </h5>
+            <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Mechanical Design:</strong> Designing the robot's physical frame using SolidWorks to ensure structural integrity and proper weight distribution.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Building the system around an ESP32-C3 microcontroller, interfacing with an MPU-6050 IMU and an L298N motor driver.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Implemented a closed-loop PID control algorithm to actively drive dual DC motors, maintaining the robot in dynamic equilibrium.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Integrated my custom C++ IMU library to fetch accurate, real-time pitch data utilizing an optimized complementary filter.</span>
+              </li>
+            </ul>
+            <div className="inline-block mt-2">
+              <span className="text-xs font-mono font-semibold tracking-wider text-cyan-500 bg-cyan-500/10 border border-cyan-500/20 rounded px-3 py-1.5">
+                IN PROGRESS
+              </span>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      id: "imu-tracker",
+      title: "IMU Pitch, Roll & Yaw Calculator",
+      desc: "Developed C++ firmware to process MPU-6050 IMU data, applying sensor fusion to calculate accurate orientation.",
+      tech: "ESP32, C++, I2C, Sensor Fusion",
+      content: (
+        <div className="space-y-6">
+          <div className="flex justify-between items-start">
+            <h4 className="text-2xl font-bold text-white">IMU Orientation Calculator</h4>
+            <a href="https://github.com/mofeomolade/IMU-Orientation-Tracker" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
+               <GithubIcon size={24} />
+            </a>
+          </div>
+          
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+            </h5>
+            <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Firmware Development:</strong> Developed C++ firmware for the ESP32 to parse raw accelerometer and gyroscope registers from the MPU-6050 via the I2C protocol.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Mathematical Modeling:</strong> Applied trigonometry to the raw accelerometer vectors and fused this data with gyroscope readings to calculate accurate pitch and roll angles.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Signal Processing:</strong> Applied a sensor fusion Euler complementary filter and a deadband filter to effectively account for and mitigate angular integration drift over time.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )
+    },
     { 
       id: "motor-controller",
       title: "Custom Motor Controller", 
@@ -431,7 +520,12 @@ function ProjectsContent() {
       tech: "Arduino, GNSS, C++, SPI",
       content: (
         <div className="space-y-6">
-          <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
+          <div className="flex justify-between items-start">
+            <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
+            <a href="https://github.com/mofeomolade/Arduino-Speedometer-HUD" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
+               <GithubIcon size={24} />
+            </a>
+          </div>
           
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
             <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
