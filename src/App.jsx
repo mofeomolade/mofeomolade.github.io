@@ -61,7 +61,6 @@ const TechItem = ({ Icon, title }) => (
       size={36} 
       className="text-neutral-400 group-hover:text-white transition-colors duration-300" 
     />
-    {/* Custom Tooltip */}
     <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10 text-white text-xs font-mono whitespace-nowrap bg-[#1a1a1a] px-2 py-1 rounded shadow-lg border border-neutral-700">
       {title}
     </span>
@@ -83,7 +82,6 @@ const TechItemPNG = ({ src, title }) => (
         maskPosition: 'center',
       }}
     />
-    {/* Custom Tooltip */}
     <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10 text-white text-xs font-mono whitespace-nowrap bg-[#1a1a1a] px-2 py-1 rounded shadow-lg border border-neutral-700">
       {title}
     </span>
@@ -216,7 +214,7 @@ function HomeContent() {
           </div>
         </div>
 
-        {/* Tools and Languages Side-by-Side */}
+        { }
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-6">
           
           {/* Tools Block */}
@@ -283,6 +281,7 @@ function HomeContent() {
 
       </div>
 
+      {}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 pointer-events-auto animate-in fade-in duration-200">
           <div 
@@ -443,16 +442,13 @@ function ProjectsContent() {
             </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               
-              {/* 3D Views - Side by Side on Medium+ Screens */}
               <img src="/motor-driver-module-top-view.png" alt="Motor Driver Module Top View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               <img src="/motor-driver-module-bottom-view.png" alt="Motor Driver Module Bottom View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               
-              {/* Layout - Full Width */}
               <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
                  <img src="/updated-motor-driver-module-layout.png" alt="Updated PCB Layout" className="w-full max-h-64 object-contain" />
               </div>
 
-              {/* Schematics - Full Width */}
               <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
                  <img src="/motor-driver-module-schematic.png" alt="Motor Driver Module Schematic" className="w-full max-h-64 object-contain" />
               </div>
@@ -600,7 +596,6 @@ function ProjectsContent() {
             
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
-            {/* Kept conditional rendering just in case you removed descriptions entirely */}
             {proj.desc && <p className="text-neutral-400 mb-6 leading-relaxed max-w-2xl">{proj.desc}</p>}
             
             <div className="text-xs font-mono text-neutral-500 uppercase tracking-widest">
@@ -649,6 +644,27 @@ export default function App() {
     
     // Hide scrollbar globally for that clean app-like feel
     document.body.style.overflow = 'hidden';
+
+    // Preload heavy gallery images in the background so they appear instantly
+    const imagesToPreload = [
+      "/PID Robot Schematic.png",
+      "/PID Robot Standing.png",
+      "/motor-driver-module-top-view.png",
+      "/motor-driver-module-bottom-view.png",
+      "/updated-motor-driver-module-layout.png",
+      "/motor-driver-module-schematic.png",
+      "/motor-driver-h-bridge-schematic.png",
+      "/mini-rover-prototype.png",
+      "/mini-rover-block-diagram.png",
+      "/hud-breadboard.jpg",
+      "/HUD-driver-view.jpg",
+      "/HUD-Schematic.png"
+    ];
+
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
     
     return () => {
       document.body.style.overflow = 'auto';
@@ -673,14 +689,6 @@ export default function App() {
       <style dangerouslySetInnerHTML={{__html: `
         ::-webkit-scrollbar { display: none; }
         * { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        @keyframes terminal-blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        .animate-terminal-blink {
-          animation: terminal-blink 1.2s step-end infinite;
-        }
       `}} />
 
       <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 md:px-12 pt-12 md:pt-24 pb-24 md:pb-16 flex flex-col min-h-full">
@@ -688,9 +696,9 @@ export default function App() {
         {/* Navigation & Header - Mobile Responsive Stacking */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-0 mb-8 md:mb-12">
           
+          {/* Underscore removed here */}
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white m-0 leading-none">
             {page === 'home' ? 'Mofe Omolade' : 'Projects'}
-            <span className="text-cyan-500 animate-terminal-blink">_</span>
           </h1>
           
           <nav className="flex gap-6 md:gap-8 font-mono text-sm md:text-base tracking-widest items-center">
@@ -727,7 +735,7 @@ export default function App() {
           {page === 'projects' && <ProjectsContent />}
         </div>
 
-        {/* Global Footer (Stays at the bottom naturally) */}
+        {}
         <div className="w-full pt-12 mt-auto">
           <div className="flex justify-between items-center font-mono text-xs text-neutral-600">
             
