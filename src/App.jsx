@@ -56,18 +56,22 @@ const PythonIcon = ({ size = 24, ...props }) => (
 );
 
 const TechItem = ({ Icon, title }) => (
-  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300" title={title}>
+  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300">
     <Icon 
-      size={26} 
+      size={36} 
       className="text-neutral-400 group-hover:text-white transition-colors duration-300" 
     />
+    {/* Custom Tooltip */}
+    <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10 text-white text-xs font-mono whitespace-nowrap bg-[#1a1a1a] px-2 py-1 rounded shadow-lg border border-neutral-700">
+      {title}
+    </span>
   </div>
 );
 
 const TechItemPNG = ({ src, title }) => (
-  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300" title={title}>
+  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300">
     <div 
-      className="w-[26px] h-[26px] bg-neutral-400 group-hover:bg-white transition-colors duration-300"
+      className="w-[36px] h-[36px] bg-neutral-400 group-hover:bg-white transition-colors duration-300"
       style={{
         WebkitMaskImage: `url(${src})`,
         WebkitMaskSize: 'contain',
@@ -79,6 +83,10 @@ const TechItemPNG = ({ src, title }) => (
         maskPosition: 'center',
       }}
     />
+    {/* Custom Tooltip */}
+    <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10 text-white text-xs font-mono whitespace-nowrap bg-[#1a1a1a] px-2 py-1 rounded shadow-lg border border-neutral-700">
+      {title}
+    </span>
   </div>
 );
 
@@ -149,7 +157,7 @@ function HomeContent() {
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Hardware Design:</strong> Designing a custom two-wheeled self-balancing robot utilizing an ESP32-C3, MPU-6050 IMU, and an L298N motor driver. The frame is being custom-designed in SolidWorks.</span>
+                <span><strong className="text-white block mb-1 font-medium">Hardware Design:</strong> Designing a custom two-wheeled self-balancing robot utilizing an ESP32-C3, MPU-6050 IMU, and an L298N motor driver. The frame is being custom-designed.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
@@ -219,14 +227,13 @@ function HomeContent() {
             
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
-            <div className="flex flex-wrap gap-4 items-center">
+            <div className="grid grid-cols-4 gap-4 place-items-center">
               <TechItemPNG src="/altium-logo.png" title="Altium Designer" />
               <TechItemPNG src="/kicad.png" title="KiCad" />
               <TechItem Icon={GitIcon} title="Git" />
               <TechItemPNG src="/LT.png" title="LTspice" />
               <TechItem Icon={Stm32Icon} title="STM32" />
               <TechItemPNG src="/MATLAB.png" title="MATLAB" />
-              <TechItemPNG src="solidworkslogo.png" title="SolidWorks" />
             </div>
           </div>
 
@@ -238,7 +245,7 @@ function HomeContent() {
             
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
-            <div className="flex flex-wrap gap-4 items-center">
+            <div className="grid grid-cols-4 gap-4 place-items-center sm:place-items-start">
               <TechItemPNG src="/C.png" title="C/C++" />
               <TechItem Icon={PythonIcon} title="Python" />
             </div>
@@ -264,7 +271,7 @@ function HomeContent() {
           <div className="space-y-4">
             <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">PID Self-Balancing Robot</h4>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl">
-              Designing a two-wheeled self-balancing robot with a custom SolidWorks frame, an ESP32-C3, and closed-loop PID control.
+              Designing a two-wheeled self-balancing robot with a custom frame, an ESP32-C3, and closed-loop PID control.
             </p>
             <div className="inline-block mt-2">
               <span className="text-xs font-mono font-semibold tracking-wider text-cyan-500 bg-cyan-500/10 border border-cyan-500/20 rounded px-3 py-1.5">
@@ -310,7 +317,7 @@ function ProjectsContent() {
       id: "pid-robot",
       title: "PID Self-Balancing Robot",
       desc: "Designing a two-wheeled self-balancing robot using an ESP32-C3, custom IMU library, and PID control.",
-      tech: "ESP32, C++, SolidWorks, PID",
+      tech: "ESP32, C++, PID",
       content: (
         <div className="space-y-6">
           <div className="flex justify-between items-start">
@@ -327,7 +334,7 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Mechanical Design:</strong> Designing the robot's physical frame using SolidWorks to ensure structural integrity and proper weight distribution.</span>
+                <span><strong className="text-white block mb-1 font-medium">Mechanical Design:</strong> Designing the robot's physical frame to ensure structural integrity and proper weight distribution.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
@@ -346,6 +353,20 @@ function ProjectsContent() {
               <span className="text-xs font-mono font-semibold tracking-wider text-cyan-500 bg-cyan-500/10 border border-cyan-500/20 rounded px-3 py-1.5">
                 IN PROGRESS
               </span>
+            </div>
+          </div>
+
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+            </h5>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+                 <img src="/PID Robot Schematic.png" alt="PID Robot Schematic" className="w-full max-h-64 object-contain" />
+              </div>
+              <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+                 <img src="/PID Robot Standing.png" alt="PID Robot Standing" className="w-full max-h-64 object-contain" />
+              </div>
             </div>
           </div>
         </div>
@@ -579,7 +600,9 @@ function ProjectsContent() {
             
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
-            <p className="text-neutral-400 mb-6 leading-relaxed max-w-2xl">{proj.desc}</p>
+            {/* Kept conditional rendering just in case you removed descriptions entirely */}
+            {proj.desc && <p className="text-neutral-400 mb-6 leading-relaxed max-w-2xl">{proj.desc}</p>}
+            
             <div className="text-xs font-mono text-neutral-500 uppercase tracking-widest">
               {proj.tech}
             </div>
