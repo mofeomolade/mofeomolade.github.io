@@ -147,7 +147,7 @@ function HomeContent() {
       title: "PROJECT INSIGHTS",
       content: (
         <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">PID Self-Balancing Robot</h4>
+          <h4 className="text-2xl font-bold text-white">24V-5V Synchronous Buck Converter</h4>
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
             <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
@@ -155,21 +155,14 @@ function HomeContent() {
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Hardware Design:</strong> Designing a custom two-wheeled self-balancing robot utilizing an ESP32-C3, MPU-6050 IMU, and an L298N motor driver. The frame is being custom-designed.</span>
+                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Discrete topology utilizing a high-side N-channel MOSFET, low-side synchronous switch, floating bootstrap gate drive, and an analog Type II control loop.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Implemented a closed-loop PID control system to actively drive dual DC motors, maintaining dynamic equilibrium.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Integrated a custom C++ IMU library that fetches real-time pitch data utilizing an optimized complementary filter.</span>
+                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Validating closed-loop stability in LTspice simulations before performing PCB layout in Altium Designer.</span>
               </li>
             </ul>
           </div>
-          <a href="https://github.com/mofeomolade/PID-Self-Balancing-Robot" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-mono text-cyan-500 hover:text-cyan-400 transition-colors mt-2">
-            <GithubIcon size={16} /> View on GitHub <ExternalLinkIcon size={14} />
-          </a>
         </div>
       )
     }
@@ -214,7 +207,7 @@ function HomeContent() {
           </div>
         </div>
 
-        { }
+        {}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-6">
           
           {/* Tools Block */}
@@ -251,6 +244,7 @@ function HomeContent() {
           
         </div>
 
+        {}
         {/* Current Project Block */}
         <div 
           onClick={() => setActiveModal('currentProject')}
@@ -267,9 +261,9 @@ function HomeContent() {
           <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
           
           <div className="space-y-4">
-            <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">PID Self-Balancing Robot</h4>
+            <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">24V-5V Synchronous Buck Converter</h4>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl">
-              Designing a two-wheeled self-balancing robot with a custom frame, an ESP32-C3, and closed-loop PID control.
+              Designing a custom 24V-5V synchronous buck converter with a discrete topology, utilizing Altium and LTspice.
             </p>
             <div className="inline-block mt-2">
               <span className="text-xs font-mono font-semibold tracking-wider text-cyan-500 bg-cyan-500/10 border border-cyan-500/20 rounded px-3 py-1.5">
@@ -315,7 +309,7 @@ function ProjectsContent() {
     {
       id: "pid-robot",
       title: "PID Self-Balancing Robot",
-      desc: "Designing a two-wheeled self-balancing robot using an ESP32-C3, custom IMU library, and PID control.",
+      desc: "Developed a two-wheeled self-balancing robot using an ESP32-C3, custom IMU library, and PID control.",
       tech: "ESP32, C++, PID",
       content: (
         <div className="space-y-6">
@@ -333,11 +327,7 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Mechanical Design:</strong> Designing the robot's physical frame to ensure structural integrity and proper weight distribution.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Building the system around an ESP32-C3 microcontroller, interfacing with an MPU-6050 IMU and an L298N motor driver.</span>
+                <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Built the system around an ESP32-C3 microcontroller, interfacing with an MPU-6050 IMU and an L298N motor driver using a public 3D-printed frame model.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
@@ -348,11 +338,6 @@ function ProjectsContent() {
                 <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Integrated my custom C++ IMU library to fetch accurate, real-time pitch data utilizing an optimized complementary filter.</span>
               </li>
             </ul>
-            <div className="inline-block mt-2">
-              <span className="text-xs font-mono font-semibold tracking-wider text-cyan-500 bg-cyan-500/10 border border-cyan-500/20 rounded px-3 py-1.5">
-                IN PROGRESS
-              </span>
-            </div>
           </div>
 
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
@@ -507,7 +492,7 @@ function ProjectsContent() {
     { 
       id: "uav",
       title: "Buck Converter Module", 
-      desc: "Designing a custom 24V-5V 2A synchronous buck converter.", 
+      desc: "Designing a custom 24V-5V synchronous buck converter.", 
       tech: "Altium, LTspice",
       content: (
         <div className="space-y-4">
@@ -605,6 +590,7 @@ function ProjectsContent() {
         ))}
       </div>
 
+      {}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 pointer-events-auto animate-in fade-in duration-200">
           <div 
@@ -696,7 +682,6 @@ export default function App() {
         {/* Navigation & Header - Mobile Responsive Stacking */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-0 mb-8 md:mb-12">
           
-          {/* Underscore removed here */}
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white m-0 leading-none">
             {page === 'home' ? 'Mofe Omolade' : 'Projects'}
           </h1>
@@ -735,7 +720,7 @@ export default function App() {
           {page === 'projects' && <ProjectsContent />}
         </div>
 
-        {}
+        {/* Bottom Social Footer */}
         <div className="w-full pt-12 mt-auto">
           <div className="flex justify-between items-center font-mono text-xs text-neutral-600">
             
