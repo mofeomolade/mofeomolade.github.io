@@ -207,7 +207,6 @@ function HomeContent() {
           </div>
         </div>
 
-        {}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-6">
           
           {/* Tools Block */}
@@ -244,7 +243,6 @@ function HomeContent() {
           
         </div>
 
-        {}
         {/* Current Project Block */}
         <div 
           onClick={() => setActiveModal('currentProject')}
@@ -275,7 +273,6 @@ function HomeContent() {
 
       </div>
 
-      {}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 pointer-events-auto animate-in fade-in duration-200">
           <div 
@@ -306,11 +303,97 @@ function ProjectsContent() {
   const [activeModal, setActiveModal] = useState(null);
 
   const projects = [
+    { 
+      id: "motor-controller",
+      title: "4-Channel Motor Controller", 
+      desc: "Owned the complete ground-up design lifecycle of a custom 4-channel motor controller PCB supporting 150W continuous power and CAN communication.", 
+      tech: "Teensy 4.1, Altium, C++",
+      content: (
+        <div className="space-y-6">
+          <h4 className="text-2xl font-bold text-white">Custom 4-Channel Motor Controller</h4>
+          
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+            </h5>
+            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Hardware Ownership:</strong> Owned the complete design lifecycle of a system architecture centered around a Teensy 4.1 to drive 12V actuators at 3A.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Advanced PCB Layout:</strong> Engineered a ground-up, high-density 8-layer PCB within a strict 80 mm x 54 mm footprint, implementing orthogonal routing and 2.1 MHz switching noise shielding.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Embedded Firmware:</strong> Built a custom test bench and developed C++ firmware to validate MCU pinouts, voltage regulation, and CAN signal integrity under dynamic loads.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <a href="#" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                  For complete planning document click here.
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+            </h5>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <img src="/motor-driver-module-top-view.png" alt="Motor Driver Module Top View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <img src="/motor-driver-module-bottom-view.png" alt="Motor Driver Module Bottom View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+                 <img src="/updated-motor-driver-module-layout.png" alt="Updated PCB Layout" className="w-full max-h-64 object-contain" />
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    { 
+      id: "buck-converter",
+      title: "24V-5V Buck Converter", 
+      desc: "Designed an asynchronous buck converter from scratch, powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.", 
+      tech: "Altium, LTspice",
+      content: (
+        <div className="space-y-4">
+          <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck</h4>
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+            </h5>
+            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Built from the ground up, implementing an N-channel high-side MOSFET with a bootstrap gate drive and discrete analog Type III compensation.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Performed 4-layer PCB layout in Altium Designer, tightly constricting high-di/dt switching loops and routing unbroken ground reference planes to minimize EMI.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <span><strong className="text-white block mb-1 font-medium">Simulation:</strong> Validated small-signal Bode stability and dynamic load response using LTspice simulations.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <a href="#" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                  For complete planning document click here.
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )
+    },
     {
       id: "pid-robot",
       title: "PID Self-Balancing Robot",
-      desc: "Developed a two-wheeled self-balancing robot using an ESP32-C3, custom IMU library, and PID control.",
-      tech: "ESP32, C++, PID",
+      desc: "Built a self-balancing robot from first principles using an ESP32-C3, featuring a scratch-written IMU driver and closed-loop PID control.",
+      tech: "ESP32, C++, I2C",
       content: (
         <div className="space-y-6">
           <div className="flex justify-between items-start">
@@ -327,15 +410,21 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Built the system around an ESP32-C3 microcontroller, interfacing with an MPU-6050 IMU and an L298N motor driver using a public 3D-printed frame model.</span>
+                <span><strong className="text-white block mb-1 font-medium">Driver Development:</strong> Developed a standalone C++ device driver for the MPU-6050 entirely from scratch, writing directly to I2C registers to parse 14-byte data bursts.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Implemented a closed-loop PID control algorithm to actively drive dual DC motors, maintaining the robot in dynamic equilibrium.</span>
+                <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Programmed a custom closed-loop PID controller from first principles without relying on any third-party frameworks, incorporating anti-windup clamping and deadband compensation.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Integrated my custom C++ IMU library to fetch accurate, real-time pitch data utilizing an optimized complementary filter.</span>
+                <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Implemented 1 kHz non-blocking data acquisition and applied a complementary filter, achieving low-latency tilt angle estimation while reducing gyroscope drift by 85%.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-cyan-500 mt-1">▹</span>
+                <a href="#" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                  For complete planning document click here.
+                </a>
               </li>
             </ul>
           </div>
@@ -393,61 +482,6 @@ function ProjectsContent() {
       )
     },
     { 
-      id: "motor-controller",
-      title: "Custom Motor Controller", 
-      desc: "Custom motor controller PCB supporting 24V, 5A loads and CAN communication.", 
-      tech: "Altium, LTspice, C++",
-      content: (
-        <div className="space-y-6">
-          <h4 className="text-2xl font-bold text-white">Custom Motor Controller</h4>
-          
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Hardware Design:</strong> Designing a compact motor driver module around the IFX007T half-bridge to support multi-channel actuator control and CAN communication. </span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Planning thorough SPICE simulations prior to physical assembly, followed by hardware debugging.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Embedded Firmware:</strong> Developing C++ firmware to handle motor control logic and serial communication for reliable in-field robot operation.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-            </h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
-              <img src="/motor-driver-module-top-view.png" alt="Motor Driver Module Top View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <img src="/motor-driver-module-bottom-view.png" alt="Motor Driver Module Bottom View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              
-              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/updated-motor-driver-module-layout.png" alt="Updated PCB Layout" className="w-full max-h-64 object-contain" />
-              </div>
-
-              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/motor-driver-module-schematic.png" alt="Motor Driver Module Schematic" className="w-full max-h-64 object-contain" />
-              </div>
-              
-              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/motor-driver-h-bridge-schematic.png" alt="H-Bridge Schematic" className="w-full max-h-64 object-contain" />
-              </div>
-
-            </div>
-          </div>
-        </div>
-      )
-    },
-    { 
       id: "drivetrain",
       title: "Rover Powertrain", 
       desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
@@ -485,32 +519,6 @@ function ProjectsContent() {
                  <img src="/mini-rover-block-diagram.png" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
               </div>
             </div>
-          </div>
-        </div>
-      )
-    },
-    { 
-      id: "uav",
-      title: "Buck Converter Module", 
-      desc: "Designing a custom 24V-5V synchronous buck converter.", 
-      tech: "Altium, LTspice",
-      content: (
-        <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">24V-5V Synchronous Buck</h4>
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Discrete topology utilizing a high-side N-channel MOSFET, low-side synchronous switch, floating bootstrap gate drive, and an analog Type II control loop.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Validating closed-loop stability in LTspice simulations before performing PCB layout in Altium.</span>
-              </li>
-            </ul>
           </div>
         </div>
       )
@@ -590,7 +598,6 @@ function ProjectsContent() {
         ))}
       </div>
 
-      {}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 pointer-events-auto animate-in fade-in duration-200">
           <div 
@@ -638,8 +645,6 @@ export default function App() {
       "/motor-driver-module-top-view.png",
       "/motor-driver-module-bottom-view.png",
       "/updated-motor-driver-module-layout.png",
-      "/motor-driver-module-schematic.png",
-      "/motor-driver-h-bridge-schematic.png",
       "/mini-rover-prototype.png",
       "/mini-rover-block-diagram.png",
       "/hud-breadboard.jpg",
