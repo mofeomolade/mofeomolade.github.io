@@ -331,7 +331,7 @@ function ProjectsContent() {
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <a href="#" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                <a href="https://drive.google.com/file/d/1jCLkcDWhCb2FywIH_KdRXVgo_ij3EGPf/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
                   For complete planning document click here.
                 </a>
               </li>
@@ -347,6 +347,12 @@ function ProjectsContent() {
               <img src="/motor-driver-module-bottom-view.png" alt="Motor Driver Module Bottom View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
                  <img src="/updated-motor-driver-module-layout.png" alt="Updated PCB Layout" className="w-full max-h-64 object-contain" />
+              </div>
+              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+                 <img src="/motor-driver-module-schematic.png" alt="Motor Driver Module Schematic" className="w-full max-h-64 object-contain" />
+              </div>
+              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+                 <img src="/motor-driver-h-bridge-schematic.png" alt="H-Bridge Schematic" className="w-full max-h-64 object-contain" />
               </div>
             </div>
           </div>
@@ -380,7 +386,7 @@ function ProjectsContent() {
               </li>
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
-                <a href="#" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                <a href="https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
                   For complete planning document click here.
                 </a>
               </li>
@@ -419,12 +425,6 @@ function ProjectsContent() {
               <li className="flex gap-3">
                 <span className="text-cyan-500 mt-1">▹</span>
                 <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Implemented 1 kHz non-blocking data acquisition and applied a complementary filter, achieving low-latency tilt angle estimation while reducing gyroscope drift by 85%.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <a href="#" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
-                  For complete planning document click here.
-                </a>
               </li>
             </ul>
           </div>
@@ -645,6 +645,8 @@ export default function App() {
       "/motor-driver-module-top-view.png",
       "/motor-driver-module-bottom-view.png",
       "/updated-motor-driver-module-layout.png",
+      "/motor-driver-module-schematic.png",
+      "/motor-driver-h-bridge-schematic.png",
       "/mini-rover-prototype.png",
       "/mini-rover-block-diagram.png",
       "/hud-breadboard.jpg",
