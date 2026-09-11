@@ -69,12 +69,14 @@ const TechItem = ({ Icon, title }) => (
   </div>
 );
 
-const TechItemPNG = ({ src, title }) => (
+const TechItemPNG = ({ src, title, size = 36 }) => (
   <div className="group flex flex-col items-center justify-center h-20 w-24 cursor-default">
     <div className="transform transition-all duration-300 group-hover:-translate-y-2 flex flex-col items-center gap-2">
       <div 
-        className="w-[36px] h-[36px] bg-neutral-500 group-hover:bg-cyan-400 transition-colors duration-300"
+        className="bg-neutral-500 group-hover:bg-cyan-400 transition-colors duration-300"
         style={{
+          width: `${size}px`,
+          height: `${size}px`,
           WebkitMaskImage: `url(${src})`,
           WebkitMaskSize: 'contain',
           WebkitMaskRepeat: 'no-repeat',
@@ -236,24 +238,24 @@ function HomeContent() {
           </div>
 
           {/* Languages Block */}
-          <div className="relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 flex flex-col">
-            <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> LANGUAGES
-            </h3>
-            
-            <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
-            
-            <div className="grid grid-cols-4 gap-4 place-items-center sm:place-items-start">
-              <TechItemPNG src="/C.png" title="C/C++" />
-              <TechItem Icon={PythonIcon} title="Python" />
-              <TechItemPNG src="/javalogo.png" title="Java" />
-              <TechItemPNG src="/systemverilog.png" title="SystemVerilog" />
-            </div>
-          </div>
-          
+      <div className="relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 flex flex-col">
+        <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> LANGUAGES
+        </h3>
+        
+        <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
+        
+        <div className="grid grid-cols-4 gap-4 place-items-center sm:place-items-start">
+          <TechItemPNG src="/C.png" title="C/C++" />
+          <TechItem Icon={PythonIcon} title="Python" />
+          <TechItemPNG src="/javalogo.png" title="Java" size={44} />
+          <TechItemPNG src="/systemverilog.png" title="SystemVerilog" size={64} />
         </div>
+      </div>
+      
+    </div>
 
-        {/* Current Project Block */}
+    {/* Current Project Block */}
         <div 
           onClick={() => setActiveModal('currentProject')}
           className="w-full relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 hover:border-cyan-500/30 transition-all text-left flex flex-col cursor-pointer group"
