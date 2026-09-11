@@ -56,36 +56,44 @@ const PythonIcon = ({ size = 24, ...props }) => (
 );
 
 const TechItem = ({ Icon, title }) => (
-  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300">
-    <Icon 
-      size={36} 
-      className="text-neutral-400 group-hover:text-white transition-colors duration-300" 
-    />
-    <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10 text-white text-xs font-mono whitespace-nowrap bg-[#1a1a1a] px-2 py-1 rounded shadow-lg border border-neutral-700">
-      {title}
-    </span>
+  <div className="group flex flex-col items-center justify-center h-20 w-24 cursor-default">
+    <div className="transform transition-all duration-300 group-hover:-translate-y-2 flex flex-col items-center gap-2">
+      <Icon 
+        size={36} 
+        className="text-neutral-500 group-hover:text-cyan-400 transition-colors duration-300" 
+      />
+      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-medium text-xs font-mono whitespace-nowrap text-center">
+        {title}
+      </span>
+    </div>
   </div>
 );
 
 const TechItemPNG = ({ src, title }) => (
-  <div className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-colors duration-300">
-    <div 
-      className="w-[36px] h-[36px] bg-neutral-400 group-hover:bg-white transition-colors duration-300"
-      style={{
-        WebkitMaskImage: `url(${src})`,
-        WebkitMaskSize: 'contain',
-        WebkitMaskRepeat: 'no-repeat',
-        WebkitMaskPosition: 'center',
-        maskImage: `url(${src})`,
-        maskSize: 'contain',
-        maskRepeat: 'no-repeat',
-        maskPosition: 'center',
-      }}
-    />
-    <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10 text-white text-xs font-mono whitespace-nowrap bg-[#1a1a1a] px-2 py-1 rounded shadow-lg border border-neutral-700">
-      {title}
-    </span>
+  <div className="group flex flex-col items-center justify-center h-20 w-24 cursor-default">
+    <div className="transform transition-all duration-300 group-hover:-translate-y-2 flex flex-col items-center gap-2">
+      <div 
+        className="w-[36px] h-[36px] bg-neutral-500 group-hover:bg-cyan-400 transition-colors duration-300"
+        style={{
+          WebkitMaskImage: `url(${src})`,
+          WebkitMaskSize: 'contain',
+          WebkitMaskRepeat: 'no-repeat',
+          WebkitMaskPosition: 'center',
+          maskImage: `url(${src})`,
+          maskSize: 'contain',
+          maskRepeat: 'no-repeat',
+          maskPosition: 'center',
+        }}
+      />
+      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-medium text-xs font-mono whitespace-nowrap text-center">
+        {title}
+      </span>
+    </div>
   </div>
+);
+
+const BulletPoint = () => (
+  <div className="w-1.5 h-1.5 mt-2 rounded-sm bg-cyan-500 shrink-0"></div>
 );
 
 function HomeContent() {
@@ -101,15 +109,15 @@ function HomeContent() {
             <p className="text-sm font-mono text-neutral-500 mb-3">May 2026 - Present</p>
             <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
+                <BulletPoint />
                 <span>Designed and integrated a custom motor driver PCB around the IFX007T, MAX33040E, and LMR50410-Q1.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
+                <BulletPoint />
                 <span>Wrote C++ firmware for multichannel motor control, CAN telemetry transmission, and actuator feedback calculation.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
+                <BulletPoint />
                 <span>Revised past schematics and PCB layout to implement electrical best practices and improve electronic reliability.</span>
               </li>
             </ul>
@@ -120,11 +128,11 @@ function HomeContent() {
             <p className="text-sm font-mono text-neutral-500 mb-3">September 2025 - Present</p>
             <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
+                <BulletPoint />
                 <span>Collaborated with chassis and software subteams to design a test rover for autonomous navigation training.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
+                <BulletPoint />
                 <span>Developed power architecture, serial communication protocols, and firmware to integrate MCU and peripherals.</span>
               </li>
             </ul>
@@ -135,7 +143,7 @@ function HomeContent() {
             <p className="text-sm font-mono text-neutral-500 mb-3">July 2023 - August 2023</p>
             <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
+                <BulletPoint />
                 <span>Modelled and simulated Op-Amp oscillator circuits in LTspice to support research in amplifier-based oscillators.</span>
               </li>
             </ul>
@@ -154,12 +162,12 @@ function HomeContent() {
             </h5>
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Discrete topology utilizing a high-side N-channel MOSFET, low-side synchronous switch, floating bootstrap gate drive, and an analog Type II control loop.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Validating closed-loop stability in LTspice simulations before performing PCB layout in Altium Designer.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Simulating open-loop dynamics and closed-loop compensation in LTspice before performing layout in Altium Designer.</span>
               </li>
             </ul>
           </div>
@@ -217,8 +225,8 @@ function HomeContent() {
             
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
-            <div className="grid grid-cols-4 gap-4 place-items-center">
-              <TechItemPNG src="/altium-logo.png" title="Altium Designer" />
+            <div className="flex flex-wrap justify-center gap-4">
+              <TechItemPNG src="/altium-logo.png" title="Altium" />
               <TechItemPNG src="/kicad.png" title="KiCad" />
               <TechItem Icon={GitIcon} title="Git" />
               <TechItemPNG src="/LT.png" title="LTspice" />
@@ -235,7 +243,7 @@ function HomeContent() {
             
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
-            <div className="grid grid-cols-4 gap-4 place-items-center sm:place-items-start">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
               <TechItemPNG src="/C.png" title="C/C++" />
               <TechItem Icon={PythonIcon} title="Python" />
             </div>
@@ -261,7 +269,7 @@ function HomeContent() {
           <div className="space-y-4">
             <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">24V-5V Synchronous Buck Converter</h4>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl">
-              Designing a custom 24V-5V synchronous buck converter with a discrete topology, utilizing Altium and LTspice.
+              Designing an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.
             </p>
             <div className="inline-block mt-2">
               <span className="text-xs font-mono font-semibold tracking-wider text-cyan-500 bg-cyan-500/10 border border-cyan-500/20 rounded px-3 py-1.5">
@@ -318,19 +326,31 @@ function ProjectsContent() {
             </h5>
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Hardware Ownership:</strong> Owned the complete design lifecycle of a system architecture centered around a Teensy 4.1 to drive 12V actuators at 3A.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">System Architecture:</strong> Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A continuous current each, implementing IFX007T half-bridge ICs and copper pours for thermal dissipation.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Advanced PCB Layout:</strong> Engineered a ground-up, high-density 8-layer PCB within a strict 80 mm x 54 mm footprint, implementing orthogonal routing and 2.1 MHz switching noise shielding.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">MCU & Telemetry:</strong> Architected system around the Teensy 4.1 600 MHz ARM Cortex-M7 to support multi-channel PWM generation, real-time Hall-effect decoding, and CAN telemetry speeds of up to 1Mbit/s.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Embedded Firmware:</strong> Built a custom test bench and developed C++ firmware to validate MCU pinouts, voltage regulation, and CAN signal integrity under dynamic loads.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Power Safety:</strong> Integrated a bulk electrolytic capacitor alongside a voltage divider fed into an MCU falling-edge interrupt, securing a 5 ms hold-up time to commit actuator calibration data to EEPROM before brownout.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Hardware Validation:</strong> Performed extensive hardware debugging to resolve buck converter bring-up faults, validating frequency responses using an oscilloscope to optimize passive component sizing and prevent underdamping. Verified MAX33040E CAN bus transceiver signal integrity.</span>
+              </li>
+              <li className="flex gap-3">
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Embedded Firmware:</strong> Developed C++ testing firmware to validate hardware performance, implementing automated homing sequences, directional state tracking, and interrupt-driven Hall sensor decoding for precise actuator positioning.</span>
+              </li>
+              <li className="flex gap-3">
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Applied DFM/DFA principles across the 8-layer stackup, sizing thermal reliefs and component clearances for automated SMT assembly while maintaining large trace widths for continuous 3A current draw.</span>
+              </li>
+              <li className="flex gap-3">
+                <BulletPoint />
                 <a href="https://drive.google.com/file/d/1jCLkcDWhCb2FywIH_KdRXVgo_ij3EGPf/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
                   For complete planning document click here.
                 </a>
@@ -373,19 +393,19 @@ function ProjectsContent() {
             </h5>
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Built from the ground up, implementing an N-channel high-side MOSFET with a bootstrap gate drive and discrete analog Type III compensation.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency. Implemented an N-channel high-side MOSFET with bootstrap gate drive and discrete analog Type III compensation, sizing propagation delays and slew rates to prevent shoot-through.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Performed 4-layer PCB layout in Altium Designer, tightly constricting high-di/dt switching loops and routing unbroken ground reference planes to minimize EMI.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Circuit Simulation:</strong> Simulating open-loop dynamics and closed-loop compensation in LTspice, validating small-signal Bode stability and dynamic load response across the full battery voltage range (18V-25.2V).</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Simulation:</strong> Validated small-signal Bode stability and dynamic load response using LTspice simulations.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Performing 4-layer PCB layout in Altium Designer, tightly constricting high-di/dt switching loops, optimizing Schottky diode return paths, and routing unbroken ground reference planes to minimize EMI and radiated noise.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
+                <BulletPoint />
                 <a href="https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
                   For complete planning document click here.
                 </a>
@@ -415,16 +435,20 @@ function ProjectsContent() {
             </h5>
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Driver Development:</strong> Developed a standalone C++ device driver for the MPU-6050 entirely from scratch, writing directly to I2C registers to parse 14-byte data bursts.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Driver Development:</strong> Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Programmed a custom closed-loop PID controller from first principles without relying on any third-party frameworks, incorporating anti-windup clamping and deadband compensation.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Implemented 1 kHz non-blocking data acquisition and applied a complementary filter, achieving low-latency tilt angle estimation while reducing gyroscope drift by 85%.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.</span>
+              </li>
+              <li className="flex gap-3">
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.</span>
               </li>
             </ul>
           </div>
@@ -465,60 +489,18 @@ function ProjectsContent() {
             </h5>
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Firmware Development:</strong> Developed C++ firmware for the ESP32 to parse raw accelerometer and gyroscope registers from the MPU-6050 via the I2C protocol.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Firmware Development:</strong> Developed C++ firmware for ESP32 to parse MPU-6050 IMU accelerometer and gyroscope registers via I2C.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Mathematical Modeling:</strong> Applied trigonometry to the raw accelerometer vectors and fused this data with gyroscope readings to calculate accurate pitch and roll angles.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Signal Processing:</strong> Applied a sensor fusion Euler complementary filter and deadband filter to account for angular integration drift.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Signal Processing:</strong> Applied a sensor fusion Euler complementary filter and a deadband filter to effectively account for and mitigate angular integration drift over time.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Mathematical Modeling:</strong> Applied trigonometry to accelerometer vectors and fused with gyroscope readings to calculate pitch and roll.</span>
               </li>
             </ul>
-          </div>
-        </div>
-      )
-    },
-    { 
-      id: "drivetrain",
-      title: "Rover Powertrain", 
-      desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
-      tech: "STM32, C, UART",
-      content: (
-        <div className="space-y-6">
-          <h4 className="text-2xl font-bold text-white">Rover Powertrain System</h4>
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Utilized three L298N motor driver modules to drive six brushed DC motors.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Embedded Control:</strong> Wrote C firmware on a Nucleo-F446RE MCU to parse serial commands from an Nvidia Jetson for drivetrain execution.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Telemetry:</strong> Calculated rover speed using hall effect encoder data, transmitting velocity back to the Jetson.</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-            </h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <img src="/mini-rover-prototype.png" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/mini-rover-block-diagram.png" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
-              </div>
-            </div>
           </div>
         </div>
       )
@@ -543,12 +525,16 @@ function ProjectsContent() {
             </h5>
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> C++ firmware to parse NMEA data streams to compute velocity from positioning telemetry.</span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> Developed a low-latency speedometer using an Arduino Nano, GY-NEO6MV2 module, and SPI OLED display.</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-cyan-500 mt-1">▹</span>
-                <span><strong className="text-white block mb-1 font-medium">Electronics Design:</strong> Integrating Arduino Nano, GY-NEO6MV2 module, and SPI OLED display for safe operation on vehicle supply voltage. </span>
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Data Processing:</strong> Wrote C++ firmware to parse NMEA data streams to compute velocity within 5% of the factory speedometer.</span>
+              </li>
+              <li className="flex gap-3">
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Electronics Integration:</strong> Safely integrated with the vehicle's 14V input using a USB-C to DIN converter to supply the Arduino Vin.</span>
               </li>
             </ul>
           </div>
@@ -562,6 +548,48 @@ function ProjectsContent() {
               <img src="/HUD-driver-view.jpg" alt="Driver View Dashboard" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
                  <img src="/HUD-Schematic.png" alt="HUD Schematic" className="w-full max-h-64 object-contain" />
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    { 
+      id: "drivetrain",
+      title: "6-Wheel Rover Powertrain", 
+      desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
+      tech: "STM32, C, UART",
+      content: (
+        <div className="space-y-6">
+          <h4 className="text-2xl font-bold text-white">Rover Powertrain System</h4>
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+            </h5>
+            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
+              <li className="flex gap-3">
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Designed a powertrain prototype around the L298N full-bridge motor driver and Nucleo F446RE MCU.</span>
+              </li>
+              <li className="flex gap-3">
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Embedded Control:</strong> Implemented C firmware using STM32 HAL for command parsing, motor feedback, and UART communication.</span>
+              </li>
+              <li className="flex gap-3">
+                <BulletPoint />
+                <span><strong className="text-white block mb-1 font-medium">Telemetry:</strong> Integrated IMU, GNSS, and LiDAR sensors to stream real-time positional and spatial data over UART and I2C.</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+            </h5>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <img src="/mini-rover-prototype.png" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+                 <img src="/mini-rover-block-diagram.png" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
               </div>
             </div>
           </div>
@@ -752,7 +780,7 @@ export default function App() {
                 />
               </a>
               
-              <a href="mailto:mofe.omolade@example.com" aria-label="Contact" className="text-neutral-500 hover:text-white transition-transform hover:-translate-y-1 duration-300">
+              <a href="mailto:omolade.mofe@gmail.com" aria-label="Contact" className="text-neutral-500 hover:text-white transition-transform hover:-translate-y-1 duration-300">
                 <MailIcon size={20} />
               </a>
             </div>
