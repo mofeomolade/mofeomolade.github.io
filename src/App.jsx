@@ -205,11 +205,11 @@ function HomeContent() {
               <span className="text-neutral-500">@ FulcrumAir</span>
             </div>
             <div className="group/item">
-              <span className="text-white font-semibold block mb-1 group-hover/item:text-cyan-400 transition-colors">Electrical Engineering</span>
+              <span className="text-white font-semibold block mb-1 group-hover/item:text-cyan-400 transition-colors">ELEC Team Member</span>
               <span className="text-neutral-500">@ UBC Rover</span>
             </div>
             <div className="group/item">
-              <span className="text-white font-semibold block mb-1 group-hover/item:text-cyan-400 transition-colors">EE Research Assistant</span>
+              <span className="text-white font-semibold block mb-1 group-hover/item:text-cyan-400 transition-colors">EE Intern</span>
               <span className="text-neutral-500">@ UCalgary</span>
             </div>
           </div>
@@ -243,9 +243,11 @@ function HomeContent() {
             
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
-            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
+            <div className="grid grid-cols-4 gap-4 place-items-center sm:place-items-start">
               <TechItemPNG src="/C.png" title="C/C++" />
               <TechItem Icon={PythonIcon} title="Python" />
+              <TechItemPNG src="/javalogo.png" title="Java" />
+              <TechItemPNG src="/systemverilog.png" title="SystemVerilog" />
             </div>
           </div>
           
@@ -318,7 +320,7 @@ function ProjectsContent() {
       tech: "Teensy 4.1, Altium, C++",
       content: (
         <div className="space-y-6">
-          <h4 className="text-2xl font-bold text-white">4-Channel Motor Controller</h4>
+          <h4 className="text-2xl font-bold text-white">Custom 4-Channel Motor Controller</h4>
           
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
             <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
@@ -347,7 +349,7 @@ function ProjectsContent() {
               </li>
               <li className="flex gap-3">
                 <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Applied DFM principles across the 8-layer stackup, sizing thermal reliefs and component clearances for automated SMT assembly while maintaining large trace widths for continuous 3A current draw.</span>
+                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Applied DFM/DFA principles across the 8-layer stackup, sizing thermal reliefs and component clearances for automated SMT assembly while maintaining large trace widths for continuous 3A current draw.</span>
               </li>
               <li className="flex gap-3">
                 <BulletPoint />
@@ -381,12 +383,12 @@ function ProjectsContent() {
     },
     { 
       id: "buck-converter",
-      title: "24V-5V Asynchronous Buck Converter", 
+      title: "24V-5V Buck Converter", 
       desc: "Designed an asynchronous buck converter from scratch, powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.", 
       tech: "Altium, LTspice",
       content: (
         <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck Converter</h4>
+          <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck</h4>
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
             <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
@@ -471,7 +473,7 @@ function ProjectsContent() {
     },
     {
       id: "imu-tracker",
-      title: "IMU Orientation Calculator",
+      title: "IMU Pitch, Roll & Yaw Calculator",
       desc: "Developed C++ firmware to process MPU-6050 IMU data, applying sensor fusion to calculate accurate orientation.",
       tech: "ESP32, C++, I2C, Sensor Fusion",
       content: (
@@ -556,12 +558,12 @@ function ProjectsContent() {
     },
     { 
       id: "drivetrain",
-      title: "6-Wheel Rover Powertrain System", 
+      title: "6-Wheel Rover Powertrain", 
       desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
       tech: "STM32, C, UART",
       content: (
         <div className="space-y-6">
-          <h4 className="text-2xl font-bold text-white">6-Wheel Rover Powertrain System</h4>
+          <h4 className="text-2xl font-bold text-white">Rover Powertrain System</h4>
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
             <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
@@ -780,7 +782,7 @@ export default function App() {
                 />
               </a>
               
-              <a href="mailto:omolade.mofe@gmail.com" aria-label="Contact" className="text-neutral-500 hover:text-white transition-transform hover:-translate-y-1 duration-300">
+              <a href="mailto:mofe.omolade@example.com" aria-label="Contact" className="text-neutral-500 hover:text-white transition-transform hover:-translate-y-1 duration-300">
                 <MailIcon size={20} />
               </a>
             </div>
