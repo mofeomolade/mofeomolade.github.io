@@ -331,7 +331,7 @@ function ProjectsContent() {
             <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
               <li className="flex gap-3">
                 <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">System Architecture:</strong> Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A continuous current each, implementing IFX007T half-bridge ICs and copper pours for thermal dissipation.</span>
+                <span><strong className="text-white block mb-1 font-medium">System Architecture:</strong> Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A continuous current each, implementing 8 IFX007T half-bridge ICs.</span>
               </li>
               <li className="flex gap-3">
                 <BulletPoint />
@@ -343,7 +343,7 @@ function ProjectsContent() {
               </li>
               <li className="flex gap-3">
                 <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Hardware Validation:</strong> Performed extensive hardware debugging to resolve buck converter bring-up faults, validating frequency responses using an oscilloscope to optimize passive component sizing and prevent underdamping. Verified MAX33040E CAN bus transceiver signal integrity.</span>
+                <span><strong className="text-white block mb-1 font-medium">Hardware Validation:</strong> Performed extensive hardware debugging to resolve buck converter faults, validating frequency responses using an oscilloscope to optimize passive component sizing and prevent underdamping. Also used oscilloscope to verify MAX33040E CAN bus transceiver signal integrity.</span>
               </li>
               <li className="flex gap-3">
                 <BulletPoint />
@@ -351,7 +351,7 @@ function ProjectsContent() {
               </li>
               <li className="flex gap-3">
                 <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Applied DFM/DFA principles across the 8-layer stackup, sizing thermal reliefs and component clearances for automated SMT assembly while maintaining large trace widths for continuous 3A current draw.</span>
+                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Applied DFM principles across the 8-layer stackup, sizing thermal reliefs and component clearances for manual SMT assembly and utilizing large trace widths and polygon pours for continuous 3A current draw.</span>
               </li>
               <li className="flex gap-3">
                 <BulletPoint />
