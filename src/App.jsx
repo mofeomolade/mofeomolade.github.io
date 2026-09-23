@@ -227,35 +227,35 @@ function HomeContent() {
             
             <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
             
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap gap-4">
               <TechItemPNG src="/altium-logo.png" title="Altium" />
               <TechItemPNG src="/kicad.png" title="KiCad" />
               <TechItem Icon={GitIcon} title="Git" />
               <TechItemPNG src="/LT.png" title="LTspice" />
-              <TechItem Icon={Stm32Icon} title="STM32" />
               <TechItemPNG src="/MATLAB.png" title="MATLAB" />
             </div>
           </div>
 
           {/* Languages Block */}
-      <div className="relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 flex flex-col">
-        <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> LANGUAGES
-        </h3>
-        
-        <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
-        
-        <div className="grid grid-cols-4 gap-4 place-items-center sm:place-items-start">
-          <TechItemPNG src="/C.png" title="C/C++" />
-          <TechItem Icon={PythonIcon} title="Python" />
-          <TechItemPNG src="/javalogo.png" title="Java" size={44} />
-          <TechItemPNG src="/systemverilog.png" title="SystemVerilog" size={64} />
-        </div>
-      </div>
+          <div className="relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 flex flex-col">
+            <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> LANGUAGES
+            </h3>
+            
+            <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
+            
+            <div className="flex flex-wrap gap-4">
+              <TechItemPNG src="/C.png" title="C/C++" />
+              <TechItem Icon={PythonIcon} title="Python" />
+              <TechItemPNG src="/javalogo.png" title="Java" size={44} />
+              <TechItemPNG src="/systemverilog.png" title="SystemVerilog" size={64} />
+              <TechItemPNG src="/riscv_logo.png" title="RISC-V Assembly" size={48} />
+            </div>
+          </div>
       
-    </div>
+        </div>
 
-    {/* Current Project Block */}
+        {/* Current Project Block */}
         <div 
           onClick={() => setActiveModal('currentProject')}
           className="w-full relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 hover:border-cyan-500/30 transition-all text-left flex flex-col cursor-pointer group"
@@ -359,6 +359,12 @@ function ProjectsContent() {
                   For complete planning document click here.
                 </a>
               </li>
+              <li className="flex gap-3">
+                <BulletPoint />
+                <a href="https://drive.google.com/file/d/1u668nQbwF0ZwOWNwbAeJjb9NH0hfOCJF/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                  Watch the hardware testing video here.
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -367,16 +373,13 @@ function ProjectsContent() {
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
             </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <img src="/motor-driver-module-top-view.png" alt="Motor Driver Module Top View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <img src="/motor-driver-module-bottom-view.png" alt="Motor Driver Module Bottom View" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/updated-motor-driver-module-layout.png" alt="Updated PCB Layout" className="w-full max-h-64 object-contain" />
+              <img src="motor_conroller_top.jpg" alt="Motor Controller Top View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <img src="motor_controller_bottom.jpg" alt="Motor Controller Bottom View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <div className="md:col-span-2">
+                 <img src="motor_controller_testing1.jpg" alt="Motor Controller Testing Setup 1" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               </div>
-              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/motor-driver-module-schematic.png" alt="Motor Driver Module Schematic" className="w-full max-h-64 object-contain" />
-              </div>
-              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/motor-driver-h-bridge-schematic.png" alt="H-Bridge Schematic" className="w-full max-h-64 object-contain" />
+              <div className="md:col-span-2">
+                 <img src="motor_controller_testing2.jpg" alt="Motor Controller Testing Setup 2" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
@@ -674,16 +677,16 @@ export default function App() {
     const imagesToPreload = [
       "/PID Robot Schematic.png",
       "/PID Robot Standing.png",
-      "/motor-driver-module-top-view.png",
-      "/motor-driver-module-bottom-view.png",
-      "/updated-motor-driver-module-layout.png",
-      "/motor-driver-module-schematic.png",
-      "/motor-driver-h-bridge-schematic.png",
+      "motor_conroller_top.jpg",
+      "motor_controller_bottom.jpg",
+      "motor_controller_testing1.jpg",
+      "motor_controller_testing2.jpg",
       "/mini-rover-prototype.png",
       "/mini-rover-block-diagram.png",
       "/hud-breadboard.jpg",
       "/HUD-driver-view.jpg",
-      "/HUD-Schematic.png"
+      "/HUD-Schematic.png",
+      "/riscv_logo.png"
     ];
 
     imagesToPreload.forEach(src => {
