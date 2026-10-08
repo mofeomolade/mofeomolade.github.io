@@ -92,85 +92,401 @@ const BulletPoint = () => (
   <div className="w-1.5 h-1.5 mt-2 rounded-sm bg-cyan-500 shrink-0"></div>
 );
 
+// Extracted outside component to prevent re-instantiation
+const modalData = {
+  experience: {
+    title: "EXPERIENCE DETAILS",
+    content: (
+      <div className="space-y-8">
+        <div>
+          <h4 className="text-xl font-bold text-white mb-1">Electronics R&D Intern <span className="text-cyan-500 font-normal">@ FulcrumAir</span></h4>
+          <p className="text-sm font-mono text-neutral-500 mb-3">May 2026 - Present</p>
+          <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span>Designed and integrated a custom motor driver PCB around the IFX007T, MAX33040E, and LMR50410-Q1.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span>Wrote C++ firmware for multichannel motor control, CAN telemetry transmission, and actuator feedback calculation.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span>Revised past schematics and PCB layout to implement electrical best practices and improve electronic reliability.</span>
+            </li>
+          </ul>
+        </div>
+        <div className="w-full h-px bg-neutral-800/50"></div>
+        <div>
+          <h4 className="text-xl font-bold text-white mb-1">Electrical Engineer <span className="text-cyan-500 font-normal">@ UBC Rover</span></h4>
+          <p className="text-sm font-mono text-neutral-500 mb-3">September 2025 - Present</p>
+          <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span>Collaborated with chassis and software subteams to design a test rover for autonomous navigation training.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span>Developed power architecture, serial communication protocols, and firmware to integrate MCU and peripherals.</span>
+            </li>
+          </ul>
+        </div>
+        <div className="w-full h-px bg-neutral-800/50"></div>
+        <div>
+          <h4 className="text-xl font-bold text-white mb-1">EE Research Assistant <span className="text-cyan-500 font-normal">@ UCalgary</span></h4>
+          <p className="text-sm font-mono text-neutral-500 mb-3">July 2023 - August 2023</p>
+          <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span>Modelled and simulated Op-Amp oscillator circuits in LTspice to support research in amplifier-based oscillators.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    )
+  },
+  currentProject: {
+    title: "PROJECT INSIGHTS",
+    content: (
+      <div className="space-y-4">
+        <h4 className="text-2xl font-bold text-white">24V-5V Synchronous Buck Converter</h4>
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+          </h5>
+          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Simulating open-loop dynamics and closed-loop compensation in LTspice before performing layout in Altium Designer.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    )
+  }
+};
+
+// Extracted outside component to prevent re-instantiation
+const projects = [
+  { 
+    id: "motor-controller",
+    title: "4-Channel Motor Controller", 
+    desc: "Owned the complete ground-up design lifecycle of a custom 4-channel motor controller PCB supporting 150W continuous power and CAN communication.", 
+    tech: "Teensy 4.1, Altium, C++",
+    content: (
+      <div className="space-y-6">
+        <h4 className="text-2xl font-bold text-white">Custom 4-Channel Motor Controller</h4>
+        
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+          </h5>
+          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">System Architecture:</strong> Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A continuous current each, implementing 8 IFX007T half-bridge ICs.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">MCU & Telemetry:</strong> Architected system around the Teensy 4.1 600 MHz ARM Cortex-M7 to support multi-channel PWM generation, real-time Hall-effect decoding, and CAN telemetry speeds of up to 1Mbit/s.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Power Safety:</strong> Integrated a bulk electrolytic capacitor alongside a voltage divider fed into an MCU falling-edge interrupt, securing a 5 ms hold-up time to commit actuator calibration data to EEPROM before brownout.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Hardware Validation:</strong> Performed extensive hardware debugging to resolve buck converter faults, validating frequency responses using an oscilloscope to optimize passive component sizing and prevent underdamping. Also used oscilloscope to verify MAX33040E CAN bus transceiver signal integrity.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Embedded Firmware:</strong> Developed C++ testing firmware to validate hardware performance, implementing automated homing sequences, directional state tracking, and interrupt-driven Hall sensor decoding for precise actuator positioning.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Applied DFM principles across the 8-layer stackup, sizing thermal reliefs and component clearances for manual SMT assembly and utilizing large trace widths and polygon pours for continuous 3A current draw.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <a href="https://drive.google.com/file/d/1jCLkcDWhCb2FywIH_KdRXVgo_ij3EGPf/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                For complete planning document click here.
+              </a>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <a href="https://drive.google.com/file/d/1u668nQbwF0ZwOWNwbAeJjb9NH0hfOCJF/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                Watch the hardware testing video here.
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img src="/motor_conroller_top.jpg" loading="lazy" alt="Motor Controller Top View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            <img src="/motor_controller_bottom.jpg" loading="lazy" alt="Motor Controller Bottom View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            <div className="md:col-span-2">
+               <img src="/updated-motor-driver-module-layout.png" loading="lazy" alt="Motor Driver Layout" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="md:col-span-2">
+               <img src="/motor-driver-module-schematic.png" loading="lazy" alt="Motor Driver Module Schematic" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="md:col-span-2">
+               <img src="/motor-driver-h-bridge-schematic.png" loading="lazy" alt="Motor Driver H-Bridge Schematic" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="md:col-span-2">
+               <img src="/motor_controller_testing1.jpg" loading="lazy" alt="Motor Controller Testing Setup 1" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="md:col-span-2">
+               <img src="/motor_controller_testing2.jpg" loading="lazy" alt="Motor Controller Testing Setup 2" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  { 
+    id: "buck-converter",
+    title: "24V-5V Buck Converter", 
+    desc: "Designed an asynchronous buck converter from scratch, powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.", 
+    tech: "Altium, LTspice",
+    content: (
+      <div className="space-y-6">
+        <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck</h4>
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+          </h5>
+          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency. Implemented an N-channel high-side MOSFET with bootstrap gate drive and discrete analog Type III compensation, sizing propagation delays and slew rates to prevent shoot-through.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Circuit Simulation:</strong> Simulating open-loop dynamics and closed-loop compensation in LTspice, validating small-signal Bode stability and dynamic load response across the full battery voltage range (18V-25.2V).</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Performing 4-layer PCB layout in Altium Designer, tightly constricting high-di/dt switching loops, optimizing Schottky diode return paths, and routing unbroken ground reference planes to minimize EMI and radiated noise.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <a href="https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
+                For complete planning document click here.
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="md:col-span-2 bg-white rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+               <img src="/type iii compensator.png" loading="lazy" alt="Type III Compensator" className="w-full h-auto object-contain" />
+            </div>
+            <div className="md:col-span-2 bg-black rounded-lg border border-neutral-800 flex items-center justify-center overflow-hidden">
+               <img src="/open loop dynamics sim buck.png" loading="lazy" alt="Open Loop Dynamics Simulation" className="w-full h-auto object-contain" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: "pid-robot",
+    title: "PID Self-Balancing Robot",
+    desc: "Built a self-balancing robot from first principles using an ESP32-C3, featuring a scratch-written IMU driver and closed-loop PID control.",
+    tech: "ESP32, C++, I2C",
+    content: (
+      <div className="space-y-6">
+        <div className="flex justify-between items-start">
+          <h4 className="text-2xl font-bold text-white">PID Self-Balancing Robot</h4>
+          <a href="https://github.com/mofeomolade/PID-Self-Balancing-Robot" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
+             <GithubIcon size={24} />
+          </a>
+        </div>
+        
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+          </h5>
+          <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Driver Development:</strong> Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+               <img src="/PID Robot Schematic.png" loading="lazy" alt="PID Robot Schematic" className="w-full max-h-64 object-contain" />
+            </div>
+            <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+               <img src="/PID Robot Standing.png" loading="lazy" alt="PID Robot Standing" className="w-full max-h-64 object-contain" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: "imu-tracker",
+    title: "IMU Pitch, Roll & Yaw Calculator",
+    desc: "Developed C++ firmware to process MPU-6050 IMU data, applying sensor fusion to calculate accurate orientation.",
+    tech: "ESP32, C++, I2C, Sensor Fusion",
+    content: (
+      <div className="space-y-6">
+        <div className="flex justify-between items-start">
+          <h4 className="text-2xl font-bold text-white">IMU Orientation Calculator</h4>
+          <a href="https://github.com/mofeomolade/IMU-Orientation-Tracker" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
+             <GithubIcon size={24} />
+          </a>
+        </div>
+        
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+          </h5>
+          <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Firmware Development:</strong> Developed C++ firmware for ESP32 to parse MPU-6050 IMU accelerometer and gyroscope registers via I2C.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Signal Processing:</strong> Applied a sensor fusion Euler complementary filter and deadband filter to account for angular integration drift.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Mathematical Modeling:</strong> Applied trigonometry to accelerometer vectors and fused with gyroscope readings to calculate pitch and roll.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    )
+  },
+  { 
+    id: "hud",
+    title: "Car HUD Speedometer", 
+    desc: "Custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness OLED.", 
+    tech: "Arduino, GNSS, C++, SPI",
+    content: (
+      <div className="space-y-6">
+        <div className="flex justify-between items-start">
+          <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
+          <a href="https://github.com/mofeomolade/Arduino-Speedometer-HUD" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
+             <GithubIcon size={24} />
+          </a>
+        </div>
+        
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+          </h5>
+          <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> Developed a low-latency speedometer using an Arduino Nano, GY-NEO6MV2 module, and SPI OLED display.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Data Processing:</strong> Wrote C++ firmware to parse NMEA data streams to compute velocity within 5% of the factory speedometer.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Electronics Integration:</strong> Safely integrated with the vehicle's 14V input using a USB-C to DIN converter to supply the Arduino Vin.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img src="/hud-breadboard.jpg" loading="lazy" alt="Breadboard Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            <img src="/HUD-driver-view.jpg" loading="lazy" alt="Driver View Dashboard" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+               <img src="/HUD-Schematic.png" loading="lazy" alt="HUD Schematic" className="w-full max-h-64 object-contain" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  { 
+    id: "drivetrain",
+    title: "6-Wheel Rover Powertrain", 
+    desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
+    tech: "STM32, C, UART",
+    content: (
+      <div className="space-y-6">
+        <h4 className="text-2xl font-bold text-white">Rover Powertrain System</h4>
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
+          </h5>
+          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Designed a powertrain prototype around the L298N full-bridge motor driver and Nucleo F446RE MCU.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Embedded Control:</strong> Implemented C firmware using STM32 HAL for command parsing, motor feedback, and UART communication.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Telemetry:</strong> Integrated IMU, GNSS, and LiDAR sensors to stream real-time positional and spatial data over UART and I2C.</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+          </h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img src="/mini-rover-prototype.png" loading="lazy" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+            <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+               <img src="/mini-rover-block-diagram.png" loading="lazy" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+];
+
 function HomeContent() {
   const [activeModal, setActiveModal] = useState(null);
-
-  const modalData = {
-    experience: {
-      title: "EXPERIENCE DETAILS",
-      content: (
-        <div className="space-y-8">
-          <div>
-            <h4 className="text-xl font-bold text-white mb-1">Electronics R&D Intern <span className="text-cyan-500 font-normal">@ FulcrumAir</span></h4>
-            <p className="text-sm font-mono text-neutral-500 mb-3">May 2026 - Present</p>
-            <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span>Designed and integrated a custom motor driver PCB around the IFX007T, MAX33040E, and LMR50410-Q1.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span>Wrote C++ firmware for multichannel motor control, CAN telemetry transmission, and actuator feedback calculation.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span>Revised past schematics and PCB layout to implement electrical best practices and improve electronic reliability.</span>
-              </li>
-            </ul>
-          </div>
-          <div className="w-full h-px bg-neutral-800/50"></div>
-          <div>
-            <h4 className="text-xl font-bold text-white mb-1">Electrical Engineer <span className="text-cyan-500 font-normal">@ UBC Rover</span></h4>
-            <p className="text-sm font-mono text-neutral-500 mb-3">September 2025 - Present</p>
-            <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span>Collaborated with chassis and software subteams to design a test rover for autonomous navigation training.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span>Developed power architecture, serial communication protocols, and firmware to integrate MCU and peripherals.</span>
-              </li>
-            </ul>
-          </div>
-          <div className="w-full h-px bg-neutral-800/50"></div>
-          <div>
-            <h4 className="text-xl font-bold text-white mb-1">EE Research Assistant <span className="text-cyan-500 font-normal">@ UCalgary</span></h4>
-            <p className="text-sm font-mono text-neutral-500 mb-3">July 2023 - August 2023</p>
-            <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span>Modelled and simulated Op-Amp oscillator circuits in LTspice to support research in amplifier-based oscillators.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      )
-    },
-    currentProject: {
-      title: "PROJECT INSIGHTS",
-      content: (
-        <div className="space-y-4">
-          <h4 className="text-2xl font-bold text-white">24V-5V Synchronous Buck Converter</h4>
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Simulating open-loop dynamics and closed-loop compensation in LTspice before performing layout in Altium Designer.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      )
-    }
-  };
 
   return (
     <>
@@ -304,320 +620,6 @@ function HomeContent() {
 function ProjectsContent() {
   const [activeModal, setActiveModal] = useState(null);
 
-  const projects = [
-    { 
-      id: "motor-controller",
-      title: "4-Channel Motor Controller", 
-      desc: "Owned the complete ground-up design lifecycle of a custom 4-channel motor controller PCB supporting 150W continuous power and CAN communication.", 
-      tech: "Teensy 4.1, Altium, C++",
-      content: (
-        <div className="space-y-6">
-          <h4 className="text-2xl font-bold text-white">Custom 4-Channel Motor Controller</h4>
-          
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">System Architecture:</strong> Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A continuous current each, implementing 8 IFX007T half-bridge ICs.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">MCU & Telemetry:</strong> Architected system around the Teensy 4.1 600 MHz ARM Cortex-M7 to support multi-channel PWM generation, real-time Hall-effect decoding, and CAN telemetry speeds of up to 1Mbit/s.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Power Safety:</strong> Integrated a bulk electrolytic capacitor alongside a voltage divider fed into an MCU falling-edge interrupt, securing a 5 ms hold-up time to commit actuator calibration data to EEPROM before brownout.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Hardware Validation:</strong> Performed extensive hardware debugging to resolve buck converter faults, validating frequency responses using an oscilloscope to optimize passive component sizing and prevent underdamping. Also used oscilloscope to verify MAX33040E CAN bus transceiver signal integrity.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Embedded Firmware:</strong> Developed C++ testing firmware to validate hardware performance, implementing automated homing sequences, directional state tracking, and interrupt-driven Hall sensor decoding for precise actuator positioning.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Applied DFM principles across the 8-layer stackup, sizing thermal reliefs and component clearances for manual SMT assembly and utilizing large trace widths and polygon pours for continuous 3A current draw.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <a href="https://drive.google.com/file/d/1jCLkcDWhCb2FywIH_KdRXVgo_ij3EGPf/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
-                  For complete planning document click here.
-                </a>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <a href="https://drive.google.com/file/d/1u668nQbwF0ZwOWNwbAeJjb9NH0hfOCJF/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
-                  Watch the hardware testing video here.
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-            </h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                 <img src="/updated-motor-driver-module-layout.png" alt="Motor Driver Layout" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              </div>
-              <div className="md:col-span-2">
-                 <img src="/motor-driver-module-schematic.png" alt="Motor Driver Module Schematic" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              </div>
-              <div className="md:col-span-2">
-                 <img src="/motor-driver-h-bridge-schematic.png" alt="Motor Driver H-Bridge Schematic" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              </div>
-              <img src="/motor_conroller_top.jpg" alt="Motor Controller Top View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <img src="/motor_controller_bottom.jpg" alt="Motor Controller Bottom View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <div className="md:col-span-2">
-                 <img src="/motor_controller_testing1.jpg" alt="Motor Controller Testing Setup 1" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              </div>
-              <div className="md:col-span-2">
-                 <img src="/motor_controller_testing2.jpg" alt="Motor Controller Testing Setup 2" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    { 
-      id: "buck-converter",
-      title: "24V-5V Buck Converter", 
-      desc: "Designed an asynchronous buck converter from scratch, powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.", 
-      tech: "Altium, LTspice",
-      content: (
-        <div className="space-y-6">
-          <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck</h4>
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency. Implemented an N-channel high-side MOSFET with bootstrap gate drive and discrete analog Type III compensation, sizing propagation delays and slew rates to prevent shoot-through.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Circuit Simulation:</strong> Simulating open-loop dynamics and closed-loop compensation in LTspice, validating small-signal Bode stability and dynamic load response across the full battery voltage range (18V-25.2V).</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Performing 4-layer PCB layout in Altium Designer, tightly constricting high-di/dt switching loops, optimizing Schottky diode return paths, and routing unbroken ground reference planes to minimize EMI and radiated noise.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <a href="https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
-                  For complete planning document click here.
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-            </h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-white rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/type iii compensator.png" alt="Type III Compensator" className="w-full h-auto object-contain" />
-              </div>
-              <div className="bg-black rounded-lg border border-neutral-800 flex items-center justify-center overflow-hidden">
-                 <img src="/open loop dynamics sim buck.png" alt="Open Loop Dynamics Simulation" className="w-full h-auto object-contain" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "pid-robot",
-      title: "PID Self-Balancing Robot",
-      desc: "Built a self-balancing robot from first principles using an ESP32-C3, featuring a scratch-written IMU driver and closed-loop PID control.",
-      tech: "ESP32, C++, I2C",
-      content: (
-        <div className="space-y-6">
-          <div className="flex justify-between items-start">
-            <h4 className="text-2xl font-bold text-white">PID Self-Balancing Robot</h4>
-            <a href="https://github.com/mofeomolade/PID-Self-Balancing-Robot" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
-               <GithubIcon size={24} />
-            </a>
-          </div>
-          
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Driver Development:</strong> Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-            </h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/PID Robot Schematic.png" alt="PID Robot Schematic" className="w-full max-h-64 object-contain" />
-              </div>
-              <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/PID Robot Standing.png" alt="PID Robot Standing" className="w-full max-h-64 object-contain" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "imu-tracker",
-      title: "IMU Pitch, Roll & Yaw Calculator",
-      desc: "Developed C++ firmware to process MPU-6050 IMU data, applying sensor fusion to calculate accurate orientation.",
-      tech: "ESP32, C++, I2C, Sensor Fusion",
-      content: (
-        <div className="space-y-6">
-          <div className="flex justify-between items-start">
-            <h4 className="text-2xl font-bold text-white">IMU Orientation Calculator</h4>
-            <a href="https://github.com/mofeomolade/IMU-Orientation-Tracker" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
-               <GithubIcon size={24} />
-            </a>
-          </div>
-          
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Firmware Development:</strong> Developed C++ firmware for ESP32 to parse MPU-6050 IMU accelerometer and gyroscope registers via I2C.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Signal Processing:</strong> Applied a sensor fusion Euler complementary filter and deadband filter to account for angular integration drift.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Mathematical Modeling:</strong> Applied trigonometry to accelerometer vectors and fused with gyroscope readings to calculate pitch and roll.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      )
-    },
-    { 
-      id: "hud",
-      title: "Car HUD Speedometer", 
-      desc: "Custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness OLED.", 
-      tech: "Arduino, GNSS, C++, SPI",
-      content: (
-        <div className="space-y-6">
-          <div className="flex justify-between items-start">
-            <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
-            <a href="https://github.com/mofeomolade/Arduino-Speedometer-HUD" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
-               <GithubIcon size={24} />
-            </a>
-          </div>
-          
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> Developed a low-latency speedometer using an Arduino Nano, GY-NEO6MV2 module, and SPI OLED display.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Data Processing:</strong> Wrote C++ firmware to parse NMEA data streams to compute velocity within 5% of the factory speedometer.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Electronics Integration:</strong> Safely integrated with the vehicle's 14V input using a USB-C to DIN converter to supply the Arduino Vin.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-            </h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <img src="/hud-breadboard.jpg" alt="Breadboard Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <img src="/HUD-driver-view.jpg" alt="Driver View Dashboard" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/HUD-Schematic.png" alt="HUD Schematic" className="w-full max-h-64 object-contain" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    { 
-      id: "drivetrain",
-      title: "6-Wheel Rover Powertrain", 
-      desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
-      tech: "STM32, C, UART",
-      content: (
-        <div className="space-y-6">
-          <h4 className="text-2xl font-bold text-white">Rover Powertrain System</h4>
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-            </h5>
-            <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Designed a powertrain prototype around the L298N full-bridge motor driver and Nucleo F446RE MCU.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Embedded Control:</strong> Implemented C firmware using STM32 HAL for command parsing, motor feedback, and UART communication.</span>
-              </li>
-              <li className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">Telemetry:</strong> Integrated IMU, GNSS, and LiDAR sensors to stream real-time positional and spatial data over UART and I2C.</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-            </h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <img src="/mini-rover-prototype.png" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-                 <img src="/mini-rover-block-diagram.png" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    }
-  ];
-
   return (
     <>
       <div className="w-full text-left animate-in fade-in duration-500 flex flex-col gap-6">
@@ -686,31 +688,8 @@ export default function App() {
     // Hide scrollbar globally for that clean app-like feel
     document.body.style.overflow = 'hidden';
 
-    // Preload heavy gallery images in the background so they appear instantly
-    const imagesToPreload = [
-      "/PID Robot Schematic.png",
-      "/PID Robot Standing.png",
-      "/motor_conroller_top.jpg",
-      "/motor_controller_bottom.jpg",
-      "/updated-motor-driver-module-layout.png",
-      "/motor-driver-module-schematic.png",
-      "/motor-driver-h-bridge-schematic.png",
-      "/type iii compensator.png",
-      "/open loop dynamics sim buck.png",
-      "/motor_controller_testing1.jpg",
-      "/motor_controller_testing2.jpg",
-      "/mini-rover-prototype.png",
-      "/mini-rover-block-diagram.png",
-      "/hud-breadboard.jpg",
-      "/HUD-driver-view.jpg",
-      "/HUD-Schematic.png",
-      "/riscv_logo.png"
-    ];
-
-    imagesToPreload.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
+    // Removed aggressive pre-loading of 17 large project images from initial mount.
+    // Relies on native loading="lazy" in the image tags for much snappier startup.
     
     return () => {
       document.body.style.overflow = 'auto';
