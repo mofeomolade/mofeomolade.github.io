@@ -43,32 +43,6 @@ const GitIcon = ({ size = 24, ...props }) => (
   </svg>
 );
 
-const Stm32Icon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M 23.818 5.61 L 6.402 5.61 C 5.125 5.609 3.968 6.362 3.452 7.529 L 0.014 15.811 C -0.036 15.931 0.052 16.063 0.182 16.061 L 8.046 16.061 C 8.601 16.061 8.848 15.523 8.412 15.093 L 5.524 12.388 C 4.008 10.9 4.658 7.45 7.81 7.45 L 23.206 7.45 C 23.283 7.451 23.352 7.402 23.378 7.329 L 23.987 5.857 C 23.996 5.835 24.001 5.811 24 5.787 C 23.997 5.689 23.917 5.61 23.818 5.61 M 22.082 9.826 L 19.126 9.826 C 18.932 9.825 18.756 9.94 18.681 10.118 L 15.369 18.118 C 15.355 18.144 15.347 18.173 15.347 18.202 C 15.348 18.302 15.429 18.383 15.529 18.381 L 16.632 18.381 C 17.93 18.387 19.105 17.613 19.612 16.418 L 22.244 10.063 C 22.252 10.042 22.257 10.019 22.257 9.996 C 22.253 9.902 22.176 9.828 22.082 9.826 M 16.271 10.005 C 16.271 9.905 16.189 9.825 16.089 9.825 L 7.706 9.825 C 7.251 9.825 6.853 10.38 7.335 10.825 L 10.104 13.404 C 10.104 13.404 11.224 14.437 10.984 15.916 C 10.778 17.219 9.889 18.016 9.241 18.302 C 9.208 18.31 9.196 18.351 9.219 18.376 C 9.23 18.387 9.246 18.392 9.261 18.388 L 12.489 18.388 C 12.683 18.39 12.859 18.275 12.934 18.095 L 16.256 10.068 C 16.266 10.049 16.271 10.027 16.271 10.005"/>
-  </svg>
-);
-
-const PythonIcon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
-  </svg>
-);
-
-const TechItem = ({ Icon, title }) => (
-  <div className="group flex flex-col items-center justify-center h-20 w-24 cursor-default">
-    <div className="transform transition-all duration-300 group-hover:-translate-y-2 flex flex-col items-center gap-2">
-      <Icon 
-        size={36} 
-        className="text-neutral-500 group-hover:text-cyan-400 transition-colors duration-300" 
-      />
-      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-medium text-xs font-mono whitespace-nowrap text-center">
-        {title}
-      </span>
-    </div>
-  </div>
-);
-
 const TechItemPNG = ({ src, title, size = 36 }) => (
   <div className="group flex flex-col items-center justify-center h-20 w-24 cursor-default">
     <div className="transform transition-all duration-300 group-hover:-translate-y-2 flex flex-col items-center gap-2">
@@ -92,6 +66,26 @@ const TechItemPNG = ({ src, title, size = 36 }) => (
       </span>
     </div>
   </div>
+);
+
+const TechItem = ({ Icon, title }) => (
+  <div className="group flex flex-col items-center justify-center h-20 w-24 cursor-default">
+    <div className="transform transition-all duration-300 group-hover:-translate-y-2 flex flex-col items-center gap-2">
+      <Icon 
+        size={36} 
+        className="text-neutral-500 group-hover:text-cyan-400 transition-colors duration-300" 
+      />
+      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-medium text-xs font-mono whitespace-nowrap text-center">
+        {title}
+      </span>
+    </div>
+  </div>
+);
+
+const PythonIcon = ({ size = 24, ...props }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
+  </svg>
 );
 
 const BulletPoint = () => (
@@ -181,7 +175,6 @@ function HomeContent() {
   return (
     <>
       <div className="w-full text-left animate-in fade-in duration-500">
-        
         <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-2xl mb-12">
           I'm a UBC Computer Engineering student with a passion for electronics. I love exploring anything related to robotics, EVs, embedded programming, semiconductors, and more!
         </p>
@@ -218,7 +211,6 @@ function HomeContent() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-6">
-          
           {/* Tools Block */}
           <div className="relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 flex flex-col">
             <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
@@ -252,7 +244,6 @@ function HomeContent() {
               <TechItemPNG src="/riscv_logo.png" title="RISC-V Assembly" size={48} />
             </div>
           </div>
-      
         </div>
 
         {/* Current Project Block */}
@@ -282,7 +273,6 @@ function HomeContent() {
             </div>
           </div>
         </div>
-
       </div>
 
       {activeModal && (
@@ -373,13 +363,22 @@ function ProjectsContent() {
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
             </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <img src="motor_conroller_top.jpg" alt="Motor Controller Top View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-              <img src="motor_controller_bottom.jpg" alt="Motor Controller Bottom View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               <div className="md:col-span-2">
-                 <img src="motor_controller_testing1.jpg" alt="Motor Controller Testing Setup 1" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+                 <img src="/updated-motor-driver-module-layout.png" alt="Motor Driver Layout" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               </div>
               <div className="md:col-span-2">
-                 <img src="motor_controller_testing2.jpg" alt="Motor Controller Testing Setup 2" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+                 <img src="/motor-driver-module-schematic.png" alt="Motor Driver Module Schematic" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="md:col-span-2">
+                 <img src="/motor-driver-h-bridge-schematic.png" alt="Motor Driver H-Bridge Schematic" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              </div>
+              <img src="/motor_conroller_top.jpg" alt="Motor Controller Top View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <img src="/motor_controller_bottom.jpg" alt="Motor Controller Bottom View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              <div className="md:col-span-2">
+                 <img src="/motor_controller_testing1.jpg" alt="Motor Controller Testing Setup 1" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="md:col-span-2">
+                 <img src="/motor_controller_testing2.jpg" alt="Motor Controller Testing Setup 2" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
@@ -392,7 +391,7 @@ function ProjectsContent() {
       desc: "Designed an asynchronous buck converter from scratch, powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.", 
       tech: "Altium, LTspice",
       content: (
-        <div className="space-y-4">
+        <div className="space-y-6">
           <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck</h4>
           <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
             <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
@@ -418,6 +417,20 @@ function ProjectsContent() {
                 </a>
               </li>
             </ul>
+          </div>
+          
+          <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
+            <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
+            </h5>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
+                 <img src="/type iii compensator.png" alt="Type III Compensator" className="w-full h-auto object-contain" />
+              </div>
+              <div className="bg-black rounded-lg border border-neutral-800 flex items-center justify-center overflow-hidden">
+                 <img src="/open loop dynamics sim buck.png" alt="Open Loop Dynamics Simulation" className="w-full h-auto object-contain" />
+              </div>
+            </div>
           </div>
         </div>
       )
@@ -677,10 +690,15 @@ export default function App() {
     const imagesToPreload = [
       "/PID Robot Schematic.png",
       "/PID Robot Standing.png",
-      "motor_conroller_top.jpg",
-      "motor_controller_bottom.jpg",
-      "motor_controller_testing1.jpg",
-      "motor_controller_testing2.jpg",
+      "/motor_conroller_top.jpg",
+      "/motor_controller_bottom.jpg",
+      "/updated-motor-driver-module-layout.png",
+      "/motor-driver-module-schematic.png",
+      "/motor-driver-h-bridge-schematic.png",
+      "/type iii compensator.png",
+      "/open loop dynamics sim buck.png",
+      "/motor_controller_testing1.jpg",
+      "/motor_controller_testing2.jpg",
       "/mini-rover-prototype.png",
       "/mini-rover-block-diagram.png",
       "/hud-breadboard.jpg",
@@ -720,10 +738,8 @@ export default function App() {
       `}} />
 
       <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 md:px-12 pt-12 md:pt-24 pb-24 md:pb-16 flex flex-col min-h-full">
-        
-        {/* Navigation & Header - Mobile Responsive Stacking */}
+        {/* Navigation & Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-0 mb-8 md:mb-12">
-          
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white m-0 leading-none">
             {page === 'home' ? 'Mofe Omolade' : 'Projects'}
           </h1>
@@ -753,7 +769,6 @@ export default function App() {
               <ExternalLinkIcon size={14} className="mb-0.5 opacity-80" />
             </a>
           </nav>
-
         </div>
 
         {/* Dynamic Page Content */}
@@ -765,7 +780,6 @@ export default function App() {
         {/* Bottom Social Footer */}
         <div className="w-full pt-12 mt-auto">
           <div className="flex justify-between items-center font-mono text-xs text-neutral-600">
-            
             <div className="flex items-center gap-6">
               <a href="https://github.com/mofeomolade" target="_blank" aria-label="GitHub Profile" rel="noreferrer" className="text-neutral-500 hover:text-white transition-transform hover:-translate-y-1 duration-300">
                 <GithubIcon size={20} />
@@ -795,10 +809,8 @@ export default function App() {
             <div className="tracking-widest uppercase opacity-50">
               STATUS: ONLINE
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
   );
