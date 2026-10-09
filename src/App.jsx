@@ -255,7 +255,7 @@ const projects = [
   { 
     id: "buck-converter",
     title: "24V-5V Buck Converter", 
-    desc: "Designed an asynchronous buck converter from scratch, powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.", 
+    desc: "Designed an asynchronous buck converter from scratch, stepping down an 18V-25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency.", 
     tech: "Altium, LTspice",
     content: (
       <div className="space-y-6">
@@ -267,11 +267,19 @@ const projects = [
           <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
             <li className="flex gap-3">
               <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency. Implemented an N-channel high-side MOSFET with bootstrap gate drive and discrete analog Type III compensation, sizing propagation delays and slew rates to prevent shoot-through.</span>
+              <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Current Mode across all operating loads.</span>
             </li>
             <li className="flex gap-3">
               <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Circuit Simulation:</strong> Simulating open-loop dynamics and closed-loop compensation in LTspice, validating small-signal Bode stability and dynamic load response across the full battery voltage range (18V-25.2V).</span>
+              <span><strong className="text-white block mb-1 font-medium">PWM Controller:</strong> Implemented an analog voltage-mode PWM controller at 121 kHz, driving an LM334 constant-current source into an TLC555 timer to generate a linear 1.67 sawtooth ramp fed into an LM311 comparator.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Control & Compensation:</strong> Developed an active Type III compensation network using an MCP6021 op-amp to place double zeros compensating the 1.56 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.</span>
+            </li>
+            <li className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">Gate Drive & Soft-Start:</strong> Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 11 mA, driving the high-side gate via an IR2125 with a sized 220 nF bootstrap capacitor.</span>
             </li>
             <li className="flex gap-3">
               <BulletPoint />
