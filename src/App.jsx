@@ -149,7 +149,7 @@ const modalData = {
     title: "PROJECT INSIGHTS",
     content: (
       <div className="space-y-4">
-        <h4 className="text-2xl font-bold text-white">24V-5V Synchronous Buck Converter</h4>
+        <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck Converter</h4>
         <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
           <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
@@ -157,11 +157,11 @@ const modalData = {
           <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
             <li className="flex gap-3">
               <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.</span>
+              <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Current Mode across all operating loads.</span>
             </li>
             <li className="flex gap-3">
               <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Simulating open-loop dynamics and closed-loop compensation in LTspice before performing layout in Altium Designer.</span>
+              <span><strong className="text-white block mb-1 font-medium">Control System:</strong> Implemented a 121 kHz analog voltage-mode PWM controller and an active Type III compensation network using an MCP6021 op-amp to maximize phase margin and stability.</span>
             </li>
           </ul>
         </div>
