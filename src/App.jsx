@@ -1,804 +1,88 @@
-import React, { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
+import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
+import { ExternalLinkIcon, GithubIcon, MailIcon } from './components/icons';
+import { useDocumentTitle } from './hooks';
+import { asset } from './utils';
+import Home from './pages/Home';
 
-const GithubIcon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-  </svg>
-);
+// Only the visited route's code is downloaded
+const Projects = lazy(() => import('./pages/Projects'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
-const MailIcon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <rect width="20" height="16" x="2" y="4" rx="2" />
-    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-  </svg> 
-);
+const navClass = ({ isActive }) =>
+  `transition-colors ${isActive ? 'text-cyan-400' : 'text-neutral-400 hover:text-white'}`;
 
-const MaximizeIcon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <polyline points="15 3 21 3 21 9"></polyline>
-    <polyline points="9 21 3 21 3 15"></polyline>
-    <line x1="21" y1="3" x2="14" y2="10"></line>
-    <line x1="3" y1="21" x2="10" y2="14"></line>
-  </svg>
-);
-
-const CloseIcon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <line x1="18" y1="6" x2="6" y2="18" />
-    <line x1="6" y1="6" x2="18" y2="18" />
-  </svg>
-);
-
-const ExternalLinkIcon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-    <polyline points="15 3 21 3 21 9"></polyline>
-    <line x1="10" y1="14" x2="21" y2="3"></line>
-  </svg>
-);
-
-const GitIcon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M13.09 23.549a1.54 1.54 0 0 1-2.18 0L.451 13.089a1.54 1.54 0 0 1 0-2.179l7.191-7.19 2.733 2.733a1.85 1.85 0 0 0 .964 2.326v6.66a1.849 1.849 0 1 0 1.54 0V8.957l2.508 2.508a1.85 1.85 0 1 0 1.09-1.09l-2.634-2.634a1.85 1.85 0 0 0-2.378-2.377L8.73 2.63 10.91.451a1.54 1.54 0 0 1 2.179 0l10.459 10.46a1.54 1.54 0 0 1 0 2.179z"/>
-  </svg>
-);
-
-const TechItemPNG = ({ src, title, size = 36 }) => (
-  <div className="group flex flex-col items-center justify-center h-20 w-24 cursor-default">
-    <div className="transform transition-all duration-300 group-hover:-translate-y-2 flex flex-col items-center gap-2">
-      <div 
-        className="bg-neutral-500 group-hover:bg-cyan-400 transition-colors duration-300"
-        style={{
-          width: `${size}px`,
-          height: `${size}px`,
-          WebkitMaskImage: `url(${src})`,
-          WebkitMaskSize: 'contain',
-          WebkitMaskRepeat: 'no-repeat',
-          WebkitMaskPosition: 'center',
-          maskImage: `url(${src})`,
-          maskSize: 'contain',
-          maskRepeat: 'no-repeat',
-          maskPosition: 'center',
-        }}
-      />
-      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-medium text-xs font-mono whitespace-nowrap text-center">
-        {title}
-      </span>
-    </div>
-  </div>
-);
-
-const TechItem = ({ Icon, title }) => (
-  <div className="group flex flex-col items-center justify-center h-20 w-24 cursor-default">
-    <div className="transform transition-all duration-300 group-hover:-translate-y-2 flex flex-col items-center gap-2">
-      <Icon 
-        size={36} 
-        className="text-neutral-500 group-hover:text-cyan-400 transition-colors duration-300" 
-      />
-      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-medium text-xs font-mono whitespace-nowrap text-center">
-        {title}
-      </span>
-    </div>
-  </div>
-);
-
-const PythonIcon = ({ size = 24, ...props }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
-  </svg>
-);
-
-const BulletPoint = () => (
-  <div className="w-1.5 h-1.5 mt-2 rounded-sm bg-cyan-500 shrink-0"></div>
-);
-
-// Extracted outside component to prevent re-instantiation
-const modalData = {
-  experience: {
-    title: "EXPERIENCE DETAILS",
-    content: (
-      <div className="space-y-8">
-        <div>
-          <h4 className="text-xl font-bold text-white mb-1">Electronics R&D Intern <span className="text-cyan-500 font-normal">@ FulcrumAir</span></h4>
-          <p className="text-sm font-mono text-neutral-500 mb-3">May 2026 - Present</p>
-          <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span>Designed and integrated a custom motor driver PCB around the IFX007T, MAX33040E, and LMR50410-Q1.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span>Wrote C++ firmware for multichannel motor control, CAN telemetry transmission, and actuator feedback calculation.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span>Revised past schematics and PCB layout to implement electrical best practices and improve electronic reliability.</span>
-            </li>
-          </ul>
-        </div>
-        <div className="w-full h-px bg-neutral-800/50"></div>
-        <div>
-          <h4 className="text-xl font-bold text-white mb-1">Electrical Engineer <span className="text-cyan-500 font-normal">@ UBC Rover</span></h4>
-          <p className="text-sm font-mono text-neutral-500 mb-3">September 2025 - Present</p>
-          <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span>Collaborated with chassis and software subteams to design a test rover for autonomous navigation training.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span>Developed power architecture, serial communication protocols, and firmware to integrate MCU and peripherals.</span>
-            </li>
-          </ul>
-        </div>
-        <div className="w-full h-px bg-neutral-800/50"></div>
-        <div>
-          <h4 className="text-xl font-bold text-white mb-1">EE Research Assistant <span className="text-cyan-500 font-normal">@ UCalgary</span></h4>
-          <p className="text-sm font-mono text-neutral-500 mb-3">July 2023 - August 2023</p>
-          <ul className="space-y-3 text-neutral-300 text-sm md:text-base">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span>Modelled and simulated Op-Amp oscillator circuits in LTspice to support research in amplifier-based oscillators.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    )
-  },
-  currentProject: {
-    title: "PROJECT INSIGHTS",
-    content: (
-      <div className="space-y-4">
-        <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck Converter</h4>
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-          </h5>
-          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Current Mode across all operating loads.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Control System:</strong> Implemented a 121 kHz analog voltage-mode PWM controller and an active Type III compensation network using an MCP6021 op-amp to maximize phase margin and stability.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    )
-  }
-};
-
-// Extracted outside component to prevent re-instantiation
-const projects = [
-  { 
-    id: "motor-controller",
-    title: "4-Channel Motor Controller", 
-    desc: "Owned the complete ground-up design lifecycle of a custom 4-channel motor controller PCB supporting 150W continuous power and CAN communication.", 
-    tech: "Teensy 4.1, Altium, C++",
-    content: (
-      <div className="space-y-6">
-        <h4 className="text-2xl font-bold text-white">Custom 4-Channel Motor Controller</h4>
-        
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-          </h5>
-          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">System Architecture:</strong> Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A continuous current each, implementing 8 IFX007T half-bridge ICs.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">MCU & Telemetry:</strong> Architected system around the Teensy 4.1 600 MHz ARM Cortex-M7 to support multi-channel PWM generation, real-time Hall-effect decoding, and CAN telemetry speeds of up to 1Mbit/s.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Power Safety:</strong> Integrated a bulk electrolytic capacitor alongside a voltage divider fed into an MCU falling-edge interrupt, securing a 5 ms hold-up time to commit actuator calibration data to EEPROM before brownout.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Hardware Validation:</strong> Performed extensive hardware debugging to resolve buck converter faults, validating frequency responses using an oscilloscope to optimize passive component sizing and prevent underdamping. Also used oscilloscope to verify MAX33040E CAN bus transceiver signal integrity.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Embedded Firmware:</strong> Developed C++ testing firmware to validate hardware performance, implementing automated homing sequences, directional state tracking, and interrupt-driven Hall sensor decoding for precise actuator positioning.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Applied DFM principles across the 8-layer stackup, sizing thermal reliefs and component clearances for manual SMT assembly and utilizing large trace widths and polygon pours for continuous 3A current draw.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <a href="https://drive.google.com/file/d/1jCLkcDWhCb2FywIH_KdRXVgo_ij3EGPf/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
-                For complete planning document click here.
-              </a>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <a href="https://drive.google.com/file/d/1u668nQbwF0ZwOWNwbAeJjb9NH0hfOCJF/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
-                Watch the hardware testing video here.
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-          </h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <img src="/motor_conroller_top.jpg" loading="lazy" alt="Motor Controller Top View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            <img src="/motor_controller_bottom.jpg" loading="lazy" alt="Motor Controller Bottom View" className="w-full h-48 md:h-56 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            <div className="md:col-span-2">
-               <img src="/updated-motor-driver-module-layout.png" loading="lazy" alt="Motor Driver Layout" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            </div>
-            <div className="md:col-span-2">
-               <img src="/motor-driver-module-schematic.png" loading="lazy" alt="Motor Driver Module Schematic" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            </div>
-            <div className="md:col-span-2">
-               <img src="/motor-driver-h-bridge-schematic.png" loading="lazy" alt="Motor Driver H-Bridge Schematic" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            </div>
-            <div className="md:col-span-2">
-               <img src="/motor_controller_testing1.jpg" loading="lazy" alt="Motor Controller Testing Setup 1" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            </div>
-            <div className="md:col-span-2">
-               <img src="/motor_controller_testing2.jpg" loading="lazy" alt="Motor Controller Testing Setup 2" className="w-full h-auto object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  },
-  { 
-    id: "buck-converter",
-    title: "24V-5V Buck Converter", 
-    desc: "Designed an asynchronous buck converter from scratch, stepping down an 18V-25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency.", 
-    tech: "Altium, LTspice",
-    content: (
-      <div className="space-y-6">
-        <h4 className="text-2xl font-bold text-white">24V-5V Asynchronous Buck</h4>
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-          </h5>
-          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Power Architecture:</strong> Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Current Mode across all operating loads.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">PWM Controller:</strong> Implemented an analog voltage-mode PWM controller at 121 kHz, driving an LM334 constant-current source into an TLC555 timer to generate a linear 1.67 sawtooth ramp fed into an LM311 comparator.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Control & Compensation:</strong> Developed an active Type III compensation network using an MCP6021 op-amp to place double zeros compensating the 1.56 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Gate Drive & Soft-Start:</strong> Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 11 mA, driving the high-side gate via an IR2125 with a sized 220 nF bootstrap capacitor.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">PCB Layout:</strong> Performing 4-layer PCB layout in Altium Designer, tightly constricting high-di/dt switching loops, optimizing Schottky diode return paths, and routing unbroken ground reference planes to minimize EMI and radiated noise.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <a href="https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors">
-                For complete planning document click here.
-              </a>
-            </li>
-          </ul>
-        </div>
-        
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-          </h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="md:col-span-2 bg-white rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-               <img src="/type iii compensator.png" loading="lazy" alt="Type III Compensator" className="w-full h-auto object-contain" />
-            </div>
-            <div className="md:col-span-2 bg-black rounded-lg border border-neutral-800 flex items-center justify-center overflow-hidden">
-               <img src="/open loop dynamics sim buck.png" loading="lazy" alt="Open Loop Dynamics Simulation" className="w-full h-auto object-contain" />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  },
-  {
-    id: "pid-robot",
-    title: "PID Self-Balancing Robot",
-    desc: "Built a self-balancing robot from first principles using an ESP32-C3, featuring a scratch-written IMU driver and closed-loop PID control.",
-    tech: "ESP32, C++, I2C",
-    content: (
-      <div className="space-y-6">
-        <div className="flex justify-between items-start">
-          <h4 className="text-2xl font-bold text-white">PID Self-Balancing Robot</h4>
-          <a href="https://github.com/mofeomolade/PID-Self-Balancing-Robot" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
-             <GithubIcon size={24} />
-          </a>
-        </div>
-        
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-          </h5>
-          <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Driver Development:</strong> Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Sensor Fusion:</strong> Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Control Systems:</strong> Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-          </h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-               <img src="/PID Robot Schematic.png" loading="lazy" alt="PID Robot Schematic" className="w-full max-h-64 object-contain" />
-            </div>
-            <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-               <img src="/PID Robot Standing.png" loading="lazy" alt="PID Robot Standing" className="w-full max-h-64 object-contain" />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  },
-  {
-    id: "imu-tracker",
-    title: "IMU Pitch, Roll & Yaw Calculator",
-    desc: "Developed C++ firmware to process MPU-6050 IMU data, applying sensor fusion to calculate accurate orientation.",
-    tech: "ESP32, C++, I2C, Sensor Fusion",
-    content: (
-      <div className="space-y-6">
-        <div className="flex justify-between items-start">
-          <h4 className="text-2xl font-bold text-white">IMU Orientation Calculator</h4>
-          <a href="https://github.com/mofeomolade/IMU-Orientation-Tracker" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
-             <GithubIcon size={24} />
-          </a>
-        </div>
-        
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-          </h5>
-          <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Firmware Development:</strong> Developed C++ firmware for ESP32 to parse MPU-6050 IMU accelerometer and gyroscope registers via I2C.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Signal Processing:</strong> Applied a sensor fusion Euler complementary filter and deadband filter to account for angular integration drift.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Mathematical Modeling:</strong> Applied trigonometry to accelerometer vectors and fused with gyroscope readings to calculate pitch and roll.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    )
-  },
-  { 
-    id: "hud",
-    title: "Car HUD Speedometer", 
-    desc: "Custom Heads-Up Display speedometer using a low-power MCU, GPS module, and high-brightness OLED.", 
-    tech: "Arduino, GNSS, C++, SPI",
-    content: (
-      <div className="space-y-6">
-        <div className="flex justify-between items-start">
-          <h4 className="text-2xl font-bold text-white">Car HUD Speedometer</h4>
-          <a href="https://github.com/mofeomolade/Arduino-Speedometer-HUD" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" title="View Repository">
-             <GithubIcon size={24} />
-          </a>
-        </div>
-        
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-          </h5>
-          <ul className="space-y-4 text-neutral-300 text-sm md:text-base mb-6">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Embedded Programming:</strong> Developed a low-latency speedometer using an Arduino Nano, GY-NEO6MV2 module, and SPI OLED display.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Data Processing:</strong> Wrote C++ firmware to parse NMEA data streams to compute velocity within 5% of the factory speedometer.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Electronics Integration:</strong> Safely integrated with the vehicle's 14V input using a USB-C to DIN converter to supply the Arduino Vin.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-          </h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <img src="/hud-breadboard.jpg" loading="lazy" alt="Breadboard Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            <img src="/HUD-driver-view.jpg" loading="lazy" alt="Driver View Dashboard" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            <div className="md:col-span-2 bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-               <img src="/HUD-Schematic.png" loading="lazy" alt="HUD Schematic" className="w-full max-h-64 object-contain" />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  },
-  { 
-    id: "drivetrain",
-    title: "6-Wheel Rover Powertrain", 
-    desc: "Firmware and electrical design for a 6-wheel rover drivetrain using a Nucleo-F446RE, interfacing with an NVIDIA Jetson.", 
-    tech: "STM32, C, UART",
-    content: (
-      <div className="space-y-6">
-        <h4 className="text-2xl font-bold text-white">Rover Powertrain System</h4>
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Technical Highlights
-          </h5>
-          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Hardware Integration:</strong> Designed a powertrain prototype around the L298N full-bridge motor driver and Nucleo F446RE MCU.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Embedded Control:</strong> Implemented C firmware using STM32 HAL for command parsing, motor feedback, and UART communication.</span>
-            </li>
-            <li className="flex gap-3">
-              <BulletPoint />
-              <span><strong className="text-white block mb-1 font-medium">Telemetry:</strong> Integrated IMU, GNSS, and LiDAR sensors to stream real-time positional and spatial data over UART and I2C.</span>
-            </li>
-          </ul>
-        </div>
-        
-        <div className="bg-[#0a0a0c] border border-neutral-800/60 rounded-xl p-6">
-          <h5 className="font-mono text-cyan-500 text-xs mb-4 uppercase tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Gallery
-          </h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <img src="/mini-rover-prototype.png" loading="lazy" alt="Mini Rover Prototype" className="w-full h-48 object-cover rounded-lg border border-neutral-800 opacity-90 hover:opacity-100 transition-opacity" />
-            <div className="bg-neutral-200 rounded-lg p-2 border border-neutral-800 flex items-center justify-center">
-               <img src="/mini-rover-block-diagram.png" loading="lazy" alt="Mini Rover Block Diagram" className="w-full h-48 object-contain" />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-];
-
-function HomeContent() {
-  const [activeModal, setActiveModal] = useState(null);
-
-  return (
-    <>
-      <div className="w-full text-left animate-in fade-in duration-500">
-        <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-2xl mb-12">
-          I'm a UBC Computer Engineering student with a passion for electronics. I love exploring anything related to robotics, EVs, embedded programming, semiconductors, and more!
-        </p>
-
-        {/* Experience Block */}
-        <div 
-          onClick={() => setActiveModal('experience')}
-          className="w-full mb-6 relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 hover:border-cyan-500/30 transition-all text-left flex flex-col cursor-pointer group"
-        >
-          <div className="absolute top-6 right-6 md:top-8 md:right-8 text-neutral-600 group-hover:text-cyan-400 transition-colors">
-            <MaximizeIcon size={18} />
-          </div>
-          
-          <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> EXPERIENCE
-          </h3>
-          
-          <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-sm">
-            <div className="group/item">
-              <span className="text-white font-semibold block mb-1 group-hover/item:text-cyan-400 transition-colors">Electronics R&D Intern</span>
-              <span className="text-neutral-500">@ FulcrumAir</span>
-            </div>
-            <div className="group/item">
-              <span className="text-white font-semibold block mb-1 group-hover/item:text-cyan-400 transition-colors">ELEC Team Member</span>
-              <span className="text-neutral-500">@ UBC Rover</span>
-            </div>
-            <div className="group/item">
-              <span className="text-white font-semibold block mb-1 group-hover/item:text-cyan-400 transition-colors">EE Intern</span>
-              <span className="text-neutral-500">@ UCalgary</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-6">
-          {/* Tools Block */}
-          <div className="relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 flex flex-col">
-            <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> TOOLS
-            </h3>
-            
-            <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
-            
-            <div className="flex flex-wrap gap-4">
-              <TechItemPNG src="/altium-logo.png" title="Altium" />
-              <TechItemPNG src="/kicad.png" title="KiCad" />
-              <TechItem Icon={GitIcon} title="Git" />
-              <TechItemPNG src="/LT.png" title="LTspice" />
-              <TechItemPNG src="/MATLAB.png" title="MATLAB" />
-            </div>
-          </div>
-
-          {/* Languages Block */}
-          <div className="relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 flex flex-col">
-            <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> LANGUAGES
-            </h3>
-            
-            <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
-            
-            <div className="flex flex-wrap gap-4">
-              <TechItemPNG src="/C.png" title="C/C++" />
-              <TechItem Icon={PythonIcon} title="Python" />
-              <TechItemPNG src="/javalogo.png" title="Java" size={44} />
-              <TechItemPNG src="/systemverilog.png" title="SystemVerilog" size={64} />
-              <TechItemPNG src="/riscv_logo.png" title="RISC-V Assembly" size={48} />
-            </div>
-          </div>
-        </div>
-
-        {/* Current Project Block */}
-        <div 
-          onClick={() => setActiveModal('currentProject')}
-          className="w-full relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 hover:border-cyan-500/30 transition-all text-left flex flex-col cursor-pointer group"
-        >
-          <div className="absolute top-6 right-6 md:top-8 md:right-8 text-neutral-600 group-hover:text-cyan-400 transition-colors">
-            <MaximizeIcon size={18} />
-          </div>
-          
-          <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> CURRENT PROJECT
-          </h3>
-          
-          <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
-          
-          <div className="space-y-4">
-            <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">24V-5V Synchronous Buck Converter</h4>
-            <p className="text-neutral-400 text-sm leading-relaxed max-w-xl">
-              Designing an asynchronous buck converter powered by a 6S LiPo input to deliver up to 500 mA at 85% efficiency.
-            </p>
-            <div className="inline-block mt-2">
-              <span className="text-xs font-mono font-semibold tracking-wider text-cyan-500 bg-cyan-500/10 border border-cyan-500/20 rounded px-3 py-1.5">
-                IN PROGRESS
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {activeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 pointer-events-auto animate-in fade-in duration-200">
-          <div 
-            className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
-            onClick={() => setActiveModal(null)}
-          ></div>
-          <div className="relative z-10 w-full max-w-2xl bg-[#0a0a0c] border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div className="flex justify-between items-center p-5 md:p-6 border-b border-neutral-800/80 bg-[#0a0a0c]">
-              <h2 className="text-sm font-bold font-mono tracking-widest text-cyan-500 uppercase">{modalData[activeModal].title}</h2>
-              <button 
-                onClick={() => setActiveModal(null)}
-                className="text-neutral-500 hover:text-white transition-colors bg-transparent border-none cursor-pointer p-1 rounded"
-              >
-                <CloseIcon size={20} />
-              </button>
-            </div>
-            <div className="p-6 md:p-8 overflow-y-auto text-left scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
-              {modalData[activeModal].content}
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
 }
 
-function ProjectsContent() {
-  const [activeModal, setActiveModal] = useState(null);
-
-  return (
-    <>
-      <div className="w-full text-left animate-in fade-in duration-500 flex flex-col gap-6">
-        {projects.map((proj) => (
-          <div 
-            key={proj.id} 
-            onClick={() => setActiveModal(proj.id)}
-            className="w-full relative p-6 md:p-8 bg-[#0a0a0c] rounded-2xl border border-neutral-800/60 hover:border-cyan-500/30 transition-all text-left flex flex-col cursor-pointer group"
-          >
-            <div className="absolute top-6 right-6 md:top-8 md:right-8 text-neutral-600 group-hover:text-cyan-400 transition-colors">
-              <MaximizeIcon size={18} />
-            </div>
-            
-            <h3 className="text-cyan-500 text-xs font-bold tracking-widest mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> {proj.title}
-            </h3>
-            
-            <div className="w-full h-px bg-neutral-800/50 mb-6"></div>
-            
-            {proj.desc && <p className="text-neutral-400 mb-6 leading-relaxed max-w-2xl">{proj.desc}</p>}
-            
-            <div className="text-xs font-mono text-neutral-500 uppercase tracking-widest">
-              {proj.tech}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {activeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 pointer-events-auto animate-in fade-in duration-200">
-          <div 
-            className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
-            onClick={() => setActiveModal(null)}
-          ></div>
-          <div className="relative z-10 w-full max-w-2xl bg-[#0a0a0c] border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div className="flex justify-between items-center p-5 md:p-6 border-b border-neutral-800/80 bg-[#0a0a0c]">
-              <h2 className="text-sm font-bold font-mono tracking-widest text-cyan-500 uppercase">PROJECT INSIGHTS</h2>
-              <button 
-                onClick={() => setActiveModal(null)}
-                className="text-neutral-500 hover:text-white transition-colors bg-transparent border-none cursor-pointer p-1 rounded"
-              >
-                <CloseIcon size={20} />
-              </button>
-            </div>
-            <div className="p-6 md:p-8 overflow-y-auto text-left scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
-              {projects.find(p => p.id === activeModal)?.content}
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
+function HomeRoute() {
+  useDocumentTitle('');
+  return <Home />;
 }
+
+function ProjectsRoute() {
+  useDocumentTitle('Projects');
+  return <Projects />;
+}
+
+const socialLink = 'text-neutral-500 hover:text-cyan-400 transition-all hover:-translate-y-1 duration-300';
+const wrap = 'w-full max-w-6xl mx-auto px-5 sm:px-8 md:px-10';
 
 export default function App() {
-  const [page, setPage] = useState('home');
-
-  useEffect(() => {
-    // Dynamic Favicon Generation
-    const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-    link.type = 'image/svg+xml';
-    link.rel = 'icon';
-    link.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18.36 6.64a9 9 0 1 1-12.73 0'/%3E%3Cline x1='12' y1='2' x2='12' y2='12'/%3E%3C/svg%3E";
-    document.getElementsByTagName('head')[0].appendChild(link);
-    
-    // Hide scrollbar globally for that clean app-like feel
-    document.body.style.overflow = 'hidden';
-
-    // Removed aggressive pre-loading of 17 large project images from initial mount.
-    // Relies on native loading="lazy" in the image tags for much snappier startup.
-    
-    return () => {
-      document.body.style.overflow = 'auto';
-    }
-  }, []);
-
   return (
-    <div
-      style={{
-        backgroundColor: '#050505',
-        backgroundImage: `
-          radial-gradient(circle at 50% 10%, #0f172a 0%, #000000 100%), 
-          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), 
-          linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)
-        `,
-        backgroundSize: '100% 100%, 40px 40px, 40px 40px',
-        backgroundPosition: 'center top',
-        backgroundAttachment: 'fixed',
-      }}
-      className="fixed inset-0 w-full h-[100dvh] font-sans selection:bg-cyan-500 selection:text-black text-[#e5e5e5] overflow-y-auto"
-    >
-      <style dangerouslySetInnerHTML={{__html: `
-        ::-webkit-scrollbar { display: none; }
-        * { -ms-overflow-style: none; scrollbar-width: none; }
-      `}} />
+    <div className="min-h-dvh flex flex-col">
+      <ScrollToTop />
 
-      <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 md:px-12 pt-12 md:pt-24 pb-24 md:pb-16 flex flex-col min-h-full">
-        {/* Navigation & Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-0 mb-8 md:mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white m-0 leading-none">
-            {page === 'home' ? 'Mofe Omolade' : 'Projects'}
-          </h1>
-          
-          <nav className="flex gap-6 md:gap-8 font-mono text-sm md:text-base tracking-widest items-center">
-            <button 
-              onClick={() => setPage('home')} 
-              className={`flex items-center transition-colors cursor-pointer bg-transparent border-0 p-0 ${page === 'home' ? 'text-cyan-500' : 'text-neutral-500 hover:text-white'}`}
-            >
-              [ Home ]
-            </button>
-            
-            <button 
-              onClick={() => setPage('projects')} 
-              className={`flex items-center transition-colors cursor-pointer bg-transparent border-0 p-0 ${page === 'projects' ? 'text-cyan-500' : 'text-neutral-500 hover:text-white'}`}
-            >
-              [ Projects ]
-            </button>
-
-            <a 
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 transition-colors cursor-pointer text-neutral-500 hover:text-white"
-            >
-              Resume
-              <ExternalLinkIcon size={14} className="mb-0.5 opacity-80" />
-            </a>
+      <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#04060b]/75 backdrop-blur-md">
+        <div className={`${wrap} h-16 flex items-center justify-between`}>
+          <nav aria-label="Main" className="flex gap-5 md:gap-8 font-mono text-xs md:text-sm tracking-widest items-center">
+            <NavLink to="/" end className={navClass}>[ Home ]</NavLink>
+            <NavLink to="/projects" className={navClass}>[ Projects ]</NavLink>
           </nav>
+          <a href={asset('resume.pdf')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 font-mono text-xs md:text-sm tracking-widest text-neutral-400 hover:text-white transition-colors">
+            Resume <ExternalLinkIcon size={13} className="opacity-80" />
+          </a>
         </div>
+      </header>
 
-        {/* Dynamic Page Content */}
-        <div className="flex-1 w-full">
-          {page === 'home' && <HomeContent />}
-          {page === 'projects' && <ProjectsContent />}
-        </div>
+      <main className={`${wrap} flex-1 pt-10 md:pt-16 pb-16 md:pb-24`}>
+        <Suspense fallback={<div className="h-64" aria-busy="true" />}>
+          <Routes>
+            <Route path="/" element={<HomeRoute />} />
+            <Route path="/projects" element={<ProjectsRoute />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
 
-        {/* Bottom Social Footer */}
-        <div className="w-full pt-12 mt-auto">
-          <div className="flex justify-between items-center font-mono text-xs text-neutral-600">
-            <div className="flex items-center gap-6">
-              <a href="https://github.com/mofeomolade" target="_blank" aria-label="GitHub Profile" rel="noreferrer" className="text-neutral-500 hover:text-white transition-transform hover:-translate-y-1 duration-300">
-                <GithubIcon size={20} />
-              </a>
-              
-              <a href="https://linkedin.com/in/momolade" target="_blank" aria-label="LinkedIn Profile" rel="noreferrer" className="text-neutral-500 hover:text-white transition-all hover:-translate-y-1 duration-300 flex items-center justify-center">
-                <div
-                  className="w-5 h-5 bg-current transition-colors duration-300"
-                  style={{
-                    WebkitMaskImage: `url(/linkedin.png)`,
-                    WebkitMaskSize: 'contain',
-                    WebkitMaskRepeat: 'no-repeat',
-                    WebkitMaskPosition: 'center',
-                    maskImage: `url(/linkedin.png)`,
-                    maskSize: 'contain',
-                    maskRepeat: 'no-repeat',
-                    maskPosition: 'center',
-                  }}
-                />
-              </a>
-              
-              <a href="mailto:mofe.omolade@example.com" aria-label="Contact" className="text-neutral-500 hover:text-white transition-transform hover:-translate-y-1 duration-300">
-                <MailIcon size={20} />
-              </a>
-            </div>
-
-            <div className="tracking-widest uppercase opacity-50">
-              STATUS: ONLINE
-            </div>
+      <footer className="border-t border-white/[0.06]">
+        <div className={`${wrap} py-8 flex justify-between items-center font-mono text-xs text-neutral-600`}>
+          <div className="flex items-center gap-6">
+            <a href="https://github.com/mofeomolade" target="_blank" rel="noreferrer" aria-label="GitHub profile" className={socialLink}>
+              <GithubIcon size={20} />
+            </a>
+            <a href="https://linkedin.com/in/momolade" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className={socialLink}>
+              <span
+                className="block w-5 h-5 bg-current"
+                style={{ WebkitMask: `url(${asset('linkedin.png')}) center / contain no-repeat`, mask: `url(${asset('linkedin.png')}) center / contain no-repeat` }}
+              />
+            </a>
+            <a href="mailto:omolade.mofe@gmail.com" aria-label="Email" className={socialLink}>
+              <MailIcon size={20} />
+            </a>
           </div>
+          <span className="tracking-widest uppercase opacity-60 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" aria-hidden="true" /> Status: Online
+          </span>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }

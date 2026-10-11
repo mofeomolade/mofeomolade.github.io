@@ -1,0 +1,236 @@
+/*
+ * Role titles, org names, dates and locations follow the resume.
+ * `summary` is the one-liner shown on the home page; `points` show in the popup.
+ */
+export const experience = [
+  {
+    role: 'Electrical Team Member',
+    org: 'UBC Formula Electric',
+    dates: 'Sep 2026 – Present',
+    location: 'Vancouver, BC',
+    summary: 'HV battery hardware for an EV race car',
+    points: [
+      'Spearheaded hardware design and system integration for high-voltage battery module daughterboards and thermistor sensing boards across the 588V tractive battery pack.',
+      'Transitioned cell balancing from internal ADBMS switching to discrete external MOSFETs to boost thermal dissipation and passive balancing efficiency while improving repairability.',
+      'Designed dual-channel, bidirectional digital isolation circuitry rated for worst-case tractive system pack voltages, isolating DS18B20 E-Meter temperature telemetry from module ground domains to adhere to FSAE safety rules.',
+      'Collaborated closely with the BMS firmware team to define requirements for bidirectional 1-Wire MCU communication and redesigned analog thermistor multiplexer paths by eliminating buffering circuits, restoring bidirectional ADBMS current source/sink capability for fault detection.',
+    ],
+  },
+  {
+    role: 'Electronics Engineering Intern',
+    org: 'Fulcrum Air',
+    dates: 'May 2026 – Aug 2026',
+    location: 'Calgary, AB',
+    summary: 'LV electronics for drones and robots',
+    points: [
+      'Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A.',
+      'Designed system architecture around Teensy 4.1 supporting 150 W continuous power draw, multichannel motor control, CAN communication, analog current sensing, Hall-effect positioning, and operation on 240kV power lines.',
+      'Performed high-density routing for an 8-layer PCB within a strict 80 mm x 54 mm package, implementing orthogonal routing, dedicated power and ground planes, ground stitching, and 2.1 MHz switching node shielding.',
+      'Engineered a power-loss detection circuit and falling-edge ISR using a voltage divider and bulk capacitor, guaranteeing non-volatile EEPROM backup of actuator positions within 5 ms of power disconnection.',
+      'Built a test bench and developed C++ firmware to validate PCB function, verifying MCU pinouts, voltage regulation, inrush current stabilization, CAN signal integrity, and bidirectional actuation under dynamic loads.',
+    ],
+  },
+  {
+    role: 'Electrical Team Member',
+    org: 'UBC Rover',
+    dates: 'Sep 2025 – Aug 2026',
+    summary: 'Hardware for an autonomous Mars rover',
+    points: [
+      'Collaborated with chassis and software subteams to design a test rover for autonomous navigation training.',
+      'Tested an off-road powertrain prototype around the L298N full-bridge motor driver and Nucleo F446RE MCU.',
+      'Developed C firmware using STM32 HAL for UART communication, command parsing, and Hall effect feedback.',
+      'Performed stress testing to validate thermal regulation and electronic reliability in environments over 35°C.',
+    ],
+  },
+  {
+    role: 'Electrical Engineering Research Assistant',
+    org: 'University of Calgary',
+    dates: 'Jul 2023 – Aug 2023',
+    summary: 'Amplifier-based oscillator simulation and research',
+    points: [
+      'Modeled and simulated circuits in LTspice to support research on novel Op-Amp-based oscillator topologies.',
+      'Validated circuit performance, achieving 95% correlation between simulation and lab measurements.',
+      'Utilized oscilloscopes, signal generators, and DMMs to debug test circuits and verify frequency responses.',
+    ],
+  },
+];
+
+export const tools = [
+  { src: '/altium-logo.png', title: 'Altium' },
+  { icon: 'git', title: 'Git' },
+  { src: '/LT.png', title: 'LTspice' },
+  { src: '/MATLAB.png', title: 'MATLAB' },
+];
+
+export const languages = [
+  { src: '/C.png', title: 'C/C++' },
+  { src: '/javalogo.png', title: 'Java', size: 44 },
+  { src: '/systemverilog.png', title: 'SystemVerilog', size: 64 },
+  { src: '/riscv_logo.png', title: 'RISC-V Assembly', size: 48 },
+];
+
+/*
+ * Home-page photo gallery. The first 4 show in the hero; clicking any opens a
+ * full-screen viewer that steps through ALL of them. To add a photo: drop it in
+ * public/gallery/ (compressed, ~1600px wide, .webp or .jpg) and add a line here.
+ * Optional `pos` sets the thumbnail crop focus, e.g. '35% 60%' (x y).
+ */
+export const gallery = [
+  { src: 'PCB_Bringup.jpg', alt: 'Soldering a PCB at the lab bench', caption: 'PCB bring-up', pos: '35% 60%' },
+  { src: 'Robot_Testing.jpg', alt: 'Testing electronics on a robot with a multimeter', caption: 'Robot testing', pos: '60% 50%' },
+  { src: '/motor_controller_top.jpg', alt: 'Custom 4-channel motor controller PCB', caption: 'Motor controller PCB' },
+  { src: '/motor_controller_testing1.jpg', alt: 'Motor controller on the test bench', caption: 'Hardware testing' },
+  { src: '/motor_controller_testing2.jpg', alt: 'Motor controller test setup', caption: 'Bench setup' },
+  { src: '/HUD-driver-view.jpg', alt: 'Car HUD speedometer on the dashboard', caption: 'Car HUD speedometer' },
+  { src: '/mini-rover-prototype.png', alt: 'Mini rover powertrain prototype', caption: 'Rover powertrain prototype' },
+];
+
+/*
+ * Gallery item: { src, alt, type: 'photo' | 'light' | 'dark', wide?: boolean }
+ *  photo = cropped cover image, light/dark = diagram on a light/dark backing
+ */
+export const projects = [
+  {
+    id: 'motor-controller',
+    title: '4-Channel Motor Controller',
+    heading: 'Custom 4-Channel Motor Controller',
+    desc: 'Custom 4-channel motor controller PCB with 150W continuous power and CAN communication.',
+    tech: ['Teensy 4.1', 'Altium', 'C++'],
+    highlights: [
+      ['System Architecture', 'Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A continuous current each, implementing 8 IFX007T half-bridge ICs.'],
+      ['MCU & Telemetry', 'Architected system around the Teensy 4.1 600 MHz ARM Cortex-M7 to support multi-channel PWM generation, real-time Hall-effect decoding, and CAN telemetry speeds of up to 1Mbit/s.'],
+      ['Power Safety', 'Integrated a bulk electrolytic capacitor alongside a voltage divider fed into an MCU falling-edge interrupt, securing a 5 ms hold-up time to commit actuator calibration data to EEPROM before brownout.'],
+      ['Hardware Validation', 'Performed extensive hardware debugging to resolve buck converter faults, validating frequency responses using an oscilloscope to optimize passive component sizing and prevent underdamping. Also used oscilloscope to verify MAX33040E CAN bus transceiver signal integrity.'],
+      ['Embedded Firmware', 'Developed C++ testing firmware to validate hardware performance, implementing automated homing sequences, directional state tracking, and interrupt-driven Hall sensor decoding for precise actuator positioning.'],
+      ['PCB Layout', 'Applied DFM principles across the 8-layer stackup, sizing thermal reliefs and component clearances for manual SMT assembly and utilizing large trace widths and polygon pours for continuous 3A current draw.'],
+    ],
+    links: [
+      ['Planning Document', 'https://drive.google.com/file/d/1jCLkcDWhCb2FywIH_KdRXVgo_ij3EGPf/view?usp=sharing'],
+      ['Hardware Testing Video', 'https://drive.google.com/file/d/1u668nQbwF0ZwOWNwbAeJjb9NH0hfOCJF/view?usp=sharing'],
+    ],
+    gallery: [
+      { src: '/motor_controller_top.jpg', alt: 'Motor Controller Top View', type: 'photo' },
+      { src: '/motor_controller_bottom.jpg', alt: 'Motor Controller Bottom View', type: 'photo' },
+      { src: '/updated-motor-driver-module-layout.png', alt: 'Motor Driver Layout', type: 'photo', wide: true },
+      { src: '/motor-driver-module-schematic.png', alt: 'Motor Driver Module Schematic', type: 'photo', wide: true },
+      { src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', wide: true },
+      { src: '/motor_controller_testing1.jpg', alt: 'Motor Controller Testing Setup 1', type: 'photo', wide: true },
+      { src: '/motor_controller_testing2.jpg', alt: 'Motor Controller Testing Setup 2', type: 'photo', wide: true },
+    ],
+  },
+  {
+    id: 'buck-converter',
+    title: '24V-5V Buck Converter',
+    heading: '24V-5V Asynchronous Buck Converter',
+    status: 'In progress',
+    desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
+    tech: ['Altium', 'LTspice'],
+    highlights: [
+      ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
+      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 121 kHz, driving an LM334 constant-current source into an TLC555 timer to generate a linear 1.67 sawtooth ramp fed into an LM311 comparator.'],
+      ['Control & Compensation', 'Developed an active Type III compensation network using an MCP6021 op-amp to place double zeros compensating the 1.56 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
+      ['Gate Drive & Soft-Start', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 11 mA, driving the high-side gate via an IR2125 with a sized 220 nF bootstrap capacitor.'],
+      ['PCB Layout', 'Performing 4-layer PCB layout in Altium Designer, tightly constricting high-di/dt switching loops, optimizing Schottky diode return paths, and routing unbroken ground reference planes to minimize EMI and radiated noise.'],
+    ],
+    links: [
+      ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
+    ],
+    gallery: [
+      { src: '/type iii compensator.png', alt: 'Type III Compensator', type: 'light', wide: true },
+      { src: '/open_loop_dynamics_sim_buck.png', alt: 'Open Loop Dynamics Simulation', type: 'dark', wide: true },
+    ],
+  },
+  {
+    id: 'pid-robot',
+    title: 'PID Self-Balancing Robot',
+    heading: 'PID Self-Balancing Robot',
+    desc: 'Self-balancing robot on an ESP32-C3 with a from-scratch IMU driver and PID control.',
+    tech: ['ESP32', 'C++', 'I2C'],
+    repo: 'https://github.com/mofeomolade/PID-Self-Balancing-Robot',
+    highlights: [
+      ['Driver Development', 'Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.'],
+      ['Sensor Fusion', 'Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.'],
+      ['Control Systems', 'Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.'],
+      ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.'],
+    ],
+    gallery: [
+      { src: '/PID_Robot_Schematic.png', alt: 'PID Robot Schematic', type: 'light' },
+      { src: '/PID_Robot_Standing.png', alt: 'PID Robot Standing', type: 'light' },
+    ],
+  },
+  {
+    id: 'robot-control-breakout',
+    title: 'Robot Control Breakout Board',
+    heading: 'Robot Control Breakout Board',
+    desc: 'Breakout board connecting a Cube Orange flight controller, radio, cameras, and actuators on a remotely controlled robot.',
+    tech: ['Altium', 'Cube Orange', 'CAN', 'RS-485'],
+    highlights: [
+      ['System Integration', 'Integrated with a Cube Orange flight controller and a radio communications module to support a remotely controlled robot, bringing camera, actuator, CAN, RS-485, and servo connections onto one board.'],
+      ['Board Architecture', 'Redesigned the breakout board architecture to resolve harness congestion, strategically grouping peripheral headers around board edges to isolate high-speed camera signals from inductive actuator lines.'],
+      ['Power Delivery', 'Integrated high-efficiency TPSM33625 and TPSM53604 buck power modules to replace bulky discrete regulators, coupling them with dedicated thermal copper pours and via stitching to ensure stable power delivery.'],
+      ['Signal Integrity', 'Routed controlled-impedance differential pairs with termination networks for CAN and RS-485 buses, maintaining an unbroken ground reference plane on the bottom layer to eliminate cross-talk.'],
+      ['Debug & Validation', 'Integrated a dedicated servo debug port and test points for firmware testing and hardware validation.'],
+    ],
+    gallery: [
+      { src: '/CSR_Communications_3D_View.png', alt: 'Robot Control Breakout Board 3D View', type: 'dark', wide: true },
+      { src: '/CSR_Communications_Layout.png', alt: 'Robot Control Breakout Board PCB Layout', type: 'dark', wide: true },
+      { src: '/CSR_Communications_Schematic.png', alt: 'Robot Control Breakout Board Schematic', type: 'light', wide: true },
+    ],
+  },
+  {
+    id: 'imu-tracker',
+    title: 'IMU Pitch, Roll & Yaw Calculator',
+    heading: 'IMU Orientation Calculator',
+    desc: 'C++ firmware that fuses MPU-6050 IMU data to calculate orientation.',
+    tech: ['ESP32', 'C++', 'I2C', 'Sensor Fusion'],
+    repo: 'https://github.com/mofeomolade/IMU-Orientation-Tracker',
+    highlights: [
+      ['Firmware Development', 'Developed C++ firmware for ESP32 to parse MPU-6050 IMU accelerometer and gyroscope registers via I2C.'],
+      ['Signal Processing', 'Applied a sensor fusion Euler complementary filter and deadband filter to account for angular integration drift.'],
+      ['Mathematical Modeling', 'Applied trigonometry to accelerometer vectors and fused with gyroscope readings to calculate pitch and roll.'],
+    ],
+    links: [
+      ['Demonstration Video', 'https://drive.google.com/file/d/1bCM1_0JE25q_tLVzCbwgkk_Z00zFMDHI/view?usp=sharing'],
+    ],
+    gallery: [],
+  },
+  {
+    id: 'hud',
+    title: 'Car HUD Speedometer',
+    heading: 'Car HUD Speedometer',
+    desc: 'Heads-up display speedometer built from an Arduino Nano, GPS module, and OLED.',
+    tech: ['Arduino', 'GNSS', 'C++', 'SPI'],
+    repo: 'https://github.com/mofeomolade/Arduino-Speedometer-HUD',
+    highlights: [
+      ['Embedded Programming', 'Developed a low-latency speedometer using an Arduino Nano, GY-NEO6MV2 module, and SPI OLED display.'],
+      ['Data Processing', 'Wrote C++ firmware to parse NMEA data streams to compute velocity within 5% of the factory speedometer.'],
+      ['Electronics Integration', "Safely integrated with the vehicle's 14V input using a USB-C to DIN converter to supply the Arduino Vin."],
+    ],
+    links: [
+      ['Demonstration Video', 'https://drive.google.com/file/d/1bXU-WOvz6mYj_RZd-T5iZxPks0LKFZjZ/view?usp=sharing'],
+    ],
+    gallery: [
+      { src: '/hud-breadboard.jpg', alt: 'Breadboard Prototype', type: 'photo' },
+      { src: '/HUD-driver-view.jpg', alt: 'Driver View Dashboard', type: 'photo' },
+      { src: '/HUD-Schematic.png', alt: 'HUD Schematic', type: 'light', wide: true },
+    ],
+  },
+  {
+    id: 'drivetrain',
+    title: '6-Wheel Rover Powertrain',
+    heading: 'Rover Powertrain System',
+    desc: 'Firmware and electronics for a 6-wheel rover drivetrain on a Nucleo-F446RE.',
+    tech: ['STM32', 'C', 'UART'],
+    highlights: [
+      ['Hardware Integration', 'Designed a powertrain prototype around the L298N full-bridge motor driver and Nucleo F446RE MCU.'],
+      ['Embedded Control', 'Implemented C firmware using STM32 HAL for command parsing, motor feedback, and UART communication.'],
+      ['Telemetry', 'Integrated IMU, GNSS, and LiDAR sensors to stream real-time positional and spatial data over UART and I2C.'],
+    ],
+    gallery: [
+      { src: '/mini-rover-prototype.png', alt: 'Mini Rover Prototype', type: 'photo' },
+      { src: '/mini-rover-block-diagram.png', alt: 'Mini Rover Block Diagram', type: 'light' },
+    ],
+  },
+];
+
+export const getProject = (id) => projects.find((p) => p.id === id);
