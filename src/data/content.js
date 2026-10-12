@@ -1,3 +1,5 @@
+import { Square } from "lucide-react";
+
 /*
  * Role titles, org names, dates and locations follow the resume.
  * `summary` is the one-liner shown on the home page; `points` show in the popup.
@@ -109,12 +111,12 @@ export const projects = [
       ['Hardware Testing Video', 'https://drive.google.com/file/d/1u668nQbwF0ZwOWNwbAeJjb9NH0hfOCJF/view?usp=sharing'],
     ],
     gallery: [
-      { src: '/motor_controller_top.jpg', alt: 'Motor Controller Top View', type: 'photo', full: true },
-      { src: '/motor_controller_bottom.jpg', alt: 'Motor Controller Bottom View', type: 'photo', full: true },
+      { src: '/motor_controller_top.jpg', alt: 'Motor Controller Top View', type: 'photo', cover: true },
+      { src: '/motor_controller_bottom.jpg', alt: 'Motor Controller Bottom View', type: 'photo', cover: true },
       { src: '/updated-motor-driver-module-layout.png', alt: 'Motor Driver Layout', type: 'photo', wide: true },
       { src: '/motor-driver-module-schematic.png', alt: 'Motor Driver Module Schematic', type: 'photo', wide: true },
-      { src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', wide: true },
-      { src: '/motor_controller_testing1.jpg', alt: 'Motor Controller Testing Setup 1', type: 'photo', wide: true },
+      { src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', cover: true },
+      { src: '/motor_controller_testing1.jpg', alt: 'Motor Controller Testing Setup 1', type: 'photo', cover: true },
       { src: '/motor_controller_testing2.jpg', alt: 'Motor Controller Testing Setup 2', type: 'photo', wide: true },
     ],
   },
@@ -136,8 +138,9 @@ export const projects = [
       ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
     ],
     gallery: [
-      { src: '/type iii compensator.png', alt: 'Type III Compensator', type: 'light', wide: true },
-      { src: '/open_loop_dynamics_sim_buck.png', alt: 'Open Loop Dynamics Simulation', type: 'dark', wide: true },
+      { src: '/buck_control_phase.png', alt: 'Control Stage', type: 'dark', cover: true},
+      { src: '/buck_power_stage.png', alt: 'Power Stage', type: 'dark', cover: true },
+      { src: 'open_loop_dynamics_sim_buck.png', alt: 'Open Loop Dynamics', type: 'dark', wide: true}
     ],
   },
   {
@@ -154,8 +157,8 @@ export const projects = [
       ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.'],
     ],
     gallery: [
-      { src: '/PID_Robot_Schematic.png', alt: 'PID Robot Schematic', type: 'light' },
-      { src: '/PID_Robot_Standing.png', alt: 'PID Robot Standing', type: 'light' },
+      { src: '/PID_Robot_Schematic.png', alt: 'PID Robot Schematic', type: 'photo', full: true },
+      { src: '/PID_Robot_Standing.png', alt: 'PID Robot Standing', type: 'dark', fill: true},
     ],
   },
   {
@@ -172,9 +175,9 @@ export const projects = [
       ['Debug & Validation', 'Integrated a dedicated servo debug port and test points for firmware testing and hardware validation.'],
     ],
     gallery: [
-      { src: '/CSR_Communications_3D_View.png', alt: 'Robot Control Breakout Board 3D View', type: 'dark', wide: true },
-      { src: '/CSR_Communications_Layout.png', alt: 'Robot Control Breakout Board PCB Layout', type: 'dark', wide: true },
-      { src: '/CSR_Communications_Schematic.png', alt: 'Robot Control Breakout Board Schematic', type: 'light', wide: true },
+      { src: '/CSR_Communications_3D_View.png', alt: 'Robot Control Breakout Board 3D View', type: 'dark', cover: true},
+      { src: '/CSR_Communications_Layout.png', alt: 'Robot Control Breakout Board PCB Layout', type: 'dark', cover: true},
+      { src: '/CSR_Communications_Schematic.png', alt: 'Robot Control Breakout Board Schematic', type: 'dark', wide: true },
     ],
   },
   {
@@ -210,9 +213,9 @@ export const projects = [
       ['Demonstration Video', 'https://drive.google.com/file/d/1bXU-WOvz6mYj_RZd-T5iZxPks0LKFZjZ/view?usp=sharing'],
     ],
     gallery: [
-      { src: '/hud-breadboard.jpg', alt: 'Breadboard Prototype', type: 'photo' },
-      { src: '/HUD-driver-view.jpg', alt: 'Driver View Dashboard', type: 'photo' },
-      { src: '/HUD-Schematic.png', alt: 'HUD Schematic', type: 'light', wide: true },
+      { src: '/hud-breadboard.jpg', alt: 'Breadboard Prototype', type: 'photo', cover: true },
+      { src: '/HUD-driver-view.jpg', alt: 'Driver View Dashboard', type: 'photo', cover:true },
+      { src: '/HUD-Schematic.png', alt: 'HUD Schematic', type: 'photo', wide: true },
     ],
   },
   {
@@ -227,8 +230,8 @@ export const projects = [
       ['Telemetry', 'Integrated IMU, GNSS, and LiDAR sensors to stream real-time positional and spatial data over UART and I2C.'],
     ],
     gallery: [
-      { src: '/mini-rover-prototype.png', alt: 'Mini Rover Prototype', type: 'photo' },
-      { src: '/mini-rover-block-diagram.png', alt: 'Mini Rover Block Diagram', type: 'light' },
+      { src: '/mini-rover-prototype.png', alt: 'Mini Rover Prototype', type: 'photo', fill: true },
+      { src: '/mini-rover-block-diagram.png', alt: 'Mini Rover Block Diagram', type: 'photo', cover: true},
     ],
   },
 ];

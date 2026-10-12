@@ -15,16 +15,20 @@ const frames = {
 function GalleryImage({ item }) {
   const src = encodeURI(asset(item.src)); // some filenames contain spaces
   const isPhoto = item.type === 'photo';
-  const sizing = isPhoto
-    ? item.wide || item.full ? 'w-full h-auto' : 'w-full h-48 md:h-56 object-cover'
-    : 'w-full max-h-64 object-contain';
+  const sizing = item.fill
+    ? 'w-full h-auto md:absolute md:inset-0 md:h-full object-cover'
+    : item.cover
+    ? 'w-full h-full object-cover'
+    : isPhoto
+      ? item.wide || item.full ? 'w-full h-auto' : 'w-full h-48 md:h-56 object-cover'
+      : 'w-full max-h-64 object-contain';
 
   return (
     <a
       href={src}
       target="_blank"
       rel="noreferrer"
-      className={`${frames[item.type]} ${item.wide ? 'md:col-span-2' : ''} ${item.full ? 'self-start' : ''} block`}
+      className={`${frames[item.type]} ${item.wide ? 'md:col-span-2' : ''} ${item.full ? 'self-start' : ''} ${item.square ? 'aspect-square' : ''} ${item.fill ? 'relative' : ''} block`}
       aria-label={`Open ${item.alt} full size`}
     >
       <img
@@ -78,9 +82,6 @@ export default function ProjectDetail() {
         <Link to="/projects" className="inline-flex items-center gap-2 text-sm font-mono text-neutral-500 hover:text-cyan-400 transition-colors mb-8">
           <ArrowLeftIcon size={16} /> All projects
         </Link>
-        <p className="font-mono text-xs tracking-[0.25em] text-cyan-500 uppercase flex items-center gap-3 mb-4">
-          <span className="h-px w-8 bg-cyan-500" aria-hidden="true" /> Project {String(index + 1).padStart(2, '0')}
-        </p>
         <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight max-w-3xl">{project.heading}</h1>
         <p className="text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl mt-5">{project.desc}</p>
       </div>

@@ -35,9 +35,11 @@ export const Tag = ({ children }) => (
 
 export const PageHeading = ({ eyebrow, title, children }) => (
   <div className="mb-10 md:mb-12 reveal">
-    <p className="font-mono text-xs tracking-[0.25em] text-cyan-500 uppercase flex items-center gap-3 mb-4">
-      <span className="h-px w-8 bg-cyan-500" aria-hidden="true" /> {eyebrow}
-    </p>
+    {eyebrow && (
+      <p className="font-mono text-xs tracking-[0.25em] text-cyan-500 uppercase flex items-center gap-3 mb-4">
+        <span className="h-px w-8 bg-cyan-500" aria-hidden="true" /> {eyebrow}
+      </p>
+)}
     <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-none">{title}</h1>
     {children && <p className="text-neutral-400 mt-5 max-w-2xl leading-relaxed">{children}</p>}
   </div>

@@ -5,7 +5,7 @@ import { projects } from '../data/content';
 export default function Projects() {
   return (
     <div>
-      <PageHeading eyebrow="Portfolio" title="Projects">
+      <PageHeading title="Projects">
         building cool stuff :)
       </PageHeading>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
