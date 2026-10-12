@@ -51,7 +51,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className={`${wrap} flex-1 pt-10 md:pt-16 pb-16 md:pb-24`}>
+      <main className={`${wrap} flex-1 pt-6 md:pt-10 pb-16 md:pb-24`}>
         <Suspense fallback={<div className="h-64" aria-busy="true" />}>
           <Routes>
             <Route path="/" element={<HomeRoute />} />

@@ -16,7 +16,7 @@ function GalleryImage({ item }) {
   const src = encodeURI(asset(item.src)); // some filenames contain spaces
   const isPhoto = item.type === 'photo';
   const sizing = isPhoto
-    ? item.wide ? 'w-full h-auto' : 'w-full h-48 md:h-56 object-cover'
+    ? item.wide || item.full ? 'w-full h-auto' : 'w-full h-48 md:h-56 object-cover'
     : 'w-full max-h-64 object-contain';
 
   return (
@@ -24,7 +24,7 @@ function GalleryImage({ item }) {
       href={src}
       target="_blank"
       rel="noreferrer"
-      className={`${frames[item.type]} ${item.wide ? 'md:col-span-2' : ''} block`}
+      className={`${frames[item.type]} ${item.wide ? 'md:col-span-2' : ''} ${item.full ? 'self-start' : ''} block`}
       aria-label={`Open ${item.alt} full size`}
     >
       <img

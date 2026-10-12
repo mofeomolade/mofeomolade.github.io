@@ -50,8 +50,8 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="grid lg:grid-cols-5 gap-10 lg:gap-14 items-center mb-14 md:mb-20">
-        <div className="lg:col-span-3 reveal">
+      <section className="grid lg:grid-cols-5 gap-8 lg:gap-14 lg:items-start mb-10 md:mb-12">
+        <div className="lg:col-span-3 lg:pt-4 reveal">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] mb-6">
             Mofe{' '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Omolade</span>

@@ -72,12 +72,12 @@ export const languages = [
 /*
  * Home-page photo gallery. The first 4 show in the hero; clicking any opens a
  * full-screen viewer that steps through ALL of them. To add a photo: drop it in
- * public/gallery/ (compressed, ~1600px wide, .webp or .jpg) and add a line here.
+ * public/ (compressed, ~1600px wide, .webp or .jpg) and add a line here.
  * Optional `pos` sets the thumbnail crop focus, e.g. '35% 60%' (x y).
  */
 export const gallery = [
-  { src: 'PCB_Bringup.jpg', alt: 'Soldering a PCB at the lab bench', caption: 'PCB bring-up', pos: '35% 60%' },
-  { src: 'Robot_Testing.jpg', alt: 'Testing electronics on a robot with a multimeter', caption: 'Robot testing', pos: '60% 50%' },
+  { src: '/PCB_Bringup.jpg', alt: 'Soldering a PCB at the lab bench', caption: 'PCB bring-up', pos: '35% 60%' },
+  { src: '/Robot_Testing.jpg', alt: 'Testing electronics on a robot with a multimeter', caption: 'Robot testing', pos: '60% 50%' },
   { src: '/motor_controller_top.jpg', alt: 'Custom 4-channel motor controller PCB', caption: 'Motor controller PCB' },
   { src: '/motor_controller_testing1.jpg', alt: 'Motor controller on the test bench', caption: 'Hardware testing' },
   { src: '/motor_controller_testing2.jpg', alt: 'Motor controller test setup', caption: 'Bench setup' },
@@ -109,8 +109,8 @@ export const projects = [
       ['Hardware Testing Video', 'https://drive.google.com/file/d/1u668nQbwF0ZwOWNwbAeJjb9NH0hfOCJF/view?usp=sharing'],
     ],
     gallery: [
-      { src: '/motor_controller_top.jpg', alt: 'Motor Controller Top View', type: 'photo' },
-      { src: '/motor_controller_bottom.jpg', alt: 'Motor Controller Bottom View', type: 'photo' },
+      { src: '/motor_controller_top.jpg', alt: 'Motor Controller Top View', type: 'photo', full: true },
+      { src: '/motor_controller_bottom.jpg', alt: 'Motor Controller Bottom View', type: 'photo', full: true },
       { src: '/updated-motor-driver-module-layout.png', alt: 'Motor Driver Layout', type: 'photo', wide: true },
       { src: '/motor-driver-module-schematic.png', alt: 'Motor Driver Module Schematic', type: 'photo', wide: true },
       { src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', wide: true },
