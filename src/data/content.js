@@ -129,18 +129,17 @@ export const projects = [
     tech: ['Altium', 'LTspice'],
     highlights: [
       ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
-      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 121 kHz, driving an LM334 constant-current source into an TLC555 timer to generate a linear 1.67 sawtooth ramp fed into an LM311 comparator.'],
-      ['Control & Compensation', 'Developed an active Type III compensation network using an MCP6021 op-amp to place double zeros compensating the 1.56 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
-      ['Gate Drive & Soft-Start', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 11 mA, driving the high-side gate via an IR2125 with a sized 220 nF bootstrap capacitor.'],
-      ['PCB Layout', 'Performing 4-layer PCB layout in Altium Designer, tightly constricting high-di/dt switching loops, optimizing Schottky diode return paths, and routing unbroken ground reference planes to minimize EMI and radiated noise.'],
+      ['PWM Controller', 'Implemented the power architecture using the NCP3063 hysteretic switching regulator IC, sizing the timing capacitor to establish a 150 kHz nominal switching frequency.'],
+      ['Transient Response', 'Sized high-frequency filter passives and a Schottky freewheeling diode, optimizing output LC networks to minimize voltage ripple below 50 mV under peak transient loads. '],
+      ['PCB Layout', 'Routing a compact 2-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
     ],
     links: [
       ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
     ],
     gallery: [
-      { src: '/buck_control_phase.png', alt: 'Control Stage', type: 'dark', cover: true},
-      { src: '/buck_power_stage.png', alt: 'Power Stage', type: 'dark', cover: true },
-      { src: 'open_loop_dynamics_sim_buck.png', alt: 'Open Loop Dynamics', type: 'dark', wide: true}
+      //{ src: '/buck_control_phase.png', alt: 'Control Stage', type: 'dark', cover: true},
+      //{ src: '/buck_power_stage.png', alt: 'Power Stage', type: 'dark', cover: true },
+      //{ src: 'open_loop_dynamics_sim_buck.png', alt: 'Open Loop Dynamics', type: 'dark', wide: true}
     ],
   },
   {
