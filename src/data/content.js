@@ -10,12 +10,12 @@ export const experience = [
     org: 'UBC Formula Electric',
     dates: 'Sep 2026 – Present',
     location: 'Vancouver, BC',
-    summary: 'HV battery hardware for an EV race car',
+    summary: 'HV battery hardware for an FSAE Electric race car',
     points: [
-      'Spearheaded hardware design and system integration for high-voltage battery module daughterboards and thermistor sensing boards across the 588V tractive battery pack.',
-      'Transitioned cell balancing from internal ADBMS switching to discrete external MOSFETs to boost thermal dissipation and passive balancing efficiency while improving repairability.',
-      'Designed dual-channel, bidirectional digital isolation circuitry rated for worst-case tractive system pack voltages, isolating DS18B20 E-Meter temperature telemetry from module ground domains to adhere to FSAE safety rules.',
-      'Collaborated closely with the BMS firmware team to define requirements for bidirectional 1-Wire MCU communication and redesigned analog thermistor multiplexer paths by eliminating buffering circuits, restoring bidirectional ADBMS current source/sink capability for fault detection.',
+      'Spearheading hardware design and system integration for high-voltage battery module daughterboards and thermistor sensing boards across the 600V tractive battery pack.',
+      'Designing dual-channel, bidirectional digital isolation circuitry isolating DS18B20 E-Meter temperature telemetry from battery ground domains to adhere to FSAE safety regulations.',
+      'Transitioning cell balancing from internal ADBMS switching to discrete external MOSFETs to boost thermal dissipation and passive balancing efficiency while improving repairability.',
+      'Collaborating closely with the BMS firmware team to design architecture for bidirectional 1-Wire MCU communication and redesigning analog thermistor voltage sensing paths by eliminating Op-amp buffering circuits.',
     ],
   },
   {
@@ -113,9 +113,9 @@ export const projects = [
     gallery: [
       { src: '/motor_controller_top.jpg', alt: 'Motor Controller Top View', type: 'photo', cover: true },
       { src: '/motor_controller_bottom.jpg', alt: 'Motor Controller Bottom View', type: 'photo', cover: true },
-      { src: '/updated-motor-driver-module-layout.png', alt: 'Motor Driver Layout', type: 'photo', wide: true },
-      { src: '/motor-driver-module-schematic.png', alt: 'Motor Driver Module Schematic', type: 'photo', wide: true },
-      { src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', cover: true },
+      //{ src: '/updated-motor-driver-module-layout.png', alt: 'Motor Driver Layout', type: 'photo', wide: true },
+      //{ src: '/motor-driver-module-schematic.png', alt: 'Motor Driver Module Schematic', type: 'photo', wide: true },
+      //{ src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', cover: true },
       { src: '/motor_controller_testing1.jpg', alt: 'Motor Controller Testing Setup 1', type: 'photo', cover: true },
       { src: '/motor_controller_testing2.jpg', alt: 'Motor Controller Testing Setup 2', type: 'photo', wide: true },
     ],
@@ -129,17 +129,18 @@ export const projects = [
     tech: ['Altium', 'LTspice'],
     highlights: [
       ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
-      ['PWM Controller', 'Implemented the power architecture using the NCP3063 hysteretic switching regulator IC, sizing the timing capacitor to establish a 150 kHz nominal switching frequency.'],
-      ['Transient Response', 'Sized high-frequency filter passives and a Schottky freewheeling diode, optimizing output LC networks to minimize voltage ripple below 50 mV under peak transient loads. '],
-      ['PCB Layout', 'Routing a compact 2-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
+      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 100 kHz, driving an LM334 constant-current source into a TLC555 timer to generate a linear sawtooth ramp fed into a comparator.'],
+      [ 'Compensator', 'Developed an active Type III compensation network using an Op-amp to place double zeros compensating the 1.56 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
+      ['Transient Response', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 10 mA, driving the high-side gate via an IR2125 with a 220 nF bootstrap capacitor.'],
+      ['PCB Layout', 'Routing a compact 4-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
     ],
     links: [
       ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
     ],
     gallery: [
-      //{ src: '/buck_control_phase.png', alt: 'Control Stage', type: 'dark', cover: true},
-      //{ src: '/buck_power_stage.png', alt: 'Power Stage', type: 'dark', cover: true },
-      //{ src: 'open_loop_dynamics_sim_buck.png', alt: 'Open Loop Dynamics', type: 'dark', wide: true}
+      { src: '/buck_control_phase.png', alt: 'Control Stage', type: 'dark', cover: true},
+      { src: '/buck_power_stage.png', alt: 'Power Stage', type: 'dark', cover: true },
+      { src: 'open_loop_dynamics_sim_buck.png', alt: 'Open Loop Dynamics', type: 'dark', wide: true}
     ],
   },
   {
@@ -174,9 +175,9 @@ export const projects = [
       ['Debug & Validation', 'Integrated a dedicated servo debug port and test points for firmware testing and hardware validation.'],
     ],
     gallery: [
-      { src: '/CSR_Communications_3D_View.png', alt: 'Robot Control Breakout Board 3D View', type: 'dark', cover: true},
-      { src: '/CSR_Communications_Layout.png', alt: 'Robot Control Breakout Board PCB Layout', type: 'dark', cover: true},
-      { src: '/CSR_Communications_Schematic.png', alt: 'Robot Control Breakout Board Schematic', type: 'dark', wide: true },
+      { src: '/CSR_Communications_3D_View.png', alt: 'Robot Control Breakout Board 3D View', type: 'dark', cover: true}
+      //{ src: '/CSR_Communications_Layout.png', alt: 'Robot Control Breakout Board PCB Layout', type: 'dark', cover: true},
+      //{ src: '/CSR_Communications_Schematic.png', alt: 'Robot Control Breakout Board Schematic', type: 'dark', wide: true },
     ],
   },
   {
