@@ -109,6 +109,7 @@ export const projects = [
     links: [
       ['Planning Document', 'https://drive.google.com/file/d/1jCLkcDWhCb2FywIH_KdRXVgo_ij3EGPf/view?usp=sharing'],
       ['Hardware Testing Video', 'https://drive.google.com/file/d/1u668nQbwF0ZwOWNwbAeJjb9NH0hfOCJF/view?usp=sharing'],
+      ['Test Firmware', 'https://github.com/mofeomolade/Motor-Driver-Testing']
     ],
     gallery: [
       { src: '/motor_controller_top.jpg', alt: 'Motor Controller Top View', type: 'photo', cover: true },
@@ -117,7 +118,7 @@ export const projects = [
       //{ src: '/motor-driver-module-schematic.png', alt: 'Motor Driver Module Schematic', type: 'photo', wide: true },
       //{ src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', cover: true },
       { src: '/motor_controller_testing1.jpg', alt: 'Motor Controller Testing Setup 1', type: 'photo', cover: true },
-      { src: '/motor_controller_testing2.jpg', alt: 'Motor Controller Testing Setup 2', type: 'photo', wide: true },
+      { src: '/motor_controller_testing2.jpg', alt: 'Motor Controller Testing Setup 2', type: 'photo', cover: true },
     ],
   },
   {
