@@ -88,16 +88,79 @@ export const gallery = [
 ];
 
 /*
+ * Project fields: `decisions` (optional) is the main story on a project page:
+ *   { title, chose, why, tradeoff? }. `highlights` stay as the supporting technical detail.
+ *
  * Gallery item: { src, alt, type: 'photo' | 'light' | 'dark', wide?: boolean }
  *  photo = cropped cover image, light/dark = diagram on a light/dark backing
  */
 export const projects = [
+  {
+    id: 'battery-pack-boards',
+    title: 'Battery Module & Thermistor Boards',
+    heading: 'Battery Module & Thermistor Boards',
+    status: 'In progress',
+    desc: 'Daughterboards and thermistor sensing boards for the high-voltage tractive battery pack of an FSAE electric race car.',
+    tech: ['Altium', 'LTspice', 'ADBMS',],
+    decisions: [
+      {
+        title: "Two-wire sensing in parasitic power mode",
+        chose: "Keep the DS18B20 temperature sensors in parasitic power mode, so each one needs only a data line and ground.",
+        why: "FSAE rules require it. The datasheet describes a three-wire architecture that would be easier, but it is not an option here.",
+      },
+      {
+        title: "Isolating the e-meter signal",
+        chose: "Two-channel, bidirectional digital isolation where the e-meter signal enters and exits each board.",
+        why: "The rules require the e-meter signal to be isolated from the modules. It has to be bidirectional so firmware can talk to whichever thermistor it picks.",
+        tradeoff: "Isolating a one-wire bus splits it into forward and backward paths, which can latch the line low in a feedback loop. Each isolated sensor also needs its own weak pull-up, and the isolator has to survive the current pulses a parasitic DS18B20 draws.",
+      },
+      {
+        title: "Driving the strong pull-up",
+        chose: "Exploring a circuit that inverts the e-meter output with NOT gates and uses a capacitor to switch a MOSFET strong pull-up on cue.",
+        why: "During a temperature conversion each sensor needs about 1.5 mA, and a weak pull-up of roughly 4.7 kOhm sags the line. The datasheet fix is a MOSFET strong pull-up, but the e-meter only gives a data line and a return, so nothing is available to drive the gate.",
+        tradeoff: "The pull-up has to take over within 10 us of the e-meter releasing the line, so the capacitor timing is critical.",
+      },
+      {
+        title: "Restoring ADBMS bidirectional communication",
+        chose: "Remove an op-amp voltage buffer in the thermistor sensing path.",
+        why: "A proper open-wire check needs the ADBMS chip to source and sink current. In the previous architecture, a buffer prevented that.",
+      },
+      {
+        title: "Internal vs. external cell balancing",
+        chose: "Move balancing from the ADBMS internal switches to discrete external MOSFETs.",
+        why: "Better thermal dissipation, more efficient passive balancing, and easier repair.",
+      },
+    ],
+    highlights: [
+      ['Digital Isolation', 'Designing dual-channel, bidirectional digital isolation to isolate DS18B20 E-Meter telemetry from battery ground domains, per FSAE rules.'],
+      ['Cell Balancing', 'Moving cell balancing from internal ADBMS switching to discrete external MOSFETs for better thermal dissipation, balancing efficiency and repairability.'],
+      ['Firmware Collaboration', 'Working with the BMS firmware team on bidirectional 1-Wire MCU communication and removing the op-amp buffering from the analog thermistor sensing path.'],
+    ],
+    gallery: [],
+  },
   {
     id: 'motor-controller',
     title: '4-Channel Motor Controller',
     heading: 'Custom 4-Channel Motor Controller',
     desc: 'Custom 4-channel motor controller PCB with 150W continuous power and CAN communication.',
     tech: ['Teensy 4.1', 'Altium', 'C++'],
+    decisions: [
+      {
+        title: "Dev board shield vs. bare MCU",
+        chose: "A Teensy 4.1 development board, with my PCB built as a shield around it.",
+        why: "The deadline for a working MVP was tight. Using a dev board took away the work of routing the MCU and implementing CAN controller, ADC, etc.",
+      },
+      {
+        title: "Choosing the MCU",
+        chose: "Teensy 4.1.",
+        why: "Picked mostly based on pinout. I needed enough analog pins for current sensing on every half-bridge IC, enough PWM-capable pins to drive ENA pins, and enough general digital I/O.",
+      },
+      {
+        title: "Thermal management",
+        chose: "Large ground and power planes, with stitching vias.",
+        why: "Each actuator runs at 12 V 3 A, so the board handles roughly 150 W continuous and thermal regulation mattered.",
+      },
+    ],
     highlights: [
       ['System Architecture', 'Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A continuous current each, implementing 8 IFX007T half-bridge ICs.'],
       ['MCU & Telemetry', 'Architected system around the Teensy 4.1 600 MHz ARM Cortex-M7 to support multi-channel PWM generation, real-time Hall-effect decoding, and CAN telemetry speeds of up to 1Mbit/s.'],
@@ -128,6 +191,18 @@ export const projects = [
     status: 'In progress',
     desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
     tech: ['Altium', 'LTspice'],
+    decisions: [
+      {
+        title: "Discrete components vs. a controller IC",
+        chose: "Designed the power and control stages from scratch with discrete components.",
+        why: "To build a deep understanding of buck topology fundamentals.",
+      },
+      {
+        title: "Voltage mode vs. current mode control",
+        chose: "Voltage mode.",
+        why: "It simplifies the feedback loop.",
+      },
+    ],
     highlights: [
       ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
       ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 100 kHz, driving an LM334 constant-current source into a TLC555 timer to generate a linear sawtooth ramp fed into a comparator.'],
@@ -150,6 +225,13 @@ export const projects = [
     heading: 'PID Self-Balancing Robot',
     desc: 'Self-balancing robot on an ESP32-C3 with a from-scratch IMU driver and PID control.',
     tech: ['ESP32', 'C++', 'I2C'],
+    decisions: [
+      {
+        title: "ESP32 vs. Arduino Nano",
+        chose: "ESP32.",
+        why: "A faster clock and a 32-bit processor give a faster PID loop, which makes the robot more responsive.",
+      },
+    ],
     repo: 'https://github.com/mofeomolade/PID-Self-Balancing-Robot',
     highlights: [
       ['Driver Development', 'Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.'],
@@ -225,6 +307,19 @@ export const projects = [
     heading: 'Rover Powertrain System',
     desc: 'Firmware and electronics for a 6-wheel rover drivetrain on a Nucleo-F446RE.',
     tech: ['STM32', 'C', 'UART'],
+    decisions: [
+      {
+        title: "STM32 Nucleo vs. Arduino",
+        chose: "An STM32 Nucleo board for prototyping.",
+        why: "More GPIOs and a faster processor. I also wanted to get familiar with an industry-standard platform and the STM32 HAL library.",
+      },
+      {
+        title: "Choosing the motor driver",
+        chose: "L298N.",
+        why: "Extensive documentation and community support around it.",
+        tradeoff: "The BJT-based architecture is inefficient. The support was worth more to me than the efficiency.",
+      },
+    ],
     highlights: [
       ['Hardware Integration', 'Designed a powertrain prototype around the L298N full-bridge motor driver and Nucleo F446RE MCU.'],
       ['Embedded Control', 'Implemented C firmware using STM32 HAL for command parsing, motor feedback, and UART communication.'],

@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon, FileTextIcon, GithubIcon, PlayIcon } from '../components/icons';
 import { BulletPoint, SectionLabel, Tag, btnGhost, cardClass } from '../components/ui';
@@ -66,6 +67,26 @@ function ResourceLink({ label, url }) {
   );
 }
 
+function Decision({ item, n }) {
+  const rows = [['Chose', item.chose], ['Why', item.why], ['Tradeoff', item.tradeoff]].filter(([, v]) => v);
+  return (
+    <li className="py-6 first:pt-0 last:pb-0">
+      <div className="flex items-baseline gap-3 mb-3">
+        <span className="font-mono text-xs text-cyan-500 tracking-widest">{String(n + 1).padStart(2, '0')}</span>
+        <h3 className="text-white font-semibold text-base md:text-lg">{item.title}</h3>
+      </div>
+      <dl className="grid grid-cols-[5rem_1fr] gap-x-4 gap-y-2 text-sm md:text-base">
+        {rows.map(([label, text]) => (
+          <Fragment key={label}>
+            <dt className="font-mono text-[11px] tracking-widest uppercase text-neutral-500 pt-1">{label}</dt>
+            <dd className="text-neutral-300 leading-relaxed">{text}</dd>
+          </Fragment>
+        ))}
+      </dl>
+    </li>
+  );
+}
+
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = getProject(id);
@@ -107,7 +128,17 @@ export default function ProjectDetail() {
           </div>
         </aside>
 
-        <section className={`${cardClass} lg:col-span-2`}>
+        <div className="lg:col-span-2 flex flex-col gap-6">
+          {project.decisions?.length > 0 && (
+            <section className={cardClass}>
+              <SectionLabel className="mb-6">Design Decisions</SectionLabel>
+              <ul className="divide-y divide-white/[0.06]">
+                {project.decisions.map((item, i) => <Decision key={item.title} item={item} n={i} />)}
+              </ul>
+            </section>
+          )}
+
+        <section className={cardClass}>
           <SectionLabel className="mb-6">Technical Highlights</SectionLabel>
           <ul className="space-y-5 text-neutral-300 text-sm md:text-base">
             {project.highlights.map(([label, text]) => (
@@ -118,6 +149,7 @@ export default function ProjectDetail() {
             ))}
           </ul>
         </section>
+        </div>
       </div>
 
       {project.gallery.length > 0 && (
