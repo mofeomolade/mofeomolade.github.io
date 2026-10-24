@@ -68,21 +68,27 @@ function ResourceLink({ label, url }) {
 }
 
 function Decision({ item, n }) {
-  const rows = [['Chose', item.chose], ['Why', item.why], ['Tradeoff', item.tradeoff]].filter(([, v]) => v);
+  const more = [['Why', item.why], ['Tradeoff', item.tradeoff]].filter(([, v]) => v);
   return (
-    <li className="py-6 first:pt-0 last:pb-0">
-      <div className="flex items-baseline gap-3 mb-3">
-        <span className="font-mono text-xs text-cyan-500 tracking-widest">{String(n + 1).padStart(2, '0')}</span>
-        <h3 className="text-white font-semibold text-base md:text-lg">{item.title}</h3>
-      </div>
-      <dl className="grid grid-cols-[5rem_1fr] gap-x-4 gap-y-2 text-sm md:text-base">
-        {rows.map(([label, text]) => (
-          <Fragment key={label}>
-            <dt className="font-mono text-[11px] tracking-widest uppercase text-neutral-500 pt-1">{label}</dt>
-            <dd className="text-neutral-300 leading-relaxed">{text}</dd>
-          </Fragment>
-        ))}
-      </dl>
+    <li className="py-5 first:pt-0 last:pb-0">
+      <details className="group">
+        <summary className="flex items-start gap-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          <span className="font-mono text-xs text-cyan-500 tracking-widest pt-1.5">{String(n + 1).padStart(2, '0')}</span>
+          <span className="flex-1 min-w-0">
+            <span className="block text-white font-semibold text-base md:text-lg group-hover:text-cyan-300 transition-colors">{item.title}</span>
+            <span className="block text-neutral-400 text-sm mt-1">{item.chose}</span>
+          </span>
+          <ArrowRightIcon size={16} className="mt-2 shrink-0 text-neutral-600 group-hover:text-cyan-400 group-open:rotate-90 transition-transform" />
+        </summary>
+        <dl className="grid grid-cols-[5rem_1fr] gap-x-4 gap-y-2 text-sm md:text-base mt-4 pl-7">
+          {more.map(([label, text]) => (
+            <Fragment key={label}>
+              <dt className="font-mono text-[11px] tracking-widest uppercase text-neutral-500 pt-1">{label}</dt>
+              <dd className="text-neutral-300 leading-relaxed">{text}</dd>
+            </Fragment>
+          ))}
+        </dl>
+      </details>
     </li>
   );
 }
@@ -106,6 +112,15 @@ export default function ProjectDetail() {
         <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight max-w-3xl">{project.heading}</h1>
         <p className="text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl mt-5">{project.desc}</p>
       </div>
+
+      {project.gallery.length > 0 && (
+        <section className={cardClass}>
+          <SectionLabel className="mb-6">Gallery</SectionLabel>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {project.gallery.map((item) => <GalleryImage key={item.src} item={item} />)}
+          </div>
+        </section>
+      )}
 
       <div className="grid lg:grid-cols-3 gap-6 items-start">
         {/* Sidebar: resources first on mobile, sticky on desktop */}
@@ -131,7 +146,7 @@ export default function ProjectDetail() {
         <div className="lg:col-span-2 flex flex-col gap-6">
           {project.decisions?.length > 0 && (
             <section className={cardClass}>
-              <SectionLabel className="mb-6">Design Decisions</SectionLabel>
+              <SectionLabel className="mb-6">Key Design Choices</SectionLabel>
               <ul className="divide-y divide-white/[0.06]">
                 {project.decisions.map((item, i) => <Decision key={item.title} item={item} n={i} />)}
               </ul>
@@ -151,15 +166,6 @@ export default function ProjectDetail() {
         </section>
         </div>
       </div>
-
-      {project.gallery.length > 0 && (
-        <section className={cardClass}>
-          <SectionLabel className="mb-6">Gallery</SectionLabel>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {project.gallery.map((item) => <GalleryImage key={item.src} item={item} />)}
-          </div>
-        </section>
-      )}
 
       <nav className="grid grid-cols-2 gap-4 font-mono text-sm" aria-label="More projects">
         {prev ? (

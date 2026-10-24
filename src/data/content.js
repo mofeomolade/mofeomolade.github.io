@@ -95,50 +95,7 @@ export const gallery = [
  *  photo = cropped cover image, light/dark = diagram on a light/dark backing
  */
 export const projects = [
-  {
-    id: 'battery-pack-boards',
-    title: 'Battery Module & Thermistor Boards',
-    heading: 'Battery Module & Thermistor Boards',
-    status: 'In progress',
-    desc: 'Daughterboards and thermistor sensing boards for the high-voltage tractive battery pack of an FSAE electric race car.',
-    tech: ['Altium', 'LTspice', 'ADBMS',],
-    decisions: [
-      {
-        title: "Two-wire sensing in parasitic power mode",
-        chose: "Keep the DS18B20 temperature sensors in parasitic power mode, so each one needs only a data line and ground.",
-        why: "FSAE rules require it. The datasheet describes a three-wire architecture that would be easier, but it is not an option here.",
-      },
-      {
-        title: "Isolating the e-meter signal",
-        chose: "Two-channel, bidirectional digital isolation where the e-meter signal enters and exits each board.",
-        why: "The rules require the e-meter signal to be isolated from the modules. It has to be bidirectional so firmware can talk to whichever thermistor it picks.",
-        tradeoff: "Isolating a one-wire bus splits it into forward and backward paths, which can latch the line low in a feedback loop. Each isolated sensor also needs its own weak pull-up, and the isolator has to survive the current pulses a parasitic DS18B20 draws.",
-      },
-      {
-        title: "Driving the strong pull-up",
-        chose: "Exploring a circuit that inverts the e-meter output with NOT gates and uses a capacitor to switch a MOSFET strong pull-up on cue.",
-        why: "During a temperature conversion each sensor needs about 1.5 mA, and a weak pull-up of roughly 4.7 kOhm sags the line. The datasheet fix is a MOSFET strong pull-up, but the e-meter only gives a data line and a return, so nothing is available to drive the gate.",
-        tradeoff: "The pull-up has to take over within 10 us of the e-meter releasing the line, so the capacitor timing is critical.",
-      },
-      {
-        title: "Restoring ADBMS bidirectional communication",
-        chose: "Remove an op-amp voltage buffer in the thermistor sensing path.",
-        why: "A proper open-wire check needs the ADBMS chip to source and sink current. In the previous architecture, a buffer prevented that.",
-      },
-      {
-        title: "Internal vs. external cell balancing",
-        chose: "Move balancing from the ADBMS internal switches to discrete external MOSFETs.",
-        why: "Better thermal dissipation, more efficient passive balancing, and easier repair.",
-      },
-    ],
-    highlights: [
-      ['Digital Isolation', 'Designing dual-channel, bidirectional digital isolation to isolate DS18B20 E-Meter telemetry from battery ground domains, per FSAE rules.'],
-      ['Cell Balancing', 'Moving cell balancing from internal ADBMS switching to discrete external MOSFETs for better thermal dissipation, balancing efficiency and repairability.'],
-      ['Firmware Collaboration', 'Working with the BMS firmware team on bidirectional 1-Wire MCU communication and removing the op-amp buffering from the analog thermistor sensing path.'],
-    ],
-    gallery: [],
-  },
-  {
+    {
     id: 'motor-controller',
     title: '4-Channel Motor Controller',
     heading: 'Custom 4-Channel Motor Controller',
@@ -147,7 +104,7 @@ export const projects = [
     decisions: [
       {
         title: "Dev board shield vs. bare MCU",
-        chose: "A Teensy 4.1 development board, with my PCB built as a shield around it.",
+        chose: "A development board with my PCB built as a shield around it.",
         why: "The deadline for a working MVP was tight. Using a dev board took away the work of routing the MCU and implementing CAN controller, ADC, etc.",
       },
       {
@@ -157,7 +114,7 @@ export const projects = [
       },
       {
         title: "Thermal management",
-        chose: "Large ground and power planes, with stitching vias.",
+        chose: "Large ground/power planes and GND stitching vias.",
         why: "Each actuator runs at 12 V 3 A, so the board handles roughly 150 W continuous and thermal regulation mattered.",
       },
     ],
@@ -185,6 +142,44 @@ export const projects = [
     ],
   },
   {
+    id: 'battery-pack-boards',
+    title: 'Battery Module & Thermistor Boards',
+    heading: 'Battery Module & Thermistor Boards',
+    status: 'In progress',
+    desc: 'Daughterboards and thermistor sensing boards for the high-voltage tractive battery pack of an FSAE electric race car.',
+    tech: ['Altium', 'LTspice', 'ADBMS',],
+    decisions: [
+      {
+        title: "Isolating the e-meter signal",
+        chose: "Two-channel, bidirectional digital isolation where the e-meter signal enters and exits each board.",
+        why: "The rules require the e-meter signal to be isolated from the modules. It has to be bidirectional to firmware can select specific sensors",
+        tradeoff: "Isolating a one-wire bus splits it into forward and backward paths, which can latch the line low in a feedback loop. Each isolated sensor also needs a pull-up resistor, and the isolator has to withstand the current pulses a parasitic DS18B20 draws.",
+      },
+      {
+        title: "Supplying a strong pull-up path", 
+        chose: "Exploring a circuit that inverts the e-meter output with NOT gates and uses a capacitor to switch a MOSFET strong pull-up on cue.",
+        why: "During a temperature conversion each sensor needs about 1.5 mA. With a 4.7 kOhm pull-up resistor, this causes the 5 V rail to sag. The datasheet fix is a MOSFET strong pull-up, but the FSAE e-meter only gives a data line and a return, so a 3-wire architecture won't meet competition specs. ",
+        tradeoff: "The pull-up has to take over within 10 us of the e-meter releasing the line, so the capacitor timing is critical.",
+      },
+      {
+        title: "Restoring ADBMS bidirectional communication",
+        chose: "Remove an op-amp voltage buffer in the thermistor sensing path.",
+        why: "A proper open-wire check needs the ADBMS chip to source and sink current. In the previous architecture, a buffer prevented that.",
+      },
+      {
+        title: "Internal vs. external cell balancing",
+        chose: "Move balancing from the ADBMS internal switches to discrete external MOSFETs.",
+        why: "Using external switches improves thermal dissipation and passive balancing efficiency. Resolves the issue of blowing internal MOSFETs",
+      },
+    ],
+    highlights: [
+      ['Digital Isolation', 'Designing dual-channel, bidirectional digital isolation to isolate DS18B20 E-Meter telemetry from battery ground domains, per FSAE rules.'],
+      ['Cell Balancing', 'Moving cell balancing from internal ADBMS switching to discrete external MOSFETs for better thermal dissipation, balancing efficiency and repairability.'],
+      ['Firmware Collaboration', 'Working with the BMS firmware team on bidirectional 1-Wire MCU communication and removing the op-amp buffering from the analog thermistor sensing path.'],
+    ],
+    gallery: [],
+  },
+  {
     id: 'buck-converter',
     title: '24V-5V Buck Converter',
     heading: '24V-5V Asynchronous Buck Converter',
@@ -200,7 +195,7 @@ export const projects = [
       {
         title: "Voltage mode vs. current mode control",
         chose: "Voltage mode.",
-        why: "It simplifies the feedback loop.",
+        why: "Voltage mode control uses a simple feedback loop compared to the nested feedback structure required for current mode control. ",
       },
     ],
     highlights: [
@@ -214,9 +209,8 @@ export const projects = [
       ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
     ],
     gallery: [
-      { src: '/buck_control_phase.png', alt: 'Control Stage', type: 'dark', cover: true},
-      { src: '/buck_power_stage.png', alt: 'Power Stage', type: 'dark', cover: true },
-      { src: 'open_loop_dynamics_sim_buck.png', alt: 'Open Loop Dynamics', type: 'dark', wide: true}
+      /*{ src: '/buck_control_phase.png', alt: 'Control Stage', type: 'dark', cover: true},*/
+      { src: '/buck_power_stage.png', alt: 'Power Stage', type: 'dark', wide: true }
     ],
   },
   {
@@ -297,8 +291,8 @@ export const projects = [
     ],
     gallery: [
       { src: '/hud-breadboard.jpg', alt: 'Breadboard Prototype', type: 'photo', cover: true },
-      { src: '/HUD-driver-view.jpg', alt: 'Driver View Dashboard', type: 'photo', cover:true },
-      { src: '/HUD-Schematic.png', alt: 'HUD Schematic', type: 'photo', wide: true },
+      { src: '/HUD-driver-view.jpg', alt: 'Driver View Dashboard', type: 'photo', cover:true }
+      /*{ src: '/HUD-Schematic.png', alt: 'HUD Schematic', type: 'photo', wide: true },*/
     ],
   },
   {
