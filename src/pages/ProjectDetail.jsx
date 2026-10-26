@@ -32,13 +32,13 @@ function GalleryImage({ item }) {
       className={`${frames[item.type]} ${item.wide ? 'md:col-span-2' : ''} ${item.full ? 'self-start' : ''} ${item.square ? 'aspect-square' : ''} ${item.fill ? 'relative' : ''} block`}
       aria-label={`Open ${item.alt} full size`}
     >
-      <img
-        src={src}
-        alt={item.alt}
-        loading="lazy"
-        decoding="async"
-        className={`${item.wide && !isPhoto ? 'w-full h-auto max-h-none' : sizing} opacity-90 hover:opacity-100 transition-opacity`}
-      />
+     <img
+      src={src}
+      alt={item.alt}
+      loading="lazy"
+      decoding="async"
+      className={`${item.wide && !isPhoto ? 'w-full h-auto max-h-none' : sizing} ${isPhoto ? 'opacity-90 hover:opacity-100 transition-opacity' : ''}`}
+    />
     </a>
   );
 }

@@ -200,17 +200,18 @@ export const projects = [
     ],
     highlights: [
       ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
-      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 100 kHz, driving an LM334 constant-current source into a TLC555 timer to generate a linear sawtooth ramp fed into a comparator.'],
-      [ 'Compensator', 'Developed an active Type III compensation network using an Op-amp to place double zeros compensating the 1.56 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
-      ['Transient Response', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 10 mA, driving the high-side gate via an IR2125 with a 220 nF bootstrap capacitor.'],
+      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 100 kHz, driving an LM334 constant-current source into a TLC555 timer to generate a linear sawtooth ramp fed into an MCP6561 comparator.'],
+      [ 'Compensator', 'Developed an active Type III compensation network using an MCP6021 Op-amp to place double zeros compensating the 1.57 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
+      ['Transient Response', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 10 mA.'],
       ['PCB Layout', 'Routing a compact 4-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
     ],
     links: [
       ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
     ],
     gallery: [
-      /*{ src: '/buck_control_phase.png', alt: 'Control Stage', type: 'dark', cover: true},*/
-      { src: '/buck_power_stage.png', alt: 'Power Stage', type: 'dark', wide: true }
+      { src: '/buck_power_stage.png', alt: 'Power Stage', type: 'light', cover: true },
+      { src: '/buck_control_stage.png', alt: 'Control Stage', type: 'light', cover: true},
+      { src: '/buck_soft_start.png', alt: 'Soft Start', type: 'dark', wide: true},
     ],
   },
   {
@@ -234,8 +235,8 @@ export const projects = [
       ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.'],
     ],
     gallery: [
-      { src: '/PID_Robot_Schematic.png', alt: 'PID Robot Schematic', type: 'photo', full: true },
-      { src: '/PID_Robot_Standing.png', alt: 'PID Robot Standing', type: 'dark', fill: true},
+      { src: '/PID_Robot_Schematic.png', alt: 'PID Robot Schematic', type: 'light', cover: true },
+      { src: '/PID_Robot_Standing.png', alt: 'PID Robot Standing', type: 'photo', fill: true},
     ],
   },
   {
@@ -321,7 +322,7 @@ export const projects = [
     ],
     gallery: [
       { src: '/mini-rover-prototype.png', alt: 'Mini Rover Prototype', type: 'photo', fill: true },
-      { src: '/mini-rover-block-diagram.png', alt: 'Mini Rover Block Diagram', type: 'photo', cover: true},
+      { src: '/mini-rover-block-diagram.png', alt: 'Mini Rover Block Diagram', type: 'light', cover: true},
     ],
   },
 ];
