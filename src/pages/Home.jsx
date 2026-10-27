@@ -44,7 +44,7 @@ const TechBlock = ({ label, items, className = '' }) => (
 
 export default function Home() {
   const [showExperience, setShowExperience] = useState(false);
-  const current = getProject('battery-pack-boards');
+  const current = getProject('buck-converter');
   const openExperience = () => setShowExperience(true);
 
   return (

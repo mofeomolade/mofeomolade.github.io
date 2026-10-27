@@ -91,8 +91,9 @@ export const gallery = [
  * Project fields: `decisions` (optional) is the main story on a project page:
  *   { title, chose, why, tradeoff? }. `highlights` stay as the supporting technical detail.
  *
- * Gallery item: { src, alt, type: 'photo' | 'light' | 'dark', wide?: boolean }
- *  photo = cropped cover image, light/dark = diagram on a light/dark backing
+ * Gallery item: { src, caption, alt, type: 'photo' | 'light' | 'dark' }
+ *  caption = the tag shown on the image (say exactly what it is)
+ *  photo / dark = black backing, light = light-grey backing for diagrams drawn for white paper
  */
 export const projects = [
     {
@@ -132,13 +133,73 @@ export const projects = [
       ['Test Firmware', 'https://github.com/mofeomolade/Motor-Driver-Testing']
     ],
     gallery: [
-      { src: '/motor_controller_top.jpg', alt: 'Motor Controller Top View', type: 'photo', cover: true },
-      { src: '/motor_controller_bottom.jpg', alt: 'Motor Controller Bottom View', type: 'photo', cover: true },
-      //{ src: '/updated-motor-driver-module-layout.png', alt: 'Motor Driver Layout', type: 'photo', wide: true },
+      { src: '/motor_controller_top.jpg', caption: 'PCB top view', alt: 'Motor Controller Top View', type: 'photo', cover: true },
+      { src: '/motor_controller_bottom.jpg', caption: 'PCB bottom view', alt: 'Motor Controller Bottom View', type: 'photo', cover: true },
+      { src: '/updated-motor-driver-module-layout.png', caption: 'PCB layout', alt: 'Motor Driver Layout', type: 'photo', wide: true },
       //{ src: '/motor-driver-module-schematic.png', alt: 'Motor Driver Module Schematic', type: 'photo', wide: true },
       //{ src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', cover: true },
-      { src: '/motor_controller_testing1.jpg', alt: 'Motor Controller Testing Setup 1', type: 'photo', cover: true },
-      { src: '/motor_controller_testing2.jpg', alt: 'Motor Controller Testing Setup 2', type: 'photo', cover: true },
+      { src: '/motor_controller_testing1.jpg', caption: 'Hardware test setup 1', alt: 'Motor Controller Testing Setup 1', type: 'photo', cover: true },
+      { src: '/motor_controller_testing2.jpg', caption: 'Hardware test setup 2', alt: 'Motor Controller Testing Setup 2', type: 'photo', cover: true },
+    ],
+  },
+  {
+    id: 'buck-converter',
+    title: '24V-5V Buck Converter',
+    heading: '24V-5V Asynchronous Buck Converter',
+    status: 'In progress',
+    desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
+    tech: ['Altium', 'LTspice'],
+    decisions: [
+      {
+        title: "Discrete components vs. a controller IC",
+        chose: "Designed the power and control stages from scratch with discrete components.",
+        why: "To build a deep understanding of buck topology fundamentals.",
+      },
+      {
+        title: "Voltage mode vs. current mode control",
+        chose: "Voltage mode.",
+        why: "Voltage mode control uses a simple feedback loop compared to the nested feedback structure required for current mode control. ",
+      },
+    ],
+    highlights: [
+      ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
+      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 100 kHz, driving an LM334 constant-current source into a TLC555 timer to generate a linear sawtooth ramp fed into an MCP6561 comparator.'],
+      [ 'Compensator', 'Developed an active Type III compensation network using an MCP6021 Op-amp to place double zeros compensating the 1.57 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
+      ['Transient Response', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 10 mA.'],
+      ['PCB Layout', 'Routing a compact 4-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
+    ],
+    links: [
+      ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
+    ],
+    gallery: [
+      { src: '/buck_power_stage.png', caption: 'Power stage schematic', alt: 'Power Stage', type: 'light', cover: true },
+      { src: '/buck_control_stage.png', caption: 'Control stage schematic', alt: 'Control Stage', type: 'light', cover: true},
+      { src: '/buck_soft_start.png', caption: 'Soft-start waveform', alt: 'Soft Start', type: 'dark', wide: true},
+    ],
+  },
+  {
+    id: 'pid-robot',
+    title: 'PID Self-Balancing Robot',
+    heading: 'PID Self-Balancing Robot',
+    desc: 'Self-balancing robot on an ESP32-C3 with a from-scratch IMU driver and PID control.',
+    tech: ['ESP32', 'C++', 'I2C'],
+    decisions: [
+      {
+        title: "ESP32 vs. Arduino Nano",
+        chose: "ESP32.",
+        why: "A faster clock and a 32-bit processor give a faster PID loop, which makes the robot more responsive.",
+      },
+    ],
+    repo: 'https://github.com/mofeomolade/PID-Self-Balancing-Robot',
+    highlights: [
+      ['Driver Development', 'Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.'],
+      ['Sensor Fusion', 'Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.'],
+      ['Control Systems', 'Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.'],
+      ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.'],
+    ],
+    gallery: [
+      { src: '/PID_Robot_Schematic.png', caption: 'Circuit schematic', alt: 'PID Robot Schematic', type: 'light', cover: true },
+      { src: '/PID_Robot_Standing.png', caption: 'Assembled robot standing', alt: 'PID Robot Standing', type: 'photo', fill: true},
     ],
   },
   {
@@ -180,100 +241,23 @@ export const projects = [
     gallery: [],
   },
   {
-    id: 'buck-converter',
-    title: '24V-5V Buck Converter',
-    heading: '24V-5V Asynchronous Buck Converter',
-    status: 'In progress',
-    desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
-    tech: ['Altium', 'LTspice'],
-    decisions: [
-      {
-        title: "Discrete components vs. a controller IC",
-        chose: "Designed the power and control stages from scratch with discrete components.",
-        why: "To build a deep understanding of buck topology fundamentals.",
-      },
-      {
-        title: "Voltage mode vs. current mode control",
-        chose: "Voltage mode.",
-        why: "Voltage mode control uses a simple feedback loop compared to the nested feedback structure required for current mode control. ",
-      },
-    ],
-    highlights: [
-      ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
-      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 100 kHz, driving an LM334 constant-current source into a TLC555 timer to generate a linear sawtooth ramp fed into an MCP6561 comparator.'],
-      [ 'Compensator', 'Developed an active Type III compensation network using an MCP6021 Op-amp to place double zeros compensating the 1.57 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
-      ['Transient Response', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 10 mA.'],
-      ['PCB Layout', 'Routing a compact 4-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
-    ],
-    links: [
-      ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
-    ],
-    gallery: [
-      { src: '/buck_power_stage.png', alt: 'Power Stage', type: 'light', cover: true },
-      { src: '/buck_control_stage.png', alt: 'Control Stage', type: 'light', cover: true},
-      { src: '/buck_soft_start.png', alt: 'Soft Start', type: 'dark', wide: true},
-    ],
-  },
-  {
-    id: 'pid-robot',
-    title: 'PID Self-Balancing Robot',
-    heading: 'PID Self-Balancing Robot',
-    desc: 'Self-balancing robot on an ESP32-C3 with a from-scratch IMU driver and PID control.',
-    tech: ['ESP32', 'C++', 'I2C'],
-    decisions: [
-      {
-        title: "ESP32 vs. Arduino Nano",
-        chose: "ESP32.",
-        why: "A faster clock and a 32-bit processor give a faster PID loop, which makes the robot more responsive.",
-      },
-    ],
-    repo: 'https://github.com/mofeomolade/PID-Self-Balancing-Robot',
-    highlights: [
-      ['Driver Development', 'Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.'],
-      ['Sensor Fusion', 'Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.'],
-      ['Control Systems', 'Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.'],
-      ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.'],
-    ],
-    gallery: [
-      { src: '/PID_Robot_Schematic.png', alt: 'PID Robot Schematic', type: 'light', cover: true },
-      { src: '/PID_Robot_Standing.png', alt: 'PID Robot Standing', type: 'photo', fill: true},
-    ],
-  },
-  {
-    id: 'robot-control-breakout',
-    title: 'Robot Control Breakout Board',
-    heading: 'Robot Control Breakout Board',
-    desc: 'Breakout board connecting a Cube Orange flight controller, radio, cameras, and actuators on a remotely controlled robot.',
-    tech: ['Altium', 'Cube Orange', 'CAN', 'RS-485'],
-    highlights: [
-      ['System Integration', 'Integrated with a Cube Orange flight controller and a radio communications module to support a remotely controlled robot, bringing camera, actuator, CAN, RS-485, and servo connections onto one board.'],
-      ['Board Architecture', 'Redesigned the breakout board architecture to resolve harness congestion, strategically grouping peripheral headers around board edges to isolate high-speed camera signals from inductive actuator lines.'],
-      ['Power Delivery', 'Integrated high-efficiency TPSM33625 and TPSM53604 buck power modules to replace bulky discrete regulators, coupling them with dedicated thermal copper pours and via stitching to ensure stable power delivery.'],
-      ['Signal Integrity', 'Routed controlled-impedance differential pairs with termination networks for CAN and RS-485 buses, maintaining an unbroken ground reference plane on the bottom layer to eliminate cross-talk.'],
-      ['Debug & Validation', 'Integrated a dedicated servo debug port and test points for firmware testing and hardware validation.'],
-    ],
-    gallery: [
-      { src: '/CSR_Communications_3D_View.png', alt: 'Robot Control Breakout Board 3D View', type: 'dark', cover: true}
-      //{ src: '/CSR_Communications_Layout.png', alt: 'Robot Control Breakout Board PCB Layout', type: 'dark', cover: true},
-      //{ src: '/CSR_Communications_Schematic.png', alt: 'Robot Control Breakout Board Schematic', type: 'dark', wide: true },
-    ],
-  },
-  {
     id: 'imu-tracker',
     title: 'IMU Pitch, Roll & Yaw Calculator',
     heading: 'IMU Orientation Calculator',
     desc: 'C++ firmware that fuses MPU-6050 IMU data to calculate orientation.',
-    tech: ['ESP32', 'C++', 'I2C', 'Sensor Fusion'],
+    tech: ['ESP32', 'C++', 'I2C', 'Python'],
     repo: 'https://github.com/mofeomolade/IMU-Orientation-Tracker',
     highlights: [
       ['Firmware Development', 'Developed C++ firmware for ESP32 to parse MPU-6050 IMU accelerometer and gyroscope registers via I2C.'],
       ['Signal Processing', 'Applied a sensor fusion Euler complementary filter and deadband filter to account for angular integration drift.'],
       ['Mathematical Modeling', 'Applied trigonometry to accelerometer vectors and fused with gyroscope readings to calculate pitch and roll.'],
+      ['Visualization', 'Streamed telemetry over UART to a Python graphical interface to render 3D flight attitude and orientation.'],
+
     ],
     links: [
       ['Demonstration Video', 'https://drive.google.com/file/d/1bCM1_0JE25q_tLVzCbwgkk_Z00zFMDHI/view?usp=sharing'],
     ],
-    gallery: [],
+    gallery: [{ src: '/IMU_breadboard.jpg', caption: 'Breadboard prototype', alt: 'ESP32 + IMU on breadboard', type: 'photo', fill: true}],
   },
   {
     id: 'hud',
@@ -291,8 +275,8 @@ export const projects = [
       ['Demonstration Video', 'https://drive.google.com/file/d/1bXU-WOvz6mYj_RZd-T5iZxPks0LKFZjZ/view?usp=sharing'],
     ],
     gallery: [
-      { src: '/hud-breadboard.jpg', alt: 'Breadboard Prototype', type: 'photo', cover: true },
-      { src: '/HUD-driver-view.jpg', alt: 'Driver View Dashboard', type: 'photo', cover:true }
+      { src: '/hud-breadboard.jpg', caption: 'Breadboard prototype', alt: 'Breadboard Prototype', type: 'photo', cover: true },
+      { src: '/HUD-driver-view.jpg', caption: 'HUD in driver view', alt: 'Driver View Dashboard', type: 'photo', cover:true }
       /*{ src: '/HUD-Schematic.png', alt: 'HUD Schematic', type: 'photo', wide: true },*/
     ],
   },
@@ -321,8 +305,8 @@ export const projects = [
       ['Telemetry', 'Integrated IMU, GNSS, and LiDAR sensors to stream real-time positional and spatial data over UART and I2C.'],
     ],
     gallery: [
-      { src: '/mini-rover-prototype.png', alt: 'Mini Rover Prototype', type: 'photo', fill: true },
-      { src: '/mini-rover-block-diagram.png', alt: 'Mini Rover Block Diagram', type: 'light', cover: true},
+      { src: '/mini-rover-prototype.png', caption: 'Rover prototype', alt: 'Mini Rover Prototype', type: 'photo', fill: true },
+      { src: '/mini-rover-block-diagram.png', caption: 'System block diagram', alt: 'Mini Rover Block Diagram', type: 'light', cover: true},
     ],
   },
 ];
