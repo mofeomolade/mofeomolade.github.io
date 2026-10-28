@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon, FileTextIcon, GithubIcon, PlayIcon } from '../components/icons';
-import Gallery from '../components/Gallery';
+import ProjectGallery from '../components/ProjectGallery';
 import { BulletPoint, SectionLabel, Tag, btnGhost, cardClass } from '../components/ui';
 import { getProject, projects } from '../data/content';
 import NotFound from './NotFound';
@@ -72,6 +72,8 @@ export default function ProjectDetail() {
 
   const hasGallery = project.gallery.length > 0;
   const hasDecisions = project.decisions?.length > 0;
+  const hasLinks = project.links?.length > 0 || Boolean(project.repo);
+  const improvements = project.improvements || [];
   // Videos first, then documents, then code
   const links = [...(project.links || [])].sort(([al, au], [bl, bu]) => kindOf(al, au).rank - kindOf(bl, bu).rank);
 
@@ -81,23 +83,28 @@ export default function ProjectDetail() {
         <Link to="/projects" className="inline-flex items-center gap-2 text-sm font-mono text-neutral-500 hover:text-cyan-400 transition-colors mb-5">
           <ArrowLeftIcon size={16} /> All projects
         </Link>
-        <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight max-w-3xl">{project.heading}</h1>
-        <p className="text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl mt-3">{project.desc}</p>
+        <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight max-w-3xl">{project.heading}</h1>
       </div>
 
       {/* Top row: gallery on the left, videos / links / tools on the right */}
-      <div className="grid lg:grid-cols-5 gap-6 items-start">
+      <div className="grid lg:grid-cols-5 gap-6">
         {hasGallery && (
-          <div className="lg:col-span-3">
-            <Gallery key={project.id} items={project.gallery} alwaysCaption />
+          <div className="lg:col-span-3 lg:relative lg:min-h-[26rem]">
+            <ProjectGallery key={project.id} items={project.gallery} />
           </div>
         )}
 
         <aside
-          aria-label="Project resources"
-          className={hasGallery ? 'lg:col-span-2 flex flex-col gap-4' : 'lg:col-span-5 grid md:grid-cols-2 gap-4 items-start'}
+          aria-label="Project overview and resources"
+          className={hasGallery ? 'lg:col-span-2 flex flex-col gap-4' : 'lg:col-span-5 grid md:grid-cols-2 gap-4'}
         >
-          {(links.length > 0 || project.repo) && (
+          {/* Overview takes up any spare height so the right column always ends level with the gallery */}
+          <section className={`${cardClass} flex-1 ${hasGallery ? '' : 'md:col-span-2'}`}>
+            <SectionLabel className="mb-4">Overview</SectionLabel>
+            <p className="text-neutral-300 text-sm md:text-base leading-relaxed">{project.desc}</p>
+          </section>
+
+          {hasLinks && (
             <section className="flex flex-col gap-3">
               <SectionLabel>Videos &amp; Links</SectionLabel>
               {links.map(([label, url]) => <ResourceLink key={url} label={label} url={url} />)}
@@ -109,35 +116,50 @@ export default function ProjectDetail() {
             </section>
           )}
 
-          <section className={cardClass}>
+          <section className={`${cardClass} ${!hasGallery && !hasLinks ? 'md:col-span-2' : ''}`}>
             <SectionLabel className="mb-4">Tools</SectionLabel>
             <div className="flex flex-wrap gap-2">{project.tech.map((t) => <Tag key={t}>{t}</Tag>)}</div>
           </section>
         </aside>
       </div>
 
-      <div className={`grid gap-6 items-start ${hasDecisions ? 'lg:grid-cols-2' : ''}`}>
-        {hasDecisions && (
-          <section className={cardClass}>
-            <SectionLabel className="mb-6">Key Design Choices</SectionLabel>
-            <ul className="divide-y divide-white/[0.06]">
-              {project.decisions.map((item, i) => <Decision key={item.title} item={item} n={i} />)}
-            </ul>
-          </section>
-        )}
-
+      {hasDecisions && (
         <section className={cardClass}>
-          <SectionLabel className="mb-6">Technical Highlights</SectionLabel>
-          <ul className="space-y-5 text-neutral-300 text-sm md:text-base">
-            {project.highlights.map(([label, text]) => (
-              <li key={label} className="flex gap-3">
-                <BulletPoint />
-                <span><strong className="text-white block mb-1 font-medium">{label}</strong>{text}</span>
-              </li>
-            ))}
+          <SectionLabel className="mb-6">Key Design Choices</SectionLabel>
+          <ul className="divide-y divide-white/[0.06]">
+            {project.decisions.map((item, i) => <Decision key={item.title} item={item} n={i} />)}
           </ul>
         </section>
-      </div>
+      )}
+
+      <section className={cardClass}>
+        <SectionLabel className="mb-6">Technical Highlights</SectionLabel>
+        <ul className="space-y-5 text-neutral-300 text-sm md:text-base">
+          {project.highlights.map(([label, text]) => (
+            <li key={label} className="flex gap-3">
+              <BulletPoint />
+              <span><strong className="text-white block mb-1 font-medium">{label}</strong>{text}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {improvements.length > 0 && (
+        <section className={cardClass}>
+          <SectionLabel className="mb-6">Future Improvements</SectionLabel>
+          <ul className="space-y-4 text-neutral-300 text-sm md:text-base">
+            {improvements.map((it) => {
+              const [label, text] = Array.isArray(it) ? it : [null, it];
+              return (
+                <li key={label || text} className="flex gap-3">
+                  <BulletPoint />
+                  <span>{label && <strong className="text-white block mb-1 font-medium">{label}</strong>}{text}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
 
       <nav className="grid grid-cols-2 gap-4 font-mono text-sm" aria-label="More projects">
         {prev ? (

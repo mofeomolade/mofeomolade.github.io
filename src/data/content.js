@@ -148,6 +148,7 @@ export const projects = [
     heading: '24V-5V Asynchronous Buck Converter',
     status: 'In progress',
     desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
+    repo: 'https://github.com/mofeomolade/6S-LiPo-Buck',
     tech: ['Altium', 'LTspice'],
     decisions: [
       {

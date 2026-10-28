@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from './icons';
 import { asset } from '../utils';
 
-const url = (src) => encodeURI(asset(src));
+export const url = (src) => encodeURI(asset(src));
 
 // Diagrams drawn for white paper get a light backing so transparent PNGs stay readable
 const backing = (item) => (item.type === 'light' ? 'bg-neutral-200' : 'bg-[#080c14]');
@@ -64,21 +64,12 @@ export function Lightbox({ items, index, onIndex, onClose }) {
 const tile =
   'group relative block overflow-hidden rounded-xl border border-white/10 cursor-pointer p-0 transition-colors hover:border-cyan-500/50';
 
-/*
- * Photo grid: the first image is large, the next three are tiles, and "+N" covers the rest.
- * Clicking any tile opens the viewer. `alwaysCaption` keeps every tag visible (project pages);
- * otherwise tile tags show on hover (home page). Item `pos` sets the crop focus; `fit: 'contain'`
- * shows a whole image without cropping.
- */
-export default function Gallery({ items, alwaysCaption = false }) {
+/* Home-page photo grid: one large image, three tiles, and "+N" over the last tile for the rest. */
+export default function Gallery({ items }) {
   const [open, setOpen] = useState(null);
   const shown = items.slice(0, 4);
   const extra = items.length - shown.length;
   if (!shown.length) return null;
-
-  // Tiles after the first share the row: 1 -> full width, 2 -> halves, 3 -> thirds
-  const rest = shown.length - 1;
-  const small = rest === 1 ? 'col-span-6 aspect-[16/7]' : rest === 2 ? 'col-span-3 aspect-[4/3]' : 'col-span-2 aspect-square';
 
   return (
     <>
@@ -86,13 +77,12 @@ export default function Gallery({ items, alwaysCaption = false }) {
         {shown.map((item, i) => {
           const big = i === 0;
           const more = i === shown.length - 1 && extra > 0;
-          const showCaption = big || alwaysCaption;
           return (
             <button
               key={item.src}
               onClick={() => setOpen(i)}
               aria-label={`View photo: ${item.caption || item.alt}`}
-              className={`${tile} ${backing(item)} ${big ? 'col-span-6 aspect-[16/10]' : small} reveal`}
+              className={`${tile} ${backing(item)} ${big ? 'col-span-6 aspect-[16/10]' : 'col-span-2 aspect-square'} reveal`}
               style={{ '--i': i + 1 }}
             >
               <img
@@ -101,11 +91,11 @@ export default function Gallery({ items, alwaysCaption = false }) {
                 loading={big ? 'eager' : 'lazy'}
                 decoding="async"
                 fetchPriority={big ? 'high' : 'auto'}
-                className={`absolute inset-0 w-full h-full ${item.fit === 'contain' ? 'object-contain' : 'object-cover'} transition-transform duration-500 group-hover:scale-105`}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 style={item.pos ? { objectPosition: item.pos } : undefined}
               />
               <span
-                className={`absolute inset-x-0 bottom-0 px-3 pb-2.5 pt-8 text-left font-mono text-[11px] tracking-wide text-white bg-gradient-to-t from-black/80 to-transparent transition-opacity ${showCaption ? '' : 'opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100'}`}
+                className={`absolute inset-x-0 bottom-0 px-3 pb-2.5 pt-8 text-left font-mono text-[11px] tracking-wide text-white bg-gradient-to-t from-black/80 to-transparent transition-opacity ${big ? '' : 'opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100'}`}
               >
                 {item.caption || item.alt}
               </span>
