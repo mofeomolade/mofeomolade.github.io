@@ -175,7 +175,9 @@ export const projects = [
     gallery: [
       { src: '/buck_power_stage.png', caption: 'Power stage schematic', alt: 'Power Stage', type: 'light', cover: true },
       { src: '/buck_control_stage.png', caption: 'Control stage schematic', alt: 'Control Stage', type: 'light', cover: true},
-      { src: '/buck_soft_start.png', caption: 'Soft-start waveform', alt: 'Soft Start', type: 'dark', wide: true},
+      { src: '/buck_25V.png', caption: '25.2 V soft-start', alt: '25.2 V closed loop sim', type: 'dark', wide: true},
+      { src: '/buck_20V.png', caption: '25.2 V soft-start', alt: '20 V closed loop sim', type: 'dark', wide: true},
+      { src: '/buck_18V.png', caption: '18 V soft-start', alt: '18 V closed loop sim', type: 'dark', wide: true},
     ],
   },
   {
