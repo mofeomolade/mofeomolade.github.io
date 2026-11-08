@@ -106,12 +106,12 @@ export const projects = [
       {
         title: "Dev board shield vs. bare MCU",
         chose: "A development board with my PCB built as a shield around it.",
-        why: "The deadline for a working MVP was tight. Using a dev board took away the work of routing the MCU and implementing CAN controller, ADC, etc.",
+        why: "The deadline for a working MVP was tight. Using a dev board took away the work of routing the MCU and implementing CAN controller, ADC, etc. This allowed me to get a working prototype finished before the end of my internship term. ",
       },
       {
         title: "Choosing the MCU",
         chose: "Teensy 4.1.",
-        why: "Picked mostly based on pinout. I needed enough analog pins for current sensing on every half-bridge IC, enough PWM-capable pins to drive ENA pins, and enough general digital I/O.",
+        why: "Picked mostly based on pinout. I needed enough analog pins for current sensing on every half-bridge IC, enough PWM-capable pins to drive ENA pins, and enough general digital I/O. Teensy 4.1 provided a very flexible pinout with many PWM and analog pins as well as a fast processor.",
       },
       {
         title: "Thermal management",
@@ -133,9 +133,9 @@ export const projects = [
       ['Test Firmware', 'https://github.com/mofeomolade/Motor-Driver-Testing']
     ],
     gallery: [
-      { src: '/motor_controller_top.jpg', caption: 'PCB top view', alt: 'Motor Controller Top View', type: 'photo', cover: true },
-      { src: '/motor_controller_bottom.jpg', caption: 'PCB bottom view', alt: 'Motor Controller Bottom View', type: 'photo', cover: true },
-      { src: '/updated-motor-driver-module-layout.png', caption: 'PCB layout', alt: 'Motor Driver Layout', type: 'photo', wide: true },
+      //{ src: '/motor_controller_top.jpg', caption: 'PCB top view', alt: 'Motor Controller Top View', type: 'photo', cover: true },
+      //{ src: '/motor_controller_bottom.jpg', caption: 'PCB bottom view', alt: 'Motor Controller Bottom View', type: 'photo', cover: true },
+      //{ src: '/updated-motor-driver-module-layout.png', caption: 'PCB layout', alt: 'Motor Driver Layout', type: 'photo', wide: true },
       //{ src: '/motor-driver-module-schematic.png', alt: 'Motor Driver Module Schematic', type: 'photo', wide: true },
       //{ src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', cover: true },
       { src: '/motor_controller_testing1.jpg', caption: 'Hardware test setup 1', alt: 'Motor Controller Testing Setup 1', type: 'photo', cover: true },
@@ -144,8 +144,8 @@ export const projects = [
   },
   {
     id: 'buck-converter',
-    title: '24V-5V Buck Converter',
-    heading: '24V-5V Asynchronous Buck Converter',
+    title: '5V Buck Converter',
+    heading: '5V Asynchronous Buck Converter',
     status: 'In progress',
     desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
     repo: 'https://github.com/mofeomolade/6S-LiPo-Buck',
@@ -153,13 +153,28 @@ export const projects = [
     decisions: [
       {
         title: "Discrete components vs. a controller IC",
-        chose: "Designed the power and control stages from scratch with discrete components.",
-        why: "To build a deep understanding of buck topology fundamentals.",
+        chose: "Designed the power and control stages from scratch with discrete components",
+        why: "I want to gain a deep understanding of power electronics fundamentals, so using a controller IC would rob me of key learning. Opting for discrete components allows me to learn how a buck converter works down to each individual componenet of the power and control stages.",
+      },
+      {
+        title: "Switching frequency",
+        chose: "100 kHz",
+        why: "When selecting fsw, I had to keep in mind what other components it would affect and settled on 100 kHz as a good balance between competing interests. It most directly impacts inductor sizing, with lower frequency requiring higher inductance. Also, inductor behaviour is documented at specific frequencies in datasheets, with 100 kHz being very common, allowing me to make an informed decision when picking. Another aspect impacted by fsw is the control stage. Since I designed it from discrete analog components, I had to keep in mind frequency limits. I ended up selecting modern CMOS components with frequency limits well beyond 100 kHz, but initially I was considering using older jellybean components, which are often BJT based and have lower maximum frequencies.",
       },
       {
         title: "Voltage mode vs. current mode control",
-        chose: "Voltage mode.",
-        why: "Voltage mode control uses a simple feedback loop compared to the nested feedback structure required for current mode control. ",
+        chose: "Voltage mode",
+        why: "Voltage mode control uses a simple feedback loop compared to the nested feedback structure required for current mode control. Since I lack analog circuit and control theory background (as of the time of this project), I prefer the simpler option.",
+      },
+      {
+        title: "Analog signal integrity",
+        chose: "Physically isolated analog control stage from power stage",
+        why: "The 100 kHz switching node can affect sensitive analog components, so I clustered these parts in the bottom right of the board away from the switching node. This physical distance helps to minimize the impact of high frequency switching on the control loop.",
+      },
+      {
+        title: "2-layer vs. 4-layer PCB stackup",
+        chose: "4-layer",
+        why: "Signal integrity is crucial, so maintaining an unobstructed GND return path on an adjaecent layer for every trace is important. Routing on 4 layers makes it significantly easier to achieve this, and the additional cost isn't a factor. Thermal regulation is also very important for a buck converter in continuous operation. With a 4-layer board, I was able to have two dedicated GND planes (layers 2 & 4). These large copper pours, paired with GND stitching, help with thermal dissipation.",
       },
     ],
     highlights: [
@@ -173,11 +188,15 @@ export const projects = [
       ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
     ],
     gallery: [
-      { src: '/buck_power_stage.png', caption: 'Power stage schematic', alt: 'Power Stage', type: 'light', cover: true },
-      { src: '/buck_control_stage.png', caption: 'Control stage schematic', alt: 'Control Stage', type: 'light', cover: true},
+      { src: '/buck_3d_view.png', caption: '3D view', alt: '3D view', type: 'light', cover: true },
+      { src: '/buck_layout_rev1.png', caption: 'Initial layout', alt: 'Initial layout', type: 'light', cover: true },
+      { src: '/buck_power_stage.png', caption: 'Power stage schematic', alt: 'Power stage', type: 'light', cover: true },
+      { src: '/buck_control_stage.png', caption: 'Control stage schematic', alt: 'Control stage', type: 'light', cover: true},
       { src: '/buck_25V.png', caption: '25.2 V soft-start', alt: '25.2 V closed loop sim', type: 'dark', wide: true},
-      { src: '/buck_20V.png', caption: '25.2 V soft-start', alt: '20 V closed loop sim', type: 'dark', wide: true},
+      //{ src: '/buck_20V.png', caption: '20 V soft-start', alt: '20 V closed loop sim', type: 'dark', wide: true},
       { src: '/buck_18V.png', caption: '18 V soft-start', alt: '18 V closed loop sim', type: 'dark', wide: true},
+      { src: '/vramp.png', caption: '555 sawtooth wave', alt: '555 sawtooth wave', type: 'dark', wide: true},
+      { src: 'vramp_fft.png', caption: 'Sawtooth wave FFT', alt: 'Sawtooth wave FFT', type: 'dark', wide: true},
     ],
   },
   {
