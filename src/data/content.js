@@ -12,10 +12,9 @@ export const experience = [
     location: 'Vancouver, BC',
     summary: 'HV battery hardware for an FSAE Electric race car',
     points: [
-      'Spearheading hardware design and system integration for high-voltage battery module daughterboards and thermistor sensing boards across the 600V tractive battery pack.',
-      'Designing dual-channel, bidirectional digital isolation circuitry isolating DS18B20 E-Meter temperature telemetry from battery ground domains to adhere to FSAE safety regulations.',
-      'Transitioning cell balancing from internal ADBMS switching to discrete external MOSFETs to boost thermal dissipation and passive balancing efficiency while improving repairability.',
-      'Collaborating closely with the BMS firmware team to design architecture for bidirectional 1-Wire MCU communication and redesigning analog thermistor voltage sensing paths by eliminating Op-amp buffering circuits.',
+      'Executing schematic revisions and board-level updates for modular BMS daughterboards across a 588V tractive accumulator, integrating the ADBMS6830B with isoSPI communication and NTC temperature sensing arrays.',
+      'Transitioning cell balancing from internal ADBMS switching to discrete external MOSFETs, increasing balancing current to 500 mA to reduce pack equalizing time by 60%.',
+      'Performing SPICE simulations to validate ADMBS open-wire check behaviour and quantify leakage currents in cell buffer circuitry.',
     ],
   },
   {
@@ -80,7 +79,7 @@ export const languages = [
 export const gallery = [
   { src: '/PCB_Bringup.jpg', alt: 'Soldering a PCB at the lab bench', caption: 'PCB bring-up', pos: '35% 60%' },
   { src: '/Robot_Testing.jpg', alt: 'Testing electronics on a robot with a multimeter', caption: 'Robot testing', pos: '60% 50%' },
-  { src: '/motor_controller_top.jpg', alt: 'Custom 4-channel motor controller PCB', caption: 'Motor controller PCB' },
+  //{ src: '/motor_controller_top.jpg', alt: 'Custom 4-channel motor controller PCB', caption: 'Motor controller PCB' },
   { src: '/motor_controller_testing1.jpg', alt: 'Motor controller on the test bench', caption: 'Hardware testing' },
   { src: '/motor_controller_testing2.jpg', alt: 'Motor controller test setup', caption: 'Bench setup' },
   { src: '/HUD-driver-view.jpg', alt: 'Car HUD speedometer on the dashboard', caption: 'Car HUD speedometer' },
@@ -96,7 +95,65 @@ export const gallery = [
  *  photo / dark = black backing, light = light-grey backing for diagrams drawn for white paper
  */
 export const projects = [
-    {
+  {
+    id: 'buck-converter',
+    title: '5V Buck Converter',
+    heading: '5V Asynchronous Buck Converter',
+    status: 'In progress',
+    desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
+    repo: 'https://github.com/mofeomolade/6S-LiPo-Buck',
+    tech: ['Altium', 'LTspice'],
+    decisions: [
+      {
+        title: "Discrete components vs. a controller IC",
+        chose: "Designed the power and control stages from scratch with discrete components",
+        why: "I want to gain a deep understanding of power electronics fundamentals, so using a controller IC would rob me of key learning. Opting for discrete components allows me to learn how a buck converter works down to each individual componenet of the power and control stages.",
+      },
+      {
+        title: "Switching frequency",
+        chose: "100 kHz",
+        why: "When selecting fsw, I had to keep in mind what other components it would affect and settled on 100 kHz as a good balance between competing interests. It most directly impacts inductor sizing, with lower frequency requiring higher inductance. Also, inductor behaviour is documented at specific frequencies in datasheets, with 100 kHz being very common, allowing me to make an informed decision when picking. Another aspect impacted by fsw is the control stage. Since I designed it from discrete analog components, I had to keep in mind frequency limits. I ended up selecting modern CMOS components with frequency limits well beyond 100 kHz, but initially I was considering using older jellybean components, which are often BJT based and have lower maximum frequencies.",
+        tradeoffs: "A lower switching frequency requires a larger inductor which takes up more space on the board. Increases board size and manufacturing cost."
+      },
+      {
+        title: "Voltage mode vs. current mode control",
+        chose: "Voltage mode",
+        why: "Voltage mode control uses a simple feedback loop compared to the nested feedback structure required for current mode control. Since I lack analog circuit and control theory background (as of the time of this project), I prefer the simpler option.",
+      },
+      {
+        title: "Analog signal integrity",
+        chose: "Physically isolated analog control stage from power stage",
+        why: "The 100 kHz switching node can affect sensitive analog components, so I clustered these parts in the bottom right of the board away from the switching node. This physical distance helps to minimize the impact of high frequency switching on the control loop.",
+      },
+      {
+        title: "2-layer vs. 4-layer PCB stackup",
+        chose: "4-layer",
+        why: "Signal integrity is crucial, so maintaining an unobstructed GND return path on an adjaecent layer for every trace is important. Routing on 4 layers makes it significantly easier to achieve this, and the additional cost isn't a factor. Thermal regulation is also very important for a buck converter in continuous operation. With a 4-layer board, I was able to have two dedicated GND planes (layers 2 & 4). These large copper pours, paired with GND stitching, help with thermal dissipation.",
+      },
+    ],
+    highlights: [
+      ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
+      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 100 kHz, driving an LM334 constant-current source into a TLC555 timer to generate a linear sawtooth ramp fed into an MCP6561 comparator.'],
+      [ 'Compensator', 'Developed an active Type III compensation network using an MCP6021 Op-amp to place double zeros compensating the 1.57 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
+      ['Transient Response', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 10 mA.'],
+      ['PCB Layout', 'Routing a compact 4-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
+    ],
+    links: [
+      ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
+    ],
+    gallery: [
+      { src: '/buck_3d_view.png', caption: '3D view', alt: '3D view', type: 'light', cover: true },
+      { src: '/buck_layout_rev1.png', caption: 'Initial layout', alt: 'Initial layout', type: 'light', cover: true },
+      { src: '/buck_power_stage.png', caption: 'Power stage schematic', alt: 'Power stage', type: 'light', cover: true },
+      { src: '/buck_control_stage.png', caption: 'Control stage schematic', alt: 'Control stage', type: 'light', cover: true},
+      { src: '/buck_25V.png', caption: '25.2 V soft-start', alt: '25.2 V closed loop sim', type: 'dark', wide: true},
+      //{ src: '/buck_20V.png', caption: '20 V soft-start', alt: '20 V closed loop sim', type: 'dark', wide: true},
+      { src: '/buck_18V.png', caption: '18 V soft-start', alt: '18 V closed loop sim', type: 'dark', wide: true},
+      { src: '/vramp.png', caption: '555 sawtooth wave', alt: '555 sawtooth wave', type: 'dark', wide: true},
+      { src: 'vramp_fft.png', caption: 'Sawtooth wave FFT', alt: 'Sawtooth wave FFT', type: 'dark', wide: true},
+    ],
+  },
+  {
     id: 'motor-controller',
     title: '4-Channel Motor Controller',
     heading: 'Custom 4-Channel Motor Controller',
@@ -140,63 +197,6 @@ export const projects = [
       //{ src: '/motor-driver-h-bridge-schematic.png', alt: 'Motor Driver H-Bridge Schematic', type: 'photo', cover: true },
       { src: '/motor_controller_testing1.jpg', caption: 'Hardware test setup 1', alt: 'Motor Controller Testing Setup 1', type: 'photo', cover: true },
       { src: '/motor_controller_testing2.jpg', caption: 'Hardware test setup 2', alt: 'Motor Controller Testing Setup 2', type: 'photo', cover: true },
-    ],
-  },
-  {
-    id: 'buck-converter',
-    title: '5V Buck Converter',
-    heading: '5V Asynchronous Buck Converter',
-    status: 'In progress',
-    desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
-    repo: 'https://github.com/mofeomolade/6S-LiPo-Buck',
-    tech: ['Altium', 'LTspice'],
-    decisions: [
-      {
-        title: "Discrete components vs. a controller IC",
-        chose: "Designed the power and control stages from scratch with discrete components",
-        why: "I want to gain a deep understanding of power electronics fundamentals, so using a controller IC would rob me of key learning. Opting for discrete components allows me to learn how a buck converter works down to each individual componenet of the power and control stages.",
-      },
-      {
-        title: "Switching frequency",
-        chose: "100 kHz",
-        why: "When selecting fsw, I had to keep in mind what other components it would affect and settled on 100 kHz as a good balance between competing interests. It most directly impacts inductor sizing, with lower frequency requiring higher inductance. Also, inductor behaviour is documented at specific frequencies in datasheets, with 100 kHz being very common, allowing me to make an informed decision when picking. Another aspect impacted by fsw is the control stage. Since I designed it from discrete analog components, I had to keep in mind frequency limits. I ended up selecting modern CMOS components with frequency limits well beyond 100 kHz, but initially I was considering using older jellybean components, which are often BJT based and have lower maximum frequencies.",
-      },
-      {
-        title: "Voltage mode vs. current mode control",
-        chose: "Voltage mode",
-        why: "Voltage mode control uses a simple feedback loop compared to the nested feedback structure required for current mode control. Since I lack analog circuit and control theory background (as of the time of this project), I prefer the simpler option.",
-      },
-      {
-        title: "Analog signal integrity",
-        chose: "Physically isolated analog control stage from power stage",
-        why: "The 100 kHz switching node can affect sensitive analog components, so I clustered these parts in the bottom right of the board away from the switching node. This physical distance helps to minimize the impact of high frequency switching on the control loop.",
-      },
-      {
-        title: "2-layer vs. 4-layer PCB stackup",
-        chose: "4-layer",
-        why: "Signal integrity is crucial, so maintaining an unobstructed GND return path on an adjaecent layer for every trace is important. Routing on 4 layers makes it significantly easier to achieve this, and the additional cost isn't a factor. Thermal regulation is also very important for a buck converter in continuous operation. With a 4-layer board, I was able to have two dedicated GND planes (layers 2 & 4). These large copper pours, paired with GND stitching, help with thermal dissipation.",
-      },
-    ],
-    highlights: [
-      ['Power Architecture', 'Designed an asynchronous buck converter stepping down an 18V–25.2V 6S LiPo input to 5V 100-500 mA at 85% efficiency, maintaining Continuous Conduction Mode across all operating loads.'],
-      ['PWM Controller', 'Implemented an analog voltage-mode PWM controller at 100 kHz, driving an LM334 constant-current source into a TLC555 timer to generate a linear sawtooth ramp fed into an MCP6561 comparator.'],
-      [ 'Compensator', 'Developed an active Type III compensation network using an MCP6021 Op-amp to place double zeros compensating the 1.57 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
-      ['Transient Response', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 10 mA.'],
-      ['PCB Layout', 'Routing a compact 4-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
-    ],
-    links: [
-      ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
-    ],
-    gallery: [
-      { src: '/buck_3d_view.png', caption: '3D view', alt: '3D view', type: 'light', cover: true },
-      { src: '/buck_layout_rev1.png', caption: 'Initial layout', alt: 'Initial layout', type: 'light', cover: true },
-      { src: '/buck_power_stage.png', caption: 'Power stage schematic', alt: 'Power stage', type: 'light', cover: true },
-      { src: '/buck_control_stage.png', caption: 'Control stage schematic', alt: 'Control stage', type: 'light', cover: true},
-      { src: '/buck_25V.png', caption: '25.2 V soft-start', alt: '25.2 V closed loop sim', type: 'dark', wide: true},
-      //{ src: '/buck_20V.png', caption: '20 V soft-start', alt: '20 V closed loop sim', type: 'dark', wide: true},
-      { src: '/buck_18V.png', caption: '18 V soft-start', alt: '18 V closed loop sim', type: 'dark', wide: true},
-      { src: '/vramp.png', caption: '555 sawtooth wave', alt: '555 sawtooth wave', type: 'dark', wide: true},
-      { src: 'vramp_fft.png', caption: 'Sawtooth wave FFT', alt: 'Sawtooth wave FFT', type: 'dark', wide: true},
     ],
   },
   {
