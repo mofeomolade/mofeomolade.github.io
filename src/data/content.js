@@ -202,32 +202,7 @@ export const projects = [
       { src: '/motor_controller_testing2.jpg', caption: 'Hardware test setup 2', alt: 'Motor Controller Testing Setup 2', type: 'photo', cover: true },
     ],
   },
-  {
-    id: 'pid-robot',
-    title: 'PID Self-Balancing Robot',
-    heading: 'PID Self-Balancing Robot',
-    desc: 'Self-balancing robot on an ESP32-C3 with a from-scratch IMU driver and PID control.',
-    tech: ['ESP32', 'C/C++', 'I2C'],
-    decisions: [
-      {
-        title: "ESP32 vs. Arduino Nano",
-        chose: "ESP32.",
-        why: "A faster clock and a 32-bit processor give a faster PID loop, which makes the robot more responsive.",
-      },
-    ],
-    repo: 'https://github.com/mofeomolade/PID-Self-Balancing-Robot',
-    highlights: [
-      ['Driver Development', 'Developed a standalone device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.'],
-      ['Sensor Fusion', 'Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.'],
-      ['Control Systems', 'Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.'],
-      ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive L298N dual H-bridges, converting raw PID outputs into directional motor commands.'],
-    ],
-    gallery: [
-      { src: '/PID_Robot_Schematic.png', caption: 'Circuit schematic', alt: 'PID Robot Schematic', type: 'light', cover: true },
-      { src: '/PID_Robot_Standing.png', caption: 'Assembled robot standing', alt: 'PID Robot Standing', type: 'photo', fill: true},
-    ],
-  },
-  {
+   {
     id: 'battery-pack-boards',
     title: 'Battery Module & Thermistor Boards',
     heading: 'Battery Module & Thermistor Boards',
@@ -263,7 +238,41 @@ export const projects = [
       ['Cell Balancing', 'Moving cell balancing from internal ADBMS switching to discrete external MOSFETs for better thermal dissipation, balancing efficiency and repairability.'],
       ['Firmware Collaboration', 'Working with the BMS firmware team on bidirectional 1-Wire MCU communication and removing the op-amp buffering from the analog thermistor sensing path.'],
     ],
-    gallery: [],
+    links: [
+      ['Planning Document', "https://drive.google.com/file/d/14X7MDwbFPMXmahca73Vlu6iIVlCnqPm_/view?usp=sharing"]
+    ],
+    gallery: [
+      { src: '/module_block_diagram.png', caption: 'Block diagram', alt: 'dlock Diagram', type: 'light', cover: true },
+      { src: '/module_ADBMS_schematic.png', caption: 'ADBMS schematic', alt: 'ADMBS schematic', type: 'light', cover: true },
+      { src: '/module_buffer_schematic.png', caption: 'Buffer circuit schematic', alt: 'Buffer circuit schematic', type: 'light', cover: true },
+      { src: '/module_filter_schematic.png', caption: 'Filter circuit schematic', alt: 'Filter circuit schematic', type: 'light', cover: true },
+      { src: '/module_power_schematic.png', caption: 'Linear regulator schematic', alt: 'Linear regulator schematic', type: 'light', cover: true },
+    ],
+  },
+  {
+    id: 'pid-robot',
+    title: 'PID Self-Balancing Robot',
+    heading: 'PID Self-Balancing Robot',
+    desc: 'Self-balancing robot on an ESP32-C3 with a from-scratch IMU driver and PID control.',
+    tech: ['ESP32', 'C/C++', 'I2C'],
+    decisions: [
+      {
+        title: "ESP32 vs. Arduino Nano",
+        chose: "ESP32",
+        why: "A faster clock and a 32-bit processor give a faster PID loop, which makes the robot more responsive.",
+      },
+    ],
+    repo: 'https://github.com/mofeomolade/PID-Self-Balancing-Robot',
+    highlights: [
+      ['Driver Development', 'Developed a standalone device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.'],
+      ['Sensor Fusion', 'Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.'],
+      ['Control Systems', 'Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.'],
+      ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive L298N dual H-bridges, converting raw PID outputs into directional motor commands.'],
+    ],
+    gallery: [
+      { src: '/PID_Robot_Schematic.png', caption: 'Circuit schematic', alt: 'PID Robot Schematic', type: 'light', cover: true },
+      { src: '/PID_Robot_Standing.png', caption: 'Assembled robot standing', alt: 'PID Robot Standing', type: 'photo', fill: true},
+    ],
   },
   {
     id: 'electric-skateboard',
