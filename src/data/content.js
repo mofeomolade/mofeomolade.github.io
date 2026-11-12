@@ -12,9 +12,11 @@ export const experience = [
     location: 'Vancouver, BC',
     summary: 'HV battery hardware for an FSAE Electric race car',
     points: [
-      'Executing schematic revisions and board-level updates for modular BMS daughterboards across a 588V tractive accumulator, integrating the ADBMS6830B with isoSPI communication and NTC temperature sensing arrays.',
-      'Transitioning cell balancing from internal ADBMS switching to discrete external MOSFETs, increasing balancing current to 500 mA to reduce pack equalizing time by 60%.',
-      'Performing SPICE simulations to validate ADMBS open-wire check behaviour and quantify leakage currents in cell buffer circuitry.',
+      'Working with a multidisciplinary team of 100+ students to design, build, and race an FSAE Electric race car.',
+      'Executing schematic and layout revisions for BMS daughterboard PCBAs across a 588V tractive accumulator, integrating the ADBMS6830B battery cell monitor to measure pack voltage, temperature, and balance cells.',
+      'Transitioning cell balancing from internal ADBMS switching to discrete external MOSFETs, increasing balancing current to 500 mA to reduce pack equalizing time by 30%.',
+      'Performing SPICE simulations to validate ADMBS open wire check behaviour and quantify quiescent leakage currents caused by cell buffer circuitry',
+      'Leading PCBA bring-up and hardware verification across new revisions, validating power rails, high-voltage isolation, and isoSPI communication integrity under varying accumulator loads'
     ],
   },
   {
@@ -24,11 +26,11 @@ export const experience = [
     location: 'Calgary, AB',
     summary: 'LV electronics for drones and robots',
     points: [
-      'Owned the complete design lifecycle of a 4-channel motor controller PCB to drive 12V actuators at 3A.',
-      'Designed system architecture around Teensy 4.1 supporting 150 W continuous power draw, multichannel motor control, CAN communication, analog current sensing, Hall-effect positioning, and operation on 240kV power lines.',
-      'Performed high-density routing for an 8-layer PCB within a strict 80 mm x 54 mm package, implementing orthogonal routing, dedicated power and ground planes, ground stitching, and 2.1 MHz switching node shielding.',
-      'Engineered a power-loss detection circuit and falling-edge ISR using a voltage divider and bulk capacitor, guaranteeing non-volatile EEPROM backup of actuator positions within 5 ms of power disconnection.',
-      'Built a test bench and developed C++ firmware to validate PCB function, verifying MCU pinouts, voltage regulation, inrush current stabilization, CAN signal integrity, and bidirectional actuation under dynamic loads.',
+      'Owned the complete design life cycle of an 8-layer 4-channel motor controller PCBA to drive 12V actuators at 3A, replacing off the shelf Polulu drivers to improve reliability and integration ease for future robot developments.',
+      'Designed system architecture around Teensy 4.1 and IFX007T half bridges, supporting multichannel motor control, CAN communication, analog current sensing, and sub-millimeter Hall-effect positioning.',
+      'Implemented orthogonal routing, dedicated power and ground planes, and ground stitching vias, to keep PCB surface temperature rise below 25°C under continuous 150 W draw.',
+      'Engineered a power hold-up circuit and falling-edge ISR using a voltage divider and 1000µF bulk capacitor, enabling EEPROM backups of actuator positioning data within 5 ms of power disconnection.',
+      'Built a test bench and developed firmware to validate PCB function, verifying MCU pinouts, voltage regulation, inrush current stabilization, CAN signal integrity, and bidirectional actuation under dynamic loads.',
     ],
   },
   {
@@ -99,8 +101,8 @@ export const projects = [
     id: 'buck-converter',
     title: '5V Buck Converter',
     heading: '5V Asynchronous Buck Converter',
-    status: 'In progress',
     desc: 'Asynchronous buck converter stepping a 6S LiPo input down to 5V at 85% efficiency.',
+    status: 'In Progress',
     repo: 'https://github.com/mofeomolade/6S-LiPo-Buck',
     tech: ['Altium', 'LTspice'],
     decisions: [
@@ -137,13 +139,14 @@ export const projects = [
       [ 'Compensator', 'Developed an active Type III compensation network using an MCP6021 Op-amp to place double zeros compensating the 1.57 kHz LC double pole, maximizing phase margin and stability under peak 25.2V input gain.'],
       ['Transient Response', 'Engineered a 10 ms RC soft-start network on the 2.5V reference to suppress turn-on overshoot and limit inrush current to 10 mA.'],
       ['PCB Layout', 'Routing a compact 4-layer PCB in Altium, isolating sensitive feedback and timing traces from the high di/dt switching node and integrating a dedicated ground plane to suppress switching noise.'],
+      ['PCB Layout', 'Validated power rail voltages with DMM and tested step-load transient response using an oscilloscope.']
     ],
     links: [
       ['Planning Document', 'https://drive.google.com/file/d/1GUGJ41Ly34sU3f9lQwCAKZL2yV-m_Rey/view?usp=sharing'],
     ],
     gallery: [
       { src: '/buck_3d_view.png', caption: '3D view', alt: '3D view', type: 'light', cover: true },
-      { src: '/buck_layout_rev1.png', caption: 'Initial layout', alt: 'Initial layout', type: 'light', cover: true },
+      { src: '/buck_layout_rev2.png', caption: 'Initial layout', alt: 'Initial layout', type: 'light', cover: true },
       { src: '/buck_power_stage.png', caption: 'Power stage schematic', alt: 'Power stage', type: 'light', cover: true },
       { src: '/buck_control_stage.png', caption: 'Control stage schematic', alt: 'Control stage', type: 'light', cover: true},
       { src: '/buck_25V.png', caption: '25.2 V soft-start', alt: '25.2 V closed loop sim', type: 'dark', wide: true},
@@ -158,7 +161,7 @@ export const projects = [
     title: '4-Channel Motor Controller',
     heading: 'Custom 4-Channel Motor Controller',
     desc: 'Custom 4-channel motor controller PCB with 150W continuous power and CAN communication.',
-    tech: ['Teensy 4.1', 'Altium', 'C++'],
+    tech: ['Teensy 4.1', 'Altium', 'C/C++'],
     decisions: [
       {
         title: "Dev board shield vs. bare MCU",
@@ -181,7 +184,7 @@ export const projects = [
       ['MCU & Telemetry', 'Architected system around the Teensy 4.1 600 MHz ARM Cortex-M7 to support multi-channel PWM generation, real-time Hall-effect decoding, and CAN telemetry speeds of up to 1Mbit/s.'],
       ['Power Safety', 'Integrated a bulk electrolytic capacitor alongside a voltage divider fed into an MCU falling-edge interrupt, securing a 5 ms hold-up time to commit actuator calibration data to EEPROM before brownout.'],
       ['Hardware Validation', 'Performed extensive hardware debugging to resolve buck converter faults, validating frequency responses using an oscilloscope to optimize passive component sizing and prevent underdamping. Also used oscilloscope to verify MAX33040E CAN bus transceiver signal integrity.'],
-      ['Embedded Firmware', 'Developed C++ testing firmware to validate hardware performance, implementing automated homing sequences, directional state tracking, and interrupt-driven Hall sensor decoding for precise actuator positioning.'],
+      ['Embedded Firmware', 'Developed test firmware to validate hardware performance, implementing automated homing sequences, directional state tracking, and interrupt-driven Hall sensor decoding for precise actuator positioning.'],
       ['PCB Layout', 'Applied DFM principles across the 8-layer stackup, sizing thermal reliefs and component clearances for manual SMT assembly and utilizing large trace widths and polygon pours for continuous 3A current draw.'],
     ],
     links: [
@@ -204,7 +207,7 @@ export const projects = [
     title: 'PID Self-Balancing Robot',
     heading: 'PID Self-Balancing Robot',
     desc: 'Self-balancing robot on an ESP32-C3 with a from-scratch IMU driver and PID control.',
-    tech: ['ESP32', 'C++', 'I2C'],
+    tech: ['ESP32', 'C/C++', 'I2C'],
     decisions: [
       {
         title: "ESP32 vs. Arduino Nano",
@@ -214,10 +217,10 @@ export const projects = [
     ],
     repo: 'https://github.com/mofeomolade/PID-Self-Balancing-Robot',
     highlights: [
-      ['Driver Development', 'Developed a standalone C++ device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.'],
+      ['Driver Development', 'Developed a standalone device driver for the MPU-6050 from scratch, writing directly to I2C registers to configure power states, set gyroscope and accelerometer ranges, and parse 14-byte data bursts.'],
       ['Sensor Fusion', 'Implemented 1 kHz non-blocking data acquisition and applied a complementary filter to fuse accelerometer and gyroscope readings, achieving low-latency angle estimation while reducing gyroscope angular drift by 85%.'],
       ['Control Systems', 'Programmed a custom closed-loop PID controller from first principles without third-party frameworks, incorporating anti-windup clamping, derivative filtering, and deadband compensation.'],
-      ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive an L298N dual-motor bridge, converting raw PID outputs into directional motor commands.'],
+      ['Embedded Programming', 'Programmed deterministic PWM generation using ESP32-C3 hardware timers to drive L298N dual H-bridges, converting raw PID outputs into directional motor commands.'],
     ],
     gallery: [
       { src: '/PID_Robot_Schematic.png', caption: 'Circuit schematic', alt: 'PID Robot Schematic', type: 'light', cover: true },
@@ -263,14 +266,34 @@ export const projects = [
     gallery: [],
   },
   {
+    id: 'electric-skateboard',
+    title: 'Electric Skateboard',
+    heading: 'Wirelessly Controlled Electric Skateboard',
+    desc: 'Working with a friend to convert an old skateboard into an electric skateboard with a handheld wireless controller',
+    status: 'In Progress',
+    repo: 'https://github.com/mofeomolade/Electric-Longboard',
+    tech: ['Altium', 'ESP32', 'C/C++', 'CAN', 'ESP-NOW'],
+    decisions: [
+    ],
+    highlights: [
+      ['System Architecture', 'Handheld remote powered off is used to set speed with a thumbwheel and change modes with a button. PWM commands are sent wirelessly to the VCU, which interfaces with Flipsky ESCs to drive a dual belt drive powertrain.'],
+      ['Power', 'Remote is powered off a rechargable 1S LiPo battery. Nominal 3.7V is stepped down to 3.3V to power MCU and sensors. 6S LiPo battery powers the VCU and ESCs. 22V is stepped down to 5V/3.3V to power MCU, CAN transceiver, etc.']
+    ],
+    links: [
+      ['Planning Document', 'https://drive.google.com/drive/home']
+    ],
+    gallery: [
+    ],
+  },
+  {
     id: 'imu-tracker',
     title: 'IMU Pitch, Roll & Yaw Calculator',
     heading: 'IMU Orientation Calculator',
-    desc: 'C++ firmware that fuses MPU-6050 IMU data to calculate orientation.',
-    tech: ['ESP32', 'C++', 'I2C', 'Python'],
+    desc: 'Firmware that fuses MPU-6050 IMU data to calculate orientation.',
+    tech: ['ESP32', 'C/C++', 'I2C', 'Python'],
     repo: 'https://github.com/mofeomolade/IMU-Orientation-Tracker',
     highlights: [
-      ['Firmware Development', 'Developed C++ firmware for ESP32 to parse MPU-6050 IMU accelerometer and gyroscope registers via I2C.'],
+      ['Firmware Development', 'Developed firmware for ESP32 to parse MPU-6050 IMU accelerometer and gyroscope registers via I2C.'],
       ['Signal Processing', 'Applied a sensor fusion Euler complementary filter and deadband filter to account for angular integration drift.'],
       ['Mathematical Modeling', 'Applied trigonometry to accelerometer vectors and fused with gyroscope readings to calculate pitch and roll.'],
       ['Visualization', 'Streamed telemetry over UART to a Python graphical interface to render 3D flight attitude and orientation.'],
@@ -286,11 +309,11 @@ export const projects = [
     title: 'Car HUD Speedometer',
     heading: 'Car HUD Speedometer',
     desc: 'Heads-up display speedometer built from an Arduino Nano, GPS module, and OLED.',
-    tech: ['Arduino', 'GNSS', 'C++', 'SPI'],
+    tech: ['Arduino', 'GNSS', 'C/C++', 'SPI'],
     repo: 'https://github.com/mofeomolade/Arduino-Speedometer-HUD',
     highlights: [
       ['Embedded Programming', 'Developed a low-latency speedometer using an Arduino Nano, GY-NEO6MV2 module, and SPI OLED display.'],
-      ['Data Processing', 'Wrote C++ firmware to parse NMEA data streams to compute velocity within 5% of the factory speedometer.'],
+      ['Data Processing', 'Wrote firmware to parse NMEA data streams to compute velocity within 5% of the factory speedometer.'],
       ['Electronics Integration', "Safely integrated with the vehicle's 14V input using a USB-C to DIN converter to supply the Arduino Vin."],
     ],
     links: [
