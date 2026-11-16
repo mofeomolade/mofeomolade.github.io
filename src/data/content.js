@@ -146,9 +146,10 @@ export const projects = [
     ],
     gallery: [
       { src: '/buck_3d_view.png', caption: '3D view', alt: '3D view', type: 'light', cover: true },
-      { src: '/buck_layout_rev2.png', caption: 'Initial layout', alt: 'Initial layout', type: 'light', cover: true },
+      { src: '/buck_layout_rev3.png', caption: 'Initial layout', alt: 'Initial layout', type: 'light', cover: true },
       { src: '/buck_power_stage.png', caption: 'Power stage schematic', alt: 'Power stage', type: 'light', cover: true },
       { src: '/buck_control_stage.png', caption: 'Control stage schematic', alt: 'Control stage', type: 'light', cover: true},
+      { src: '/bode_plots.png', caption: 'Compensator Bode plots', alt: 'Bode plots', type: 'light', cover: true },
       { src: '/buck_25V.png', caption: '25.2 V soft-start', alt: '25.2 V closed loop sim', type: 'dark', wide: true},
       //{ src: '/buck_20V.png', caption: '20 V soft-start', alt: '20 V closed loop sim', type: 'dark', wide: true},
       { src: '/buck_18V.png', caption: '18 V soft-start', alt: '18 V closed loop sim', type: 'dark', wide: true},
